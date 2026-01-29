@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery | Lake Huyck Resort on Huyck Lake</title>
+    <meta name="description" content="Explore our lakefront cabins through photos. See the A-Frame Chalet, Log Cabin, private beach, and all the beauty of Huyck Lake.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --forest-deep: #1a3a2f;
+            --forest-mid: #2d5a4a;
+            --forest-light: #4a7c6b;
+            --amber: #b8860b;
+            --sienna: #8b4513;
+            --lake-blue: #5a7d8c;
+            --cream: #faf8f5;
+            --cream-dark: #f0ebe3;
+            --charcoal: #2c2c2c;
+            --gold: #c9a227;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-ui: 'Outfit', sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--charcoal);
+            background-color: var(--cream);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Dropdown */
+        .nav-dropdown { position: relative; }
+        
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        .nav-dropdown-toggle svg {
+            width: 10px;
+            height: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+        
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-top: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-dropdown-menu-inner {
+            background: var(--cream);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+            min-width: 200px;
+        }
+        
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--forest-deep) !important;
+            white-space: nowrap;
+        }
+        
+        .nav-dropdown-menu a::after { display: none; }
+        
+        .nav-dropdown-menu a:hover {
+            background: var(--cream-dark);
+        }
+        
+        .nav-book {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.75rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-book:hover {
+            background: var(--amber);
+            transform: translateY(-2px);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 10rem 4rem 4rem;
+            text-align: center;
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+        
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Gallery Filter */
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 2rem;
+            background: var(--cream-dark);
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--forest-deep);
+            border: 1px solid var(--forest-mid);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--forest-deep);
+            color: var(--cream);
+            border-color: var(--forest-deep);
+        }
+        
+        /* Gallery Grid */
+        .gallery-container {
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-section {
+            margin-bottom: 4rem;
+        }
+        
+        .gallery-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(26, 58, 47, 0.15);
+        }
+        
+        .gallery-section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+        }
+        
+        .gallery-section-header span {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item.span-2 {
+            grid-column: span 2;
+        }
+        
+        .gallery-item.span-2-tall {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1;
+        }
+        
+        .gallery-item.tall {
+            grid-row: span 2;
+            aspect-ratio: 2/3;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 58, 47, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            background: rgba(26, 58, 47, 0.3);
+        }
+        
+        .gallery-item-overlay svg {
+            width: 48px;
+            height: 48px;
+            color: var(--cream);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: var(--transition-smooth);
+        }
+        
+        .gallery-item:hover .gallery-item-overlay svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--cream);
+            font-size: 2rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+        
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .lightbox-prev {
+            left: 2rem;
+        }
+        
+        .lightbox-next {
+            right: 2rem;
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--cream);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        /* CTA */
+        .gallery-cta {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+        
+        .gallery-cta h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-cta p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+        
+        .btn-primary:hover {
+            background: var(--amber);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+        
+        .footer-links-inline {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links-inline a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links-inline a:hover {
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header {
+                padding: 8rem 2rem 3rem;
+            }
+            
+            .gallery-container {
+                padding: 1rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .gallery-item.span-2,
+            .gallery-item.span-2-tall {
+                grid-column: span 2;
+            }
+            
+            .gallery-item.tall {
+                grid-row: span 1;
+                aspect-ratio: 4/3;
+            }
+            
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .lightbox-prev { left: 0.5rem; }
+            .lightbox-next { right: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lake Huyck Resort</a>
+        <ul class="nav-links">
+            <li><a href="a-frame.html">A-Frame Chalet</a></li>
+            <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
+            <li><a href="index.html#amenities">Amenities</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="rules.html">House Rules</a></li>
+        </ul>
+        <a href="book.html" class="nav-book">Book Now</a>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Photo Gallery</h1>
+        <p>Explore our lakefront cabins, private beach, and the natural beauty of Huyck Lake.</p>
+    </header>
+
+    <!-- Filter Buttons -->
+    <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="aframe">A-Frame Chalet</button>
+        <button class="filter-btn" data-filter="logcabin">Log Cabin</button>
+        <button class="filter-btn" data-filter="outdoor">Lake & Outdoors</button>
+    </div>
+
+    <!-- Gallery Content -->
+    <main class="gallery-container">
+        
+        <!-- A-Frame Section -->
+        <section class="gallery-section" data-category="aframe">
+            <div class="gallery-section-header">
+                <h2>A-Frame Chalet</h2>
+                <span>12 Photos</span>
+            </div>
+            <div class="gallery-grid">
+                <!-- REPLACE: Add your A-Frame photos here -->
+                <!-- Example structure - duplicate and modify as needed -->
+                <div class="gallery-item span-2-tall" data-caption="A-Frame living room with cathedral windows">
+                    <img src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=800&q=80" alt="A-Frame living room">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Kitchen with lake views">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="A-Frame kitchen">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Dining area">
+                    <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&q=80" alt="A-Frame dining">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Master bedroom">
+                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" alt="A-Frame bedroom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Second bedroom">
+                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80" alt="A-Frame second bedroom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="Bathroom with herringbone tile">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80" alt="A-Frame bathroom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Loft bedroom">
+                    <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=80" alt="A-Frame loft">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Deck with fall colors">
+                    <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=600&q=80" alt="A-Frame deck">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="A-Frame exterior view">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="A-Frame exterior">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Log Cabin Section -->
+        <section class="gallery-section" data-category="logcabin">
+            <div class="gallery-section-header">
+                <h2>Log Cabin</h2>
+                <span>12 Photos</span>
+            </div>
+            <div class="gallery-grid">
+                <!-- REPLACE: Add your Log Cabin photos here -->
+                <div class="gallery-item span-2" data-caption="Log Cabin living room with wood stove">
+                    <img src="log-cabin-living-room-1.png" alt="Log Cabin living room">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item tall" data-caption="Antler chandelier and décor">
+                    <img src="log-cabin-woodstove.png" alt="Log Cabin wood stove">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Chef's kitchen">
+                    <img src="log-cabin-kitchen-1.png" alt="Log Cabin kitchen">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Master suite">
+                    <img src="log-cabin-master-1.png" alt="Log Cabin master">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Guest bedroom">
+                    <img src="log-cabin-guest-1.png" alt="Log Cabin guest room">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Bunk room">
+                    <img src="log-cabin-bunk-room.png" alt="Log Cabin bunk room">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="Screened porch with lake view">
+                    <img src="log-cabin-guest-lakeview.png" alt="Log Cabin lake view">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Bathroom with soaking tub">
+                    <img src="log-cabin-bath-1.png" alt="Log Cabin bathroom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="Log Cabin in winter">
+                    <img src="log-cabin-living-lakeview.png" alt="Log Cabin lake view">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lake & Outdoors Section -->
+        <section class="gallery-section" data-category="outdoor">
+            <div class="gallery-section-header">
+                <h2>Lake & Outdoors</h2>
+                <span>15 Photos</span>
+            </div>
+            <div class="gallery-grid">
+                <!-- REPLACE: Add your outdoor/lake photos here -->
+                <div class="gallery-item span-2-tall" data-caption="Huyck Lake at sunset">
+                    <img src="lake-sunrise-dock.png" alt="Lake sunrise">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Private dock">
+                    <img src="lake-dock-beach.png" alt="Dock">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Kayaks ready for adventure">
+                    <img src="lake-dock-kayaks.png" alt="Kayaks">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Paddle boarding">
+                    <img src="lake-kayak-dog.png" alt="Kayaking with dog">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Sandy beach">
+                    <img src="lake-beach-overview.png" alt="Beach">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="Campfire under the stars">
+                    <img src="lake-campfire-stars.png" alt="Starry night campfire">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Morning mist on the lake">
+                    <img src="lake-fall-reflection.png" alt="Fall reflection">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Fall colors">
+                    <img src="lake-fall-view.png" alt="Fall colors">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item span-2" data-caption="Floating dock and swim area">
+                    <img src="lake-kids-jumping.png" alt="Kids jumping off dock">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Misty morning kayak">
+                    <img src="lake-kayak-mist.png" alt="Misty morning kayak">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Swing at sunrise">
+                    <img src="lake-swing-sunrise.png" alt="Swing at sunrise">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Grounds at sunrise">
+                    <img src="lake-grounds-sunrise.png" alt="Grounds at sunrise">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-caption="Group campfire">
+                    <img src="lake-campfire-group.png" alt="Group campfire">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CTA -->
+    <section class="gallery-cta">
+        <h2>Ready to Experience This in Person?</h2>
+        <p>Book your lakefront escape today.</p>
+        <a href="book.html" class="btn-primary">Book Your Stay</a>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">←</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">→</button>
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links-inline">
+            <a href="index.html">Home</a>
+            <a href="a-frame.html">A-Frame Chalet</a>
+            <a href="log-cabin.html">Cozy Log Cabin</a>
+            <a href="rules.html">House Rules</a>
+            <a href="book.html">Book Now</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 Lake Huyck Resort · Hosted by Adriana & Vince · Marcellus, Michigan</p>
+    </footer>
+
+    <script>
+        // =====================
+        // FILTER FUNCTIONALITY
+        // =====================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const sections = document.querySelectorAll('.gallery-section');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                // Show/hide sections
+                sections.forEach(section => {
+                    if (filter === 'all' || section.dataset.category === filter) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // =====================
+        // LIGHTBOX FUNCTIONALITY
+        // =====================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        let currentIndex = 0;
+        let visibleImages = [];
+        
+        function updateVisibleImages() {
+            visibleImages = Array.from(galleryItems).filter(item => {
+                return item.closest('.gallery-section').style.display !== 'none';
+            });
+        }
+        
+        function openLightbox(index) {
+            updateVisibleImages();
+            currentIndex = index;
+            const item = visibleImages[index];
+            const img = item.querySelector('img');
+            const caption = item.dataset.caption || '';
+            
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function navigateLightbox(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = visibleImages.length - 1;
+            if (currentIndex >= visibleImages.length) currentIndex = 0;
+            
+            const item = visibleImages[currentIndex];
+            const img = item.querySelector('img');
+            const caption = item.dataset.caption || '';
+            
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+        }
+        
+        // Event listeners
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                updateVisibleImages();
+                const visibleIndex = visibleImages.indexOf(item);
+                openLightbox(visibleIndex);
+            });
+        });
+        
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', () => navigateLightbox(-1));
+        document.getElementById('lightboxNext').addEventListener('click', () => navigateLightbox(1));
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+        
+        // Initialize
+        updateVisibleImages();
+    </script>
+</body>
+</html>

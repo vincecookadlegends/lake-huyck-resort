@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Stay | Lake Huyck Resort</title>
+    <meta name="description" content="Book your lakefront escape at Lake Huyck Resort. Check availability for the A-Frame Chalet, Log Cabin, or the entire resort.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --forest-deep: #1a3a2f;
+            --forest-mid: #2d5a4a;
+            --forest-light: #4a7c6b;
+            --amber: #b8860b;
+            --sienna: #8b4513;
+            --lake-blue: #5a7d8c;
+            --cream: #faf8f5;
+            --cream-dark: #f0ebe3;
+            --charcoal: #2c2c2c;
+            --gold: #c9a227;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-ui: 'Outfit', sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--charcoal);
+            background-color: var(--cream);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover {
+            color: var(--amber);
+        }
+        
+        /* Dropdown */
+        .nav-dropdown { position: relative; }
+        
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        .nav-dropdown-toggle svg {
+            width: 10px;
+            height: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+        
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-top: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-dropdown-menu-inner {
+            background: var(--cream);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+            min-width: 200px;
+        }
+        
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--forest-deep) !important;
+            white-space: nowrap;
+        }
+        
+        .nav-dropdown-menu a:hover {
+            background: var(--cream-dark);
+        }
+        
+        .nav-book {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.75rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-book:hover {
+            background: var(--amber);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 10rem 4rem 4rem;
+            text-align: center;
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+        
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Booking Options */
+        .booking-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: -3rem auto 4rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .booking-card {
+            background: var(--cream);
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .booking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
+        }
+        
+        .booking-card.selected {
+            border-color: var(--gold);
+        }
+        
+        .booking-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .booking-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .booking-card:hover .booking-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .booking-card-content {
+            padding: 2rem;
+        }
+        
+        .booking-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            margin-bottom: 0.5rem;
+        }
+        
+        .booking-card-specs {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--forest-mid);
+            margin-bottom: 1rem;
+        }
+        
+        .booking-card-price {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--charcoal);
+        }
+        
+        .booking-card-price span {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .select-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(26, 58, 47, 0.1);
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            transition: var(--transition-smooth);
+        }
+        
+        .booking-card.selected .select-indicator {
+            color: var(--gold);
+        }
+        
+        .select-indicator .check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        
+        .booking-card.selected .select-indicator .check {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+        
+        .booking-card.selected .select-indicator .check::after {
+            content: '✓';
+            color: var(--forest-deep);
+            font-size: 12px;
+        }
+        
+        /* Calendar Section */
+        .calendar-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .calendar-section h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        /* Calendar Widget */
+        .calendar-container {
+            background: var(--cream);
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .calendar-nav button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--forest-mid);
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--forest-mid);
+            transition: var(--transition-smooth);
+        }
+        
+        .calendar-nav button:hover {
+            background: var(--forest-deep);
+            color: var(--cream);
+            border-color: var(--forest-deep);
+        }
+        
+        .calendar-month {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-weekday {
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-family: var(--font-ui);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+        
+        .calendar-day:hover:not(.disabled):not(.booked) {
+            background: var(--cream-dark);
+        }
+        
+        .calendar-day.today {
+            border-color: var(--forest-mid);
+        }
+        
+        .calendar-day.selected {
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+        
+        .calendar-day.in-range {
+            background: var(--cream-dark);
+        }
+        
+        .calendar-day.booked {
+            color: #ccc;
+            text-decoration: line-through;
+            cursor: not-allowed;
+        }
+        
+        .calendar-day.disabled {
+            color: #ddd;
+            cursor: not-allowed;
+        }
+        
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(26, 58, 47, 0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            color: var(--charcoal);
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .legend-dot.available {
+            background: var(--cream);
+            border: 1px solid var(--forest-mid);
+        }
+        
+        .legend-dot.booked {
+            background: #eee;
+        }
+        
+        .legend-dot.selected {
+            background: var(--forest-deep);
+        }
+        
+        /* Date Selection Summary */
+        .date-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 2rem;
+            align-items: end;
+            background: var(--cream-dark);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .date-input-group label {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            margin-bottom: 0.5rem;
+        }
+        
+        .date-input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(26, 58, 47, 0.2);
+            background: var(--cream);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+        
+        .date-input-group input:focus {
+            outline: none;
+            border-color: var(--forest-deep);
+        }
+        
+        .guest-select {
+            padding: 1rem;
+            border: 1px solid rgba(26, 58, 47, 0.2);
+            background: var(--cream);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+        
+        /* Pricing Summary */
+        .pricing-summary {
+            background: var(--cream);
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-summary h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(26, 58, 47, 0.1);
+        }
+        
+        .pricing-row:last-child {
+            border-bottom: none;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid var(--forest-deep);
+        }
+        
+        .pricing-row.total {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+        }
+        
+        /* Book Button */
+        .book-button-container {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .btn-book {
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1.25rem 4rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .btn-book:hover {
+            background: var(--amber);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(184, 134, 11, 0.3);
+        }
+        
+        .btn-book:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .booking-note {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        /* Alternative Booking */
+        .alternative-booking {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--cream-dark);
+            margin: 4rem 0 0;
+        }
+        
+        .alternative-booking h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+            margin-bottom: 1rem;
+        }
+        
+        .alternative-booking p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .airbnb-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .airbnb-link {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--forest-mid);
+            color: var(--forest-deep);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .airbnb-link:hover {
+            background: var(--forest-deep);
+            color: var(--cream);
+            border-color: var(--forest-deep);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .contact-section h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-form {
+            background: var(--cream);
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(26, 58, 47, 0.2);
+            background: var(--cream);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--forest-deep);
+        }
+        
+        .btn-submit {
+            width: 100%;
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1.25rem 2rem;
+            background: var(--forest-deep);
+            color: var(--cream);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        
+        .btn-submit:hover {
+            background: var(--forest-mid);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+        
+        .footer-links-inline {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links-inline a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links-inline a:hover {
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .booking-options {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header {
+                padding: 8rem 2rem 3rem;
+            }
+            
+            .booking-options {
+                margin-top: -2rem;
+                padding: 0 1rem;
+            }
+            
+            .calendar-section,
+            .contact-section {
+                padding: 2rem 1rem;
+            }
+            
+            .date-summary {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Lake Huyck Resort</a>
+        <ul class="nav-links">
+            <li><a href="a-frame.html">A-Frame Chalet</a></li>
+            <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
+            <li><a href="index.html#amenities">Amenities</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="rules.html">House Rules</a></li>
+        </ul>
+        <a href="book.html" class="nav-book">Book Now</a>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Book Your Stay</h1>
+        <p>Select your cabin, choose your dates, and reserve your lakefront escape.</p>
+    </header>
+
+    <!-- Booking Property Selection -->
+    <section class="booking-options">
+        <div class="booking-card selected" data-property="aframe">
+            <div class="booking-card-image">
+                <img src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=600&q=80" alt="A-Frame Chalet">
+            </div>
+            <div class="booking-card-content">
+                <h3>A-Frame Chalet</h3>
+                <p class="booking-card-specs">6 guests · 3 bedrooms · 1 bath</p>
+                <p class="booking-card-price">From $250 <span>/ night</span></p>
+                <div class="select-indicator">
+                    <span class="check"></span>
+                    <span>Select</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-card" data-property="logcabin">
+            <div class="booking-card-image">
+                <img src="log-cabin-living-lakeview.png" alt="Log Cabin">
+            </div>
+            <div class="booking-card-content">
+                <h3>Log Cabin</h3>
+                <p class="booking-card-specs">8 guests · 3 bedrooms · 2 baths</p>
+                <p class="booking-card-price">From $275 <span>/ night</span></p>
+                <div class="select-indicator">
+                    <span class="check"></span>
+                    <span>Select</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-card" data-property="resort">
+            <div class="booking-card-image">
+                <img src="lake-beach-overview.png" alt="Entire Resort">
+            </div>
+            <div class="booking-card-content">
+                <h3>Entire Resort</h3>
+                <p class="booking-card-specs">14 guests · 6 bedrooms · 3 baths</p>
+                <p class="booking-card-price">From $450 <span>/ night</span></p>
+                <div class="select-indicator">
+                    <span class="check"></span>
+                    <span>Select</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendar Section -->
+    <section class="calendar-section">
+        <h2>Select Your Dates</h2>
+        
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button class="calendar-nav" id="prevMonth">←</button>
+                <span class="calendar-month" id="currentMonth">January 2025</span>
+                <button class="calendar-nav" id="nextMonth">→</button>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="calendar-weekday">Sun</div>
+                <div class="calendar-weekday">Mon</div>
+                <div class="calendar-weekday">Tue</div>
+                <div class="calendar-weekday">Wed</div>
+                <div class="calendar-weekday">Thu</div>
+                <div class="calendar-weekday">Fri</div>
+                <div class="calendar-weekday">Sat</div>
+                <!-- Calendar days will be generated by JavaScript -->
+            </div>
+            
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <span class="legend-dot available"></span>
+                    Available
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot booked"></span>
+                    Booked
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot selected"></span>
+                    Selected
+                </div>
+            </div>
+        </div>
+        
+        <div class="date-summary">
+            <div class="date-input-group">
+                <label for="checkIn">Check-In</label>
+                <input type="text" id="checkIn" placeholder="Select date" readonly>
+            </div>
+            <div class="date-input-group">
+                <label for="checkOut">Check-Out</label>
+                <input type="text" id="checkOut" placeholder="Select date" readonly>
+            </div>
+            <div class="date-input-group">
+                <label for="guests">Guests</label>
+                <select id="guests" class="guest-select">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                    <option value="6">6 Guests</option>
+                    <option value="7">7 Guests</option>
+                    <option value="8">8 Guests</option>
+                    <option value="9">9 Guests</option>
+                    <option value="10">10 Guests</option>
+                    <option value="11">11 Guests</option>
+                    <option value="12">12 Guests</option>
+                    <option value="13">13 Guests</option>
+                    <option value="14">14 Guests</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Pricing Summary -->
+        <div class="pricing-summary" id="pricingSummary" style="display: none;">
+            <h3>Price Details</h3>
+            <div class="pricing-row">
+                <span id="nightsLabel">$250 × 3 nights</span>
+                <span id="nightsTotal">$750</span>
+            </div>
+            <div class="pricing-row">
+                <span>Cleaning fee</span>
+                <span>$150</span>
+            </div>
+            <div class="pricing-row">
+                <span>Service fee</span>
+                <span id="serviceFee">$45</span>
+            </div>
+            <div class="pricing-row total">
+                <span>Total</span>
+                <span id="totalPrice">$945</span>
+            </div>
+        </div>
+        
+        <!-- Book Button -->
+        <div class="book-button-container">
+            <button class="btn-book" id="bookButton" disabled>Select Dates to Continue</button>
+            <p class="booking-note">You won't be charged yet. We'll confirm availability first.</p>
+        </div>
+    </section>
+
+    <!-- Alternative Booking -->
+    <section class="alternative-booking">
+        <h3>Prefer to Book on Airbnb?</h3>
+        <p>You can also book through our Airbnb listings for instant confirmation.</p>
+        <div class="airbnb-links">
+            <!-- REPLACE: Add your actual Airbnb URLs -->
+            <a href="https://airbnb.com/h/tranquil-a-frame-on-private-glacial-lake" target="_blank" class="airbnb-link">A-Frame on Airbnb</a>
+            <a href="https://airbnb.com/h/cozy-log-cabin-on-private-glacial-lake" target="_blank" class="airbnb-link">Log Cabin on Airbnb</a>
+            <a href="https://airbnb.com/h/tanquil-resort-on-a-private-glacial-lake" target="_blank" class="airbnb-link">Resort on Airbnb</a>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-section" id="contact">
+        <h2>Questions? Get in Touch</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                    <option value="availability">Availability Question</option>
+                    <option value="special-request">Special Request</option>
+                    <option value="group-booking">Large Group Booking</option>
+                    <option value="pet-question">Pet Question</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your trip plans, questions, or special requests..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links-inline">
+            <a href="index.html">Home</a>
+            <a href="a-frame.html">A-Frame Chalet</a>
+            <a href="log-cabin.html">Cozy Log Cabin</a>
+            <a href="rules.html">House Rules</a>
+            <a href="rules.html#pets">Pet Policy</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 Lake Huyck Resort · Hosted by Adriana & Vince · Marcellus, Michigan</p>
+    </footer>
+
+    <script>
+        // =====================
+        // PROPERTY SELECTION
+        // =====================
+        const bookingCards = document.querySelectorAll('.booking-card');
+        let selectedProperty = 'aframe';
+        
+        const propertyPrices = {
+            aframe: 250,
+            logcabin: 275,
+            resort: 450
+        };
+        
+        const propertyMaxGuests = {
+            aframe: 6,
+            logcabin: 8,
+            resort: 14
+        };
+        
+        bookingCards.forEach(card => {
+            card.addEventListener('click', () => {
+                bookingCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedProperty = card.dataset.property;
+                updateGuestOptions();
+                updatePricing();
+            });
+        });
+        
+        function updateGuestOptions() {
+            const maxGuests = propertyMaxGuests[selectedProperty];
+            const guestSelect = document.getElementById('guests');
+            const currentValue = parseInt(guestSelect.value);
+            
+            // Update options
+            guestSelect.innerHTML = '';
+            for (let i = 1; i <= maxGuests; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i === 1 ? '1 Guest' : `${i} Guests`;
+                if (i === Math.min(currentValue, maxGuests)) {
+                    option.selected = true;
+                }
+                guestSelect.appendChild(option);
+            }
+        }
+        
+        // =====================
+        // CALENDAR
+        // =====================
+        let currentDate = new Date();
+        let selectedCheckIn = null;
+        let selectedCheckOut = null;
+        
+        // Simulated booked dates (replace with real data from your booking system)
+        const bookedDates = [
+            '2025-02-14', '2025-02-15', '2025-02-16',
+            '2025-02-21', '2025-02-22', '2025-02-23',
+            '2025-03-07', '2025-03-08', '2025-03-09', '2025-03-10'
+        ];
+        
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            document.getElementById('currentMonth').textContent = 
+                new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const grid = document.getElementById('calendarGrid');
+            
+            // Keep weekday headers
+            const weekdays = grid.querySelectorAll('.calendar-weekday');
+            grid.innerHTML = '';
+            weekdays.forEach(wd => grid.appendChild(wd));
+            
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day disabled';
+                grid.appendChild(empty);
+            }
+            
+            // Days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = day;
+                
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateObj = new Date(year, month, day);
+                
+                // Check if in past
+                if (dateObj < today) {
+                    dayEl.classList.add('disabled');
+                }
+                // Check if booked
+                else if (bookedDates.includes(dateStr)) {
+                    dayEl.classList.add('booked');
+                }
+                // Check if today
+                else if (dateObj.getTime() === today.getTime()) {
+                    dayEl.classList.add('today');
+                }
+                
+                // Check if selected
+                if (selectedCheckIn && dateObj.getTime() === selectedCheckIn.getTime()) {
+                    dayEl.classList.add('selected');
+                }
+                if (selectedCheckOut && dateObj.getTime() === selectedCheckOut.getTime()) {
+                    dayEl.classList.add('selected');
+                }
+                
+                // Check if in range
+                if (selectedCheckIn && selectedCheckOut) {
+                    if (dateObj > selectedCheckIn && dateObj < selectedCheckOut) {
+                        dayEl.classList.add('in-range');
+                    }
+                }
+                
+                // Click handler
+                if (!dayEl.classList.contains('disabled') && !dayEl.classList.contains('booked')) {
+                    dayEl.addEventListener('click', () => selectDate(dateObj));
+                }
+                
+                grid.appendChild(dayEl);
+            }
+        }
+        
+        function selectDate(date) {
+            if (!selectedCheckIn || (selectedCheckIn && selectedCheckOut)) {
+                // Start new selection
+                selectedCheckIn = date;
+                selectedCheckOut = null;
+            } else {
+                // Complete selection
+                if (date > selectedCheckIn) {
+                    selectedCheckOut = date;
+                } else {
+                    selectedCheckIn = date;
+                }
+            }
+            
+            updateDateInputs();
+            renderCalendar();
+            updatePricing();
+        }
+        
+        function updateDateInputs() {
+            const checkInInput = document.getElementById('checkIn');
+            const checkOutInput = document.getElementById('checkOut');
+            
+            checkInInput.value = selectedCheckIn ? 
+                selectedCheckIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+            checkOutInput.value = selectedCheckOut ? 
+                selectedCheckOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+        }
+        
+        function updatePricing() {
+            const pricingSummary = document.getElementById('pricingSummary');
+            const bookButton = document.getElementById('bookButton');
+            
+            if (selectedCheckIn && selectedCheckOut) {
+                const nights = Math.ceil((selectedCheckOut - selectedCheckIn) / (1000 * 60 * 60 * 24));
+                const pricePerNight = propertyPrices[selectedProperty];
+                const nightsTotal = nights * pricePerNight;
+                const cleaningFee = 150;
+                const serviceFee = Math.round(nightsTotal * 0.06);
+                const total = nightsTotal + cleaningFee + serviceFee;
+                
+                document.getElementById('nightsLabel').textContent = `$${pricePerNight} × ${nights} nights`;
+                document.getElementById('nightsTotal').textContent = `$${nightsTotal}`;
+                document.getElementById('serviceFee').textContent = `$${serviceFee}`;
+                document.getElementById('totalPrice').textContent = `$${total}`;
+                
+                pricingSummary.style.display = 'block';
+                bookButton.disabled = false;
+                bookButton.textContent = 'Request to Book';
+            } else {
+                pricingSummary.style.display = 'none';
+                bookButton.disabled = true;
+                bookButton.textContent = 'Select Dates to Continue';
+            }
+        }
+        
+        // Calendar navigation
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+        
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+        
+        // =====================
+        // BOOKING BUTTON
+        // =====================
+        document.getElementById('bookButton').addEventListener('click', () => {
+            // In production, this would integrate with Stripe
+            // For now, show a message
+            const propertyNames = {
+                aframe: 'A-Frame Chalet',
+                logcabin: 'Log Cabin',
+                resort: 'Entire Resort'
+            };
+            
+            const nights = Math.ceil((selectedCheckOut - selectedCheckIn) / (1000 * 60 * 60 * 24));
+            const guests = document.getElementById('guests').value;
+            
+            alert(`Booking Request:\n\nProperty: ${propertyNames[selectedProperty]}\nCheck-in: ${selectedCheckIn.toLocaleDateString()}\nCheck-out: ${selectedCheckOut.toLocaleDateString()}\nNights: ${nights}\nGuests: ${guests}\n\nIn production, this would redirect to Stripe Checkout.`);
+            
+            // STRIPE INTEGRATION:
+            // Replace the alert above with a redirect to your Stripe Payment Link
+            // or create a Stripe Checkout session via your backend
+            //
+            // Example with Stripe Payment Links:
+            // window.location.href = 'https://buy.stripe.com/your-payment-link-id';
+            //
+            // Example with Stripe Checkout (requires backend):
+            // fetch('/create-checkout-session', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({
+            //         property: selectedProperty,
+            //         checkIn: selectedCheckIn,
+            //         checkOut: selectedCheckOut,
+            //         guests: guests
+            //     })
+            // })
+            // .then(res => res.json())
+            // .then(data => window.location.href = data.url);
+        });
+        
+        // =====================
+        // CONTACT FORM
+        // =====================
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.\n\nIn production, this would send an email via your preferred service (Formspree, Netlify Forms, etc.)');
+        });
+        
+        // Initialize
+        renderCalendar();
+        updateGuestOptions();
+    </script>
+</body>
+</html>
