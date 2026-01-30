@@ -83,9 +83,27 @@
             letter-spacing: 0.02em;
             transition: var(--transition-smooth);
         }
-        
+
         nav.scrolled .logo {
             color: var(--forest-deep);
+        }
+
+        .hero-top-logo {
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            width: 84px;
+            height: auto;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+        }
+
+        @media (min-width: 768px) {
+            .hero-top-logo {
+                width: 112px;
+                top: 130px;
+            }
         }
         
         .nav-links {
@@ -244,9 +262,14 @@
             z-index: 2;
             text-align: center;
             color: var(--cream);
+            width: 100%;
             max-width: 900px;
             padding: 0 2rem;
+            box-sizing: border-box;
             animation: fadeInUp 1.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .hero-logo {
@@ -276,21 +299,42 @@
         
         .hero-subtitle {
             font-family: var(--font-ui);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 400;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             opacity: 0.9;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 0.25em;
+                margin-bottom: 1.5rem;
+            }
         }
         
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: 2.2rem;
             font-weight: 400;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            margin: 0 0 1.5rem;
             letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.2rem;
+                white-space: nowrap;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .hero-title {
+                font-size: 4.2rem;
+            }
         }
         
         .hero-title em {
@@ -300,29 +344,59 @@
         
         .hero-description {
             font-family: var(--font-body);
-            font-size: 1.25rem;
+            font-size: 1rem;
             max-width: 600px;
             margin: 0 auto 2.5rem;
             opacity: 0.9;
-            line-height: 1.8;
+            line-height: 1.7;
+        }
+
+        .hero-description br {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .hero-description {
+                font-size: 1.25rem;
+                line-height: 1.8;
+            }
+            .hero-description br {
+                display: block;
+            }
         }
         
         .hero-cta {
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero-cta {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
         
         .btn-primary {
             font-family: var(--font-ui);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 1rem 2.5rem;
+            padding: 0.9rem 2rem;
             background: var(--cream);
             color: var(--forest-deep);
             text-decoration: none;
             transition: var(--transition-smooth);
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                font-size: 0.8rem;
+                padding: 1rem 2.5rem;
+            }
         }
         
         .btn-primary:hover {
@@ -333,16 +407,23 @@
         
         .btn-secondary {
             font-family: var(--font-ui);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 400;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 1rem 2.5rem;
+            padding: 0.9rem 2rem;
             background: transparent;
             color: var(--cream);
             text-decoration: none;
             border: 1px solid rgba(250, 248, 245, 0.4);
             transition: var(--transition-smooth);
+        }
+
+        @media (min-width: 768px) {
+            .btn-secondary {
+                font-size: 0.8rem;
+                padding: 1rem 2.5rem;
+            }
         }
         
         .btn-secondary:hover {
@@ -678,7 +759,16 @@
             margin: 0 auto 1.5rem;
             color: var(--forest-mid);
         }
-        
+
+        .amenity-icon-img {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 1.5rem;
+            display: block;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
         .amenity-card h4 {
             font-family: var(--font-display);
             font-size: 1.25rem;
@@ -1043,11 +1133,11 @@
             <img src="lake-hero-main.png" alt="Lake Huyck Resort">
         </div>
         <div class="hero-overlay"></div>
+        <img src="lake-huyck-logo-white-trimmed.png" alt="Lake Huyck Resort - Established 1980 - Michigan" class="hero-top-logo">
         <div class="hero-content">
-            <img src="lake-huyck-logo-white-trimmed.png" alt="Lake Huyck Resort - Established 1980 - Michigan" class="hero-logo">
-            <p class="hero-subtitle">Private Glacial Lake · Marcellus</p>
-            <h1 class="hero-title">Your <em>Tranquil</em> Escape Awaits</h1>
-            <p class="hero-description">Two stunning cabins on a private glacial lake. Disconnect from the everyday and reconnect with what matters.</p>
+            <p class="hero-subtitle">Private Glacial Lake · Southeastern Michigan</p>
+            <h1 class="hero-title">Your <em>Tranquil</em> Escape is waiting.</h1>
+            <p class="hero-description">Two stunning cabins on a private glacial lake.<br>Disconnect from the everyday and reconnect with what matters.</p>
             <div class="hero-cta">
                 <a href="#book" class="btn-primary">Book Your Stay</a>
                 <a href="#cabins" class="btn-secondary">Explore the Resort</a>
@@ -1188,59 +1278,101 @@
         </div>
         <div class="amenities-grid">
             <div class="amenity-card">
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-                </svg>
+                <!-- Beach woodcut illustration -->
+                <img src="beach-woodcut.jpg" alt="Private Beach" class="amenity-icon-img">
                 <h4>Private Beach</h4>
                 <p>Sandy shoreline with swim docks and floating island</p>
             </div>
             <div class="amenity-card">
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    <path d="M9 10h.01M15 10h.01M9.5 15.5s1.5 1 3 1 3-1 3-1"/>
-                </svg>
+                <!-- Paddle woodcut illustration -->
+                <img src="paddle-woodcut.jpg" alt="Water Sports" class="amenity-icon-img">
                 <h4>Water Sports</h4>
                 <p>Kayaks, canoes, paddle boards & pontoon rentals</p>
             </div>
             <div class="amenity-card">
+                <!-- Campfire icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
-                    <path d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/>
+                    <path d="M12 4c1.5 2 3 4 3 7 0 2.5-1.5 4-3 4s-3-1.5-3-4c0-3 1.5-5 3-7z"/>
+                    <path d="M12 12c.5.5 1 1 1 2s-.5 1.5-1 1.5-1-.5-1-1.5.5-1.5 1-2z"/>
+                    <path d="M7 15c-1 1-1.5 2-1 3 .5 1 2 1.5 3 1"/>
+                    <path d="M17 15c1 1 1.5 2 1 3-.5 1-2 1.5-3 1"/>
+                    <path d="M5 21l3-2"/>
+                    <path d="M19 21l-3-2"/>
+                    <path d="M8 21h8"/>
                 </svg>
                 <h4>Fire Pits</h4>
                 <p>Communal campfire & private fire pit for s'mores</p>
             </div>
             <div class="amenity-card">
+                <!-- Fishing rod icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                    <path d="M18 3l3 3-3 3"/>
+                    <path d="M21 6H9"/>
+                    <path d="M9 6v10"/>
+                    <path d="M9 10c-2 0-4 1-4 3s2 3 4 3"/>
+                    <circle cx="9" cy="19" r="2"/>
+                    <path d="M12 13l2-1"/>
                 </svg>
                 <h4>Sport Fishing</h4>
                 <p>Well-stocked lake with bass, bluegill & more</p>
             </div>
             <div class="amenity-card">
+                <!-- Stove/Oven icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    <rect x="4" y="8" width="16" height="13" rx="1"/>
+                    <path d="M4 14h16"/>
+                    <rect x="6" y="16" width="12" height="3" rx="0.5"/>
+                    <circle cx="8" cy="11" r="1"/>
+                    <circle cx="12" cy="11" r="1"/>
+                    <circle cx="16" cy="11" r="1"/>
+                    <path d="M8 5v3"/>
+                    <path d="M12 4v4"/>
+                    <path d="M16 5v3"/>
                 </svg>
                 <h4>Full Kitchens</h4>
                 <p>Fully equipped chef's kitchens in both cabins</p>
             </div>
             <div class="amenity-card">
+                <!-- WiFi icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+                    <path d="M2 9c6-5 14-5 20 0"/>
+                    <path d="M5 13c4-3 10-3 14 0"/>
+                    <path d="M9 17c2-1.5 4-1.5 6 0"/>
+                    <circle cx="12" cy="20" r="1.5"/>
                 </svg>
                 <h4>High-Speed WiFi</h4>
                 <p>Wide-range WiFi & ethernet connections</p>
             </div>
             <div class="amenity-card">
+                <!-- EV Car charging icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    <path d="M3 14h15v5H3z"/>
+                    <circle cx="6" cy="19" r="2"/>
+                    <circle cx="15" cy="19" r="2"/>
+                    <path d="M3 14l2-4h10l2 4"/>
+                    <path d="M20 10v6"/>
+                    <path d="M20 10h2v3h-2"/>
+                    <path d="M21 7l-1 3"/>
+                    <path d="M7 14v-2h4v2"/>
                 </svg>
                 <h4>EV Charger</h4>
                 <p>Electric vehicle charging station on-site</p>
             </div>
             <div class="amenity-card">
+                <!-- Happy dog sitting icon -->
                 <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    <ellipse cx="12" cy="9" rx="5" ry="4"/>
+                    <path d="M7 7c-1-3 0-5 1-5.5"/>
+                    <path d="M17 7c1-3 0-5-1-5.5"/>
+                    <circle cx="10" cy="8" r="1"/>
+                    <circle cx="14" cy="8" r="1"/>
+                    <ellipse cx="12" cy="11" rx="1.5" ry="1"/>
+                    <path d="M10.5 12.5c.5.5 1 .75 1.5.75s1-.25 1.5-.75"/>
+                    <path d="M12 13v1.5"/>
+                    <path d="M8 13c-2 1-3 3-3 5v3h4v-4"/>
+                    <path d="M16 13c2 1 3 3 3 5v3h-4v-4"/>
+                    <path d="M9 21h6"/>
+                    <path d="M19 17c1.5.5 2.5 0 3-1"/>
                 </svg>
                 <h4>Pet Friendly</h4>
                 <p>Furry friends welcome—see our pet policy</p>
@@ -1418,7 +1550,7 @@
             </div>
         </div>
         <div class="gallery-cta">
-            <a href="#" class="btn-primary" style="background: var(--forest-deep); color: var(--cream);">View Full Gallery</a>
+            <a href="gallery.html" class="btn-primary" style="background: var(--forest-deep); color: var(--cream);">View Full Gallery</a>
         </div>
     </section>
 
