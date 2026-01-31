@@ -220,80 +220,147 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile Menu Toggle */
+        /* =====================
+           MOBILE NAVIGATION
+        ===================== */
         .mobile-menu-toggle {
             display: none;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             background: none;
             border: none;
             cursor: pointer;
             padding: 0;
-            z-index: 1001;
+            position: relative;
+            z-index: 9999;
         }
 
         .mobile-menu-toggle span {
             display: block;
-            width: 100%;
+            width: 24px;
             height: 2px;
             background: var(--cream);
-            transition: var(--transition-smooth);
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
         }
+
+        .mobile-menu-toggle span:nth-child(1) { top: 4px; }
+        .mobile-menu-toggle span:nth-child(2) { top: 11px; }
+        .mobile-menu-toggle span:nth-child(3) { top: 18px; }
 
         nav.scrolled .mobile-menu-toggle span {
             background: var(--forest-deep);
         }
 
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+        /* Hamburger to X animation */
+        .mobile-menu-toggle.active span {
+            background: var(--cream);
         }
-
+        .mobile-menu-toggle.active span:nth-child(1) {
+            top: 11px;
+            transform: rotate(45deg);
+        }
         .mobile-menu-toggle.active span:nth-child(2) {
             opacity: 0;
         }
-
         .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            top: 11px;
+            transform: rotate(-45deg);
         }
 
-        /* Mobile Navigation */
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+        }
+
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: flex;
+            nav {
+                padding: 1rem 1.5rem;
             }
 
-            .nav-links {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links,
+            .nav-book {
+                display: none;
+            }
+
+            /* Hero Book Your Stay button - stays visible above overlay */
+            .hero-cta {
+                position: relative;
+                z-index: 9999;
+            }
+
+            .hero-cta .btn-primary {
+                background: var(--gold);
+                color: var(--forest-deep);
+            }
+
+            /* Full screen overlay menu */
+            .mobile-menu-overlay {
+                display: block;
                 position: fixed;
                 top: 0;
                 left: 0;
-                right: 0;
-                bottom: 0;
+                width: 100%;
+                height: 100%;
                 background: var(--forest-deep);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2rem;
+                z-index: 998;
                 opacity: 0;
                 visibility: hidden;
                 transition: opacity 0.3s ease, visibility 0.3s ease;
+                padding-top: 70px;
             }
 
-            .nav-links.active {
+            .mobile-menu-overlay.active {
                 opacity: 1;
                 visibility: visible;
             }
 
-            .nav-links a {
-                color: var(--cream) !important;
-                font-size: 1.1rem;
+            .mobile-menu-overlay ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+                padding-top: 1rem;
             }
 
-            .nav-book {
+            .mobile-menu-overlay li {
+                margin: 0;
+                border-bottom: 1px solid rgba(250, 248, 245, 0.1);
+            }
+
+            .mobile-menu-overlay li:first-child {
+                border-top: 1px solid rgba(250, 248, 245, 0.1);
+            }
+
+            .mobile-menu-overlay a {
+                display: block;
+                font-family: var(--font-ui);
+                font-size: 0.9rem;
+                font-weight: 400;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--cream);
+                text-decoration: none;
+                padding: 1.25rem 3rem;
+                transition: background 0.2s ease;
+            }
+
+            .mobile-menu-overlay a:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .logo {
                 position: relative;
-                z-index: 1001;
+                z-index: 9999;
+            }
+
+            body.menu-open .logo {
+                color: var(--cream);
             }
         }
 
@@ -470,7 +537,7 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             padding: 0.9rem 2rem;
-            background: var(--cream);
+            background: var(--gold);
             color: var(--forest-deep);
             text-decoration: none;
             transition: var(--transition-smooth);
@@ -487,7 +554,7 @@
         }
         
         .btn-primary:hover {
-            background: var(--gold);
+            background: var(--amber);
             transform: translateY(-3px);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
@@ -1355,7 +1422,7 @@
             <span></span>
             <span></span>
         </button>
-        <ul class="nav-links" id="navLinks">
+        <ul class="nav-links">
             <li><a href="a-frame.html">A-Frame Chalet</a></li>
             <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
             <li><a href="index.html#amenities">Amenities</a></li>
@@ -1364,6 +1431,17 @@
         </ul>
         <a href="book.html" class="nav-book">Book Now</a>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <ul>
+            <li><a href="a-frame.html">A-Frame Chalet</a></li>
+            <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
+            <li><a href="index.html#amenities">Amenities</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="rules.html">Guest Handbook</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1374,7 +1452,7 @@
         <img src="lake-huyck-logo-white-trimmed.png" alt="Lake Huyck Resort - Established 1980 - Michigan" class="hero-top-logo">
         <div class="hero-content">
             <p class="hero-subtitle">Private Glacial Lake · Southeastern Michigan</p>
-            <h1 class="hero-title">Your <em>Tranquil</em> Escape is waiting.</h1>
+            <h1 class="hero-title">Your <em>tranquil</em> escape is waiting.</h1>
             <p class="hero-description">Two stunning cabins on a private glacial lake.<br>Disconnect from the everyday and reconnect with what matters.</p>
             <div class="hero-cta">
                 <a href="#book" class="btn-primary">Book Your Stay</a>
@@ -1755,21 +1833,33 @@
 
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navLinks = document.getElementById('navLinks');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function openMobileMenu() {
+            mobileMenuToggle.classList.add('active');
+            mobileMenu.classList.add('active');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }
 
         mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            if (mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
         });
 
         // Close mobile menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
         
         // Smooth scroll for anchor links
