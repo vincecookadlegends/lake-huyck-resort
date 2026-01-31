@@ -243,6 +243,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: 60% bottom;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image img {
+                object-position: center center;
+            }
         }
         
         .hero-overlay {
@@ -303,7 +310,7 @@
             font-weight: 400;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
         }
 
@@ -311,7 +318,7 @@
             .hero-subtitle {
                 font-size: 0.8rem;
                 letter-spacing: 0.25em;
-                margin-bottom: 1.5rem;
+                margin-bottom: 3rem;
             }
         }
         
@@ -390,12 +397,15 @@
             color: var(--forest-deep);
             text-decoration: none;
             transition: var(--transition-smooth);
+            min-width: 200px;
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .btn-primary {
                 font-size: 0.8rem;
                 padding: 1rem 2.5rem;
+                min-width: 220px;
             }
         }
         
@@ -417,12 +427,15 @@
             text-decoration: none;
             border: 1px solid rgba(250, 248, 245, 0.4);
             transition: var(--transition-smooth);
+            min-width: 200px;
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .btn-secondary {
                 font-size: 0.8rem;
                 padding: 1rem 2.5rem;
+                min-width: 220px;
             }
         }
         
@@ -1189,7 +1202,7 @@
                     </div>
                 </div>
                 <p>Dramatic floor-to-ceiling windows frame stunning lake views and fall foliage. The open living space is flooded with natural light, creating an inviting atmosphere perfect for morning coffee or evening conversations.</p>
-                <a href="#aframe" class="cabin-link">
+                <a href="a-frame.html" class="cabin-link">
                     Explore the A-Frame
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1226,7 +1239,7 @@
                     </div>
                 </div>
                 <p>Freshly remodeled with vintage, rustic charm. The wood-burning stove, antler chandeliers, and expansive screened porch create the perfect setting for s'mores, campfire stories, and making memories that last a lifetime.</p>
-                <a href="#logcabin" class="cabin-link">
+                <a href="log-cabin.html" class="cabin-link">
                     Explore the Log Cabin
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1290,90 +1303,38 @@
                 <p>Kayaks, canoes, paddle boards & pontoon rentals</p>
             </div>
             <div class="amenity-card">
-                <!-- Campfire icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M12 4c1.5 2 3 4 3 7 0 2.5-1.5 4-3 4s-3-1.5-3-4c0-3 1.5-5 3-7z"/>
-                    <path d="M12 12c.5.5 1 1 1 2s-.5 1.5-1 1.5-1-.5-1-1.5.5-1.5 1-2z"/>
-                    <path d="M7 15c-1 1-1.5 2-1 3 .5 1 2 1.5 3 1"/>
-                    <path d="M17 15c1 1 1.5 2 1 3-.5 1-2 1.5-3 1"/>
-                    <path d="M5 21l3-2"/>
-                    <path d="M19 21l-3-2"/>
-                    <path d="M8 21h8"/>
-                </svg>
+                <!-- Campfire woodcut illustration -->
+                <img src="campfire-woodcut.jpg" alt="Fire Pits" class="amenity-icon-img">
                 <h4>Fire Pits</h4>
                 <p>Communal campfire & private fire pit for s'mores</p>
             </div>
             <div class="amenity-card">
-                <!-- Fishing rod icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M18 3l3 3-3 3"/>
-                    <path d="M21 6H9"/>
-                    <path d="M9 6v10"/>
-                    <path d="M9 10c-2 0-4 1-4 3s2 3 4 3"/>
-                    <circle cx="9" cy="19" r="2"/>
-                    <path d="M12 13l2-1"/>
-                </svg>
+                <!-- Fish woodcut illustration -->
+                <img src="fish-woodcut.jpg" alt="Sport Fishing" class="amenity-icon-img">
                 <h4>Sport Fishing</h4>
                 <p>Well-stocked lake with bass, bluegill & more</p>
             </div>
             <div class="amenity-card">
-                <!-- Stove/Oven icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="4" y="8" width="16" height="13" rx="1"/>
-                    <path d="M4 14h16"/>
-                    <rect x="6" y="16" width="12" height="3" rx="0.5"/>
-                    <circle cx="8" cy="11" r="1"/>
-                    <circle cx="12" cy="11" r="1"/>
-                    <circle cx="16" cy="11" r="1"/>
-                    <path d="M8 5v3"/>
-                    <path d="M12 4v4"/>
-                    <path d="M16 5v3"/>
-                </svg>
+                <!-- Kitchen woodcut illustration -->
+                <img src="kitchen-woodcut.jpg" alt="Full Kitchens" class="amenity-icon-img">
                 <h4>Full Kitchens</h4>
                 <p>Fully equipped chef's kitchens in both cabins</p>
             </div>
             <div class="amenity-card">
-                <!-- WiFi icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M2 9c6-5 14-5 20 0"/>
-                    <path d="M5 13c4-3 10-3 14 0"/>
-                    <path d="M9 17c2-1.5 4-1.5 6 0"/>
-                    <circle cx="12" cy="20" r="1.5"/>
-                </svg>
+                <!-- WiFi woodcut illustration -->
+                <img src="wifi-woodcut.jpg" alt="High-Speed WiFi" class="amenity-icon-img">
                 <h4>High-Speed WiFi</h4>
                 <p>Wide-range WiFi & ethernet connections</p>
             </div>
             <div class="amenity-card">
-                <!-- EV Car charging icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 14h15v5H3z"/>
-                    <circle cx="6" cy="19" r="2"/>
-                    <circle cx="15" cy="19" r="2"/>
-                    <path d="M3 14l2-4h10l2 4"/>
-                    <path d="M20 10v6"/>
-                    <path d="M20 10h2v3h-2"/>
-                    <path d="M21 7l-1 3"/>
-                    <path d="M7 14v-2h4v2"/>
-                </svg>
+                <!-- EV Charger woodcut illustration -->
+                <img src="ev-charger-woodcut.jpg" alt="EV Charger" class="amenity-icon-img">
                 <h4>EV Charger</h4>
                 <p>Electric vehicle charging station on-site</p>
             </div>
             <div class="amenity-card">
-                <!-- Happy dog sitting icon -->
-                <svg class="amenity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <ellipse cx="12" cy="9" rx="5" ry="4"/>
-                    <path d="M7 7c-1-3 0-5 1-5.5"/>
-                    <path d="M17 7c1-3 0-5-1-5.5"/>
-                    <circle cx="10" cy="8" r="1"/>
-                    <circle cx="14" cy="8" r="1"/>
-                    <ellipse cx="12" cy="11" rx="1.5" ry="1"/>
-                    <path d="M10.5 12.5c.5.5 1 .75 1.5.75s1-.25 1.5-.75"/>
-                    <path d="M12 13v1.5"/>
-                    <path d="M8 13c-2 1-3 3-3 5v3h4v-4"/>
-                    <path d="M16 13c2 1 3 3 3 5v3h-4v-4"/>
-                    <path d="M9 21h6"/>
-                    <path d="M19 17c1.5.5 2.5 0 3-1"/>
-                </svg>
+                <!-- Dog woodcut illustration -->
+                <img src="dog-woodcut.jpg" alt="Pet Friendly" class="amenity-icon-img">
                 <h4>Pet Friendly</h4>
                 <p>Furry friends welcome—see our pet policy</p>
             </div>
