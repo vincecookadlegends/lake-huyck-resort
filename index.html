@@ -219,7 +219,84 @@
             background: var(--amber);
             transform: translateY(-2px);
         }
-        
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--cream);
+            transition: var(--transition-smooth);
+        }
+
+        nav.scrolled .mobile-menu-toggle span {
+            background: var(--forest-deep);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--forest-deep);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                color: var(--cream) !important;
+                font-size: 1.1rem;
+            }
+
+            .nav-book {
+                position: relative;
+                z-index: 1001;
+            }
+        }
+
         /* =====================
            HERO SECTION
         ===================== */
@@ -821,16 +898,21 @@
         }
         
         .amenities-accordion-grid {
-            column-count: 3;
-            column-gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            align-items: start;
         }
-        
+
+        /* Assign items to specific columns for independent stacking */
+        .amenity-accordion:nth-child(3n+1) { grid-column: 1; }
+        .amenity-accordion:nth-child(3n+2) { grid-column: 2; }
+        .amenity-accordion:nth-child(3n) { grid-column: 3; }
+
         .amenity-accordion {
             background: var(--cream);
             border: 1px solid rgba(26, 58, 47, 0.1);
             overflow: hidden;
-            break-inside: avoid;
-            margin-bottom: 1rem;
         }
         
         .amenity-accordion-header {
@@ -895,7 +977,128 @@
         .amenity-accordion-content li:last-child {
             border-bottom: none;
         }
-        
+
+        /* Full Amenities Modal Cards */
+        .amenities-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .amenity-modal-card {
+            background: var(--cream);
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            transition: var(--transition-smooth);
+            text-align: center;
+        }
+
+        .amenity-modal-card:hover {
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+
+        /* Amenity Modal */
+        .amenity-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .amenity-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .amenity-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--cream);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 2001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        .amenity-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .amenity-modal-header {
+            background: var(--forest-deep);
+            color: var(--cream);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .amenity-modal-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .amenity-modal-close {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .amenity-modal-close:hover {
+            opacity: 1;
+        }
+
+        .amenity-modal-content {
+            padding: 2rem;
+        }
+
+        .amenity-modal-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .amenity-modal-content li {
+            font-size: 1rem;
+            color: var(--charcoal);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(26, 58, 47, 0.1);
+        }
+
+        .amenity-modal-content li:last-child {
+            border-bottom: none;
+        }
+
         /* =====================
            GALLERY PREVIEW
         ===================== */
@@ -1056,7 +1259,17 @@
             }
             
             .amenities-accordion-grid {
-                column-count: 2;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .amenity-accordion:nth-child(3n+1),
+            .amenity-accordion:nth-child(3n+2),
+            .amenity-accordion:nth-child(3n) { grid-column: auto; }
+            .amenity-accordion:nth-child(2n+1) { grid-column: 1; }
+            .amenity-accordion:nth-child(2n) { grid-column: 2; }
+
+            .amenities-modal-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .gallery-grid {
@@ -1086,7 +1299,14 @@
             }
             
             .amenities-accordion-grid {
-                column-count: 1;
+                grid-template-columns: 1fr;
+            }
+
+            .amenity-accordion:nth-child(2n+1),
+            .amenity-accordion:nth-child(2n) { grid-column: auto; }
+
+            .amenities-modal-grid {
+                grid-template-columns: 1fr;
             }
             
             .resort-cta {
@@ -1130,12 +1350,17 @@
     <!-- Navigation -->
     <nav id="nav">
         <a href="index.html" class="logo">Lake Huyck Resort</a>
-        <ul class="nav-links">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
             <li><a href="a-frame.html">A-Frame Chalet</a></li>
             <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
             <li><a href="index.html#amenities">Amenities</a></li>
             <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="rules.html">House Rules</a></li>
+            <li><a href="rules.html">Guest Handbook</a></li>
         </ul>
         <a href="book.html" class="nav-book">Book Now</a>
     </nav>
@@ -1340,130 +1565,94 @@
             </div>
         </div>
         
-        <!-- Full Amenities List - Accordion Style -->
+        <!-- Full Amenities List -->
         <div class="amenities-full-section">
             <h3>All 76 Resort Amenities</h3>
             <p class="amenities-subtext">Click each category to explore</p>
-            <div class="amenities-accordion-grid">
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Scenic Views</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Lake view</li><li>Beach view</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Bathroom</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Bathtub</li><li>Hair dryer</li><li>Cleaning products</li><li>Shampoo</li><li>Conditioner</li><li>Body soap</li><li>Outdoor shower</li><li>Hot water</li><li>Shower gel</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Bedroom & Laundry</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Hangers</li><li>Bed linens (cotton)</li><li>Extra pillows and blankets</li><li>Room-darkening shades</li><li>Iron</li><li>Clothing storage: closet and dresser</li><li>Washer</li><li>Dryer</li><li>Essentials (towels, sheets, soap, toilet paper)</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Entertainment</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Ethernet connection</li><li>HDTV</li><li>Bluetooth sound system</li><li>Books and reading material</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Family</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Board games</li><li>Outdoor playground</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Heating & Cooling</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>AC - split type ductless system</li><li>Indoor fireplace: wood-burning</li><li>Portable fans</li><li>Portable heater</li><li>Radiant heating</li><li>Heating - split type ductless system</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Home Safety</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Exterior security cameras on property</li><li>Smoke alarm</li><li>Carbon monoxide alarm</li><li>Fire extinguisher</li><li>First aid kit</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Internet & Office</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>WiFi</li><li>Dedicated workspace (in a room with a door)</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Kitchen & Dining</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Kitchen</li><li>Refrigerator</li><li>Microwave</li><li>Dishwasher</li><li>Cooking basics (pots, pans, oil, salt, pepper)</li><li>Dishes and silverware</li><li>Freezer</li><li>Electric stove</li><li>Oven</li><li>Hot water kettle</li><li>Coffee maker</li><li>Wine glasses</li><li>Toaster</li><li>Baking sheet</li><li>Barbecue utensils</li><li>Dining table</li><li>Coffee</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Location Features</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Waterfront</li><li>Shared beach access</li><li>Lake access</li><li>Private entrance</li><li>Laundromat nearby</li><li>Free resort access</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Outdoor</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Private patio or balcony</li><li>Shared backyard</li><li>Fire pit</li><li>Outdoor furniture</li><li>Hammock</li><li>Outdoor dining area</li><li>BBQ grill</li><li>Beach essentials</li><li>Kayak</li><li>Boat slip</li><li>Sun loungers</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Parking & Facilities</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Free parking on premises</li><li>Free street parking</li><li>EV charger - level 2</li></ul>
-                    </div>
-                </div>
-                <div class="amenity-accordion">
-                    <div class="amenity-accordion-header">
-                        <span>Services</span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </div>
-                    <div class="amenity-accordion-content">
-                        <ul><li>Pets allowed</li><li>Long term stays allowed (28+ days)</li><li>Self check-in</li><li>Lockbox</li></ul>
-                    </div>
-                </div>
+            <div class="amenities-modal-grid">
+                <div class="amenity-modal-card" data-category="scenic-views">Scenic Views</div>
+                <div class="amenity-modal-card" data-category="bathroom">Bathroom</div>
+                <div class="amenity-modal-card" data-category="bedroom-laundry">Bedroom & Laundry</div>
+                <div class="amenity-modal-card" data-category="entertainment">Entertainment</div>
+                <div class="amenity-modal-card" data-category="family">Family</div>
+                <div class="amenity-modal-card" data-category="heating-cooling">Heating & Cooling</div>
+                <div class="amenity-modal-card" data-category="home-safety">Home Safety</div>
+                <div class="amenity-modal-card" data-category="internet-office">Internet & Office</div>
+                <div class="amenity-modal-card" data-category="kitchen-dining">Kitchen & Dining</div>
+                <div class="amenity-modal-card" data-category="location-features">Location Features</div>
+                <div class="amenity-modal-card" data-category="outdoor">Outdoor</div>
+                <div class="amenity-modal-card" data-category="parking-facilities">Parking & Facilities</div>
+                <div class="amenity-modal-card" data-category="services">Services</div>
             </div>
         </div>
+
+        <!-- Amenity Modal -->
+        <div class="amenity-modal-overlay" id="amenityModalOverlay"></div>
+        <div class="amenity-modal" id="amenityModal">
+            <div class="amenity-modal-header">
+                <h3 id="amenityModalTitle">Category</h3>
+                <button class="amenity-modal-close" id="amenityModalClose">&times;</button>
+            </div>
+            <div class="amenity-modal-content" id="amenityModalContent"></div>
+        </div>
+
+        <!-- Amenity Data -->
+        <script type="application/json" id="amenityData">
+        {
+            "scenic-views": {
+                "title": "Scenic Views",
+                "items": ["Lake view", "Beach view"]
+            },
+            "bathroom": {
+                "title": "Bathroom",
+                "items": ["Bathtub", "Hair dryer", "Cleaning products", "Shampoo", "Conditioner", "Body soap", "Outdoor shower", "Hot water", "Shower gel"]
+            },
+            "bedroom-laundry": {
+                "title": "Bedroom & Laundry",
+                "items": ["Hangers", "Bed linens (cotton)", "Extra pillows and blankets", "Room-darkening shades", "Iron", "Clothing storage: closet and dresser", "Washer", "Dryer", "Essentials (towels, sheets, soap, toilet paper)"]
+            },
+            "entertainment": {
+                "title": "Entertainment",
+                "items": ["Ethernet connection", "HDTV", "Bluetooth sound system", "Books and reading material"]
+            },
+            "family": {
+                "title": "Family",
+                "items": ["Board games", "Outdoor playground"]
+            },
+            "heating-cooling": {
+                "title": "Heating & Cooling",
+                "items": ["AC - split type ductless system", "Indoor fireplace: wood-burning", "Portable fans", "Portable heater", "Radiant heating", "Heating - split type ductless system"]
+            },
+            "home-safety": {
+                "title": "Home Safety",
+                "items": ["Exterior security cameras on property", "Smoke alarm", "Carbon monoxide alarm", "Fire extinguisher", "First aid kit"]
+            },
+            "internet-office": {
+                "title": "Internet & Office",
+                "items": ["WiFi", "Dedicated workspace (in a room with a door)"]
+            },
+            "kitchen-dining": {
+                "title": "Kitchen & Dining",
+                "items": ["Kitchen", "Refrigerator", "Microwave", "Dishwasher", "Cooking basics (pots, pans, oil, salt, pepper)", "Dishes and silverware", "Freezer", "Electric stove", "Oven", "Hot water kettle", "Coffee maker", "Wine glasses", "Toaster", "Baking sheet", "Barbecue utensils", "Dining table", "Coffee"]
+            },
+            "location-features": {
+                "title": "Location Features",
+                "items": ["Waterfront", "Shared beach access", "Lake access", "Private entrance", "Laundromat nearby", "Free resort access"]
+            },
+            "outdoor": {
+                "title": "Outdoor",
+                "items": ["Private patio or balcony", "Shared backyard", "Fire pit", "Outdoor furniture", "Hammock", "Outdoor dining area", "BBQ grill", "Beach essentials", "Kayak", "Boat slip", "Sun loungers"]
+            },
+            "parking-facilities": {
+                "title": "Parking & Facilities",
+                "items": ["Free parking on premises", "Free street parking", "EV charger - level 2"]
+            },
+            "services": {
+                "title": "Services",
+                "items": ["Pets allowed", "Long term stays allowed (28+ days)", "Self check-in", "Lockbox"]
+            }
+        }
+        </script>
     </section>
 
     <!-- Gallery Preview -->
@@ -1525,18 +1714,18 @@
             <div class="footer-links">
                 <h4>Stay</h4>
                 <ul>
-                    <li><a href="#aframe">A-Frame Chalet</a></li>
-                    <li><a href="#logcabin">Log Cabin</a></li>
-                    <li><a href="#book">Book the Resort</a></li>
+                    <li><a href="a-frame.html">A-Frame Chalet</a></li>
+                    <li><a href="log-cabin.html">Log Cabin</a></li>
+                    <li><a href="book.html">Book the Resort</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Info</h4>
                 <ul>
                     <li><a href="#amenities">Amenities</a></li>
-                    <li><a href="#rules">House Rules</a></li>
-                    <li><a href="#pets">Pet Policy</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="rules.html">Guest Handbook</a></li>
+                    <li><a href="rules.html#pets">Pet Policy</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -1563,6 +1752,25 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
         
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1575,13 +1783,38 @@
             });
         });
         
-        // Amenities Accordion functionality
-        document.querySelectorAll('.amenity-accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const accordion = header.parentElement;
-                accordion.classList.toggle('open');
-            });
+        // Amenity Modal functionality
+        const amenityData = JSON.parse(document.getElementById('amenityData').textContent);
+        const modal = document.getElementById('amenityModal');
+        const overlay = document.getElementById('amenityModalOverlay');
+        const modalTitle = document.getElementById('amenityModalTitle');
+        const modalContent = document.getElementById('amenityModalContent');
+        const modalClose = document.getElementById('amenityModalClose');
+
+        function openModal(category) {
+            const data = amenityData[category];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalContent.innerHTML = '<ul>' + data.items.map(item => '<li>' + item + '</li>').join('') + '</ul>';
+                modal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.amenity-modal-card').forEach(card => {
+            card.addEventListener('click', () => openModal(card.dataset.category));
         });
+
+        modalClose.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     </script>
 </body>
 </html>
