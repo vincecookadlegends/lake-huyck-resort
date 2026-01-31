@@ -195,14 +195,20 @@
         
         /* Tab Navigation */
         .tab-nav {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             padding: 2rem 4rem;
             background: var(--cream-dark);
-            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
+
+        /* Center the last item when it's alone in its row */
+        .tab-nav .tab-btn:last-child:nth-child(3n + 1) {
+            grid-column: 2;
+        }
+
         .tab-btn {
             font-family: var(--font-ui);
             font-size: 0.8rem;
@@ -214,6 +220,7 @@
             border: 1px solid var(--forest-mid);
             cursor: pointer;
             transition: var(--transition-smooth);
+            text-align: center;
         }
         
         .tab-btn:hover,
