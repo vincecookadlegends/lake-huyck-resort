@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Stay | Lake Huyck Resort</title>
-    <meta name="description" content="Book your lakefront escape at Lake Huyck Resort. Check availability for the A-Frame Chalet, Log Cabin, or the entire resort.">
-    
+    <meta name="description" content="Book your lakefront escape at Lake Huyck Resort. Reserve the A-Frame Chalet, Log Cabin, or the entire resort through Airbnb.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --forest-deep: #1a3a2f;
@@ -22,17 +22,17 @@
             --cream-dark: #f0ebe3;
             --charcoal: #2c2c2c;
             --gold: #c9a227;
-            
+
             --font-display: 'Playfair Display', serif;
             --font-body: 'Cormorant Garamond', serif;
             --font-ui: 'Outfit', sans-serif;
-            
+
             --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
+
         body {
             font-family: var(--font-body);
             font-size: 18px;
@@ -40,7 +40,7 @@
             color: var(--charcoal);
             background-color: var(--cream);
         }
-        
+
         /* Navigation */
         nav {
             position: fixed;
@@ -56,7 +56,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 40px rgba(0, 0, 0, 0.08);
         }
-        
+
         .logo {
             font-family: var(--font-display);
             font-size: 1.5rem;
@@ -64,13 +64,13 @@
             color: var(--forest-deep);
             text-decoration: none;
         }
-        
+
         .nav-links {
             display: flex;
             gap: 2.5rem;
             list-style: none;
         }
-        
+
         .nav-links a {
             font-family: var(--font-ui);
             font-size: 0.85rem;
@@ -81,64 +81,11 @@
             text-decoration: none;
             transition: var(--transition-smooth);
         }
-        
+
         .nav-links a:hover {
             color: var(--amber);
         }
-        
-        /* Dropdown */
-        .nav-dropdown { position: relative; }
-        
-        .nav-dropdown-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        
-        .nav-dropdown-toggle svg {
-            width: 10px;
-            height: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-dropdown:hover .nav-dropdown-toggle svg {
-            transform: rotate(180deg);
-        }
-        
-        .nav-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding-top: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-dropdown:hover .nav-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .nav-dropdown-menu-inner {
-            background: var(--cream);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            padding: 1rem 0;
-            min-width: 200px;
-        }
-        
-        .nav-dropdown-menu a {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--forest-deep) !important;
-            white-space: nowrap;
-        }
-        
-        .nav-dropdown-menu a:hover {
-            background: var(--cream-dark);
-        }
-        
+
         .nav-book {
             font-family: var(--font-ui);
             font-size: 0.8rem;
@@ -151,7 +98,7 @@
             text-decoration: none;
             transition: var(--transition-smooth);
         }
-        
+
         .nav-book:hover {
             background: var(--amber);
         }
@@ -274,71 +221,87 @@
             background: var(--forest-deep);
             color: var(--cream);
         }
-        
+
         .page-header h1 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 400;
             margin-bottom: 1rem;
         }
-        
+
         .page-header p {
             font-size: 1.1rem;
             opacity: 0.8;
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         /* Booking Options */
-        .booking-options {
+        .booking-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .booking-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .booking-intro h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+            margin-bottom: 1rem;
+        }
+
+        .booking-intro p {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .booking-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            max-width: 1200px;
-            margin: -3rem auto 4rem;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 10;
         }
-        
+
         .booking-card {
             background: var(--cream);
             box-shadow: 0 10px 60px rgba(0, 0, 0, 0.12);
             overflow: hidden;
             transition: var(--transition-smooth);
-            cursor: pointer;
-            border: 3px solid transparent;
         }
-        
+
         .booking-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
         }
-        
-        .booking-card.selected {
-            border-color: var(--gold);
-        }
-        
+
         .booking-card-image {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
         }
-        
+
         .booking-card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
         }
-        
+
         .booking-card:hover .booking-card-image img {
             transform: scale(1.05);
         }
-        
+
         .booking-card-content {
             padding: 2rem;
         }
-        
+
         .booking-card h3 {
             font-family: var(--font-display);
             font-size: 1.5rem;
@@ -346,693 +309,73 @@
             color: var(--forest-deep);
             margin-bottom: 0.5rem;
         }
-        
+
         .booking-card-specs {
             font-family: var(--font-ui);
             font-size: 0.85rem;
             color: var(--forest-mid);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
-        
+
         .booking-card-price {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--charcoal);
+            margin-bottom: 1.5rem;
         }
-        
+
         .booking-card-price span {
             font-size: 0.9rem;
             opacity: 0.7;
         }
-        
-        .select-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(26, 58, 47, 0.1);
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--forest-mid);
-            transition: var(--transition-smooth);
-        }
-        
-        .booking-card.selected .select-indicator {
-            color: var(--gold);
-        }
-        
-        .select-indicator .check {
-            width: 20px;
-            height: 20px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-smooth);
-        }
-        
-        .booking-card.selected .select-indicator .check {
-            background: var(--gold);
-            border-color: var(--gold);
-        }
-        
-        .booking-card.selected .select-indicator .check::after {
-            content: '✓';
-            color: var(--forest-deep);
-            font-size: 12px;
-        }
-        
-        /* Calendar Section */
-        .calendar-section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        
-        .calendar-section h2 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 400;
-            color: var(--forest-deep);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        /* Calendar Widget */
-        .calendar-container {
-            background: var(--cream);
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .calendar-nav {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .calendar-nav button {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--forest-mid);
-            background: transparent;
-            cursor: pointer;
-            font-size: 1.25rem;
-            color: var(--forest-mid);
-            transition: var(--transition-smooth);
-        }
-        
-        .calendar-nav button:hover {
-            background: var(--forest-deep);
-            color: var(--cream);
-            border-color: var(--forest-deep);
-        }
-        
-        .calendar-month {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--forest-deep);
-        }
-        
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-        }
-        
-        .calendar-weekday {
-            padding: 1rem 0.5rem;
-            text-align: center;
-            font-family: var(--font-ui);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--forest-mid);
-        }
-        
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-ui);
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            border: 1px solid transparent;
-            padding: 4px 2px;
-            min-height: 60px;
-        }
 
-        .calendar-day .day-number {
-            font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1;
-        }
-
-        .calendar-day .day-price {
-            font-size: 0.65rem;
-            opacity: 0.7;
-            margin-top: 2px;
-            line-height: 1;
-        }
-
-        .calendar-day.selected .day-price {
-            opacity: 0.9;
-        }
-
-        .calendar-day:hover:not(.disabled):not(.booked) {
-            background: var(--cream-dark);
-        }
-
-        .calendar-day.today {
-            border-color: var(--forest-mid);
-        }
-
-        .calendar-day.selected {
-            background: var(--forest-deep);
-            color: var(--cream);
-        }
-
-        .calendar-day.in-range {
-            background: var(--cream-dark);
-        }
-
-        .calendar-day.booked {
-            color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .calendar-day.booked .day-number {
-            text-decoration: line-through;
-        }
-
-        .calendar-day.booked .day-price {
-            display: none;
-        }
-
-        .calendar-day.disabled {
-            color: #ddd;
-            cursor: not-allowed;
-        }
-
-        .calendar-day.disabled .day-price {
-            display: none;
-        }
-        
-        .calendar-legend {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(26, 58, 47, 0.1);
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            color: var(--charcoal);
-        }
-        
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-        }
-        
-        .legend-dot.available {
-            background: var(--cream);
-            border: 1px solid var(--forest-mid);
-        }
-        
-        .legend-dot.booked {
-            background: #eee;
-        }
-        
-        .legend-dot.selected {
-            background: var(--forest-deep);
-        }
-        
-        /* Date Selection Summary */
-        .date-summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 2rem;
-            align-items: end;
-            background: var(--cream-dark);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .date-input-group label {
+        .btn-airbnb {
             display: block;
-            font-family: var(--font-ui);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--forest-mid);
-            margin-bottom: 0.5rem;
-        }
-        
-        .date-input-group input {
             width: 100%;
             padding: 1rem;
-            border: 1px solid rgba(26, 58, 47, 0.2);
-            background: var(--cream);
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            color: var(--charcoal);
-        }
-        
-        .date-input-group input:focus {
-            outline: none;
-            border-color: var(--forest-deep);
-        }
-        
-        .guest-select {
-            padding: 1rem;
-            border: 1px solid rgba(26, 58, 47, 0.2);
-            background: var(--cream);
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            color: var(--charcoal);
-            cursor: pointer;
-        }
-
-        /* Pet Option */
-        .pet-option {
-            background: var(--cream);
-            padding: 1.5rem 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .pet-checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            font-family: var(--font-ui);
-            font-size: 1rem;
-            color: var(--forest-deep);
-        }
-
-        .pet-checkbox-label input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--forest-deep);
-        }
-
-        .pet-count {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(26, 58, 47, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .pet-count label {
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            color: var(--charcoal);
-        }
-
-        .pet-count select {
-            padding: 0.5rem 1rem;
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            border: 1px solid rgba(26, 58, 47, 0.2);
-            background: white;
-            color: var(--charcoal);
-            cursor: pointer;
-        }
-
-        .pet-note {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--charcoal);
-            opacity: 0.7;
-        }
-
-        .pet-note a {
-            color: var(--forest-deep);
-        }
-
-        /* Pricing Summary */
-        .pricing-summary {
-            background: var(--cream);
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .pricing-summary h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--forest-deep);
-            margin-bottom: 1.5rem;
-        }
-        
-        .pricing-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(26, 58, 47, 0.1);
-        }
-        
-        .pricing-row:last-child {
-            border-bottom: none;
-            padding-top: 1rem;
-            margin-top: 0.5rem;
-            border-top: 2px solid var(--forest-deep);
-        }
-        
-        .pricing-row.total {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--forest-deep);
-        }
-
-        .pricing-row.sub-item {
-            font-size: 0.9rem;
-            opacity: 0.85;
-            padding: 0.5rem 0 0.5rem 1rem;
-            border-bottom: none;
-        }
-
-        .pricing-row.sub-item:last-of-type {
-            border-bottom: 1px solid rgba(26, 58, 47, 0.1);
-            padding-bottom: 0.75rem;
-        }
-
-        .pricing-note {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background: var(--cream-dark);
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            color: var(--forest-mid);
-        }
-
-        .minimum-stay-notice {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1rem;
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            color: #856404;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .minimum-stay-notice::before {
-            content: '⚠';
-            font-size: 1.1rem;
-        }
-
-        .minimum-stay-notice.error {
-            background: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
-        }
-
-        .minimum-stay-notice.info {
-            background: var(--cream-dark);
-            border-color: var(--forest-light);
-            color: var(--forest-mid);
-        }
-
-        .minimum-stay-notice.info::before {
-            content: 'ℹ';
-        }
-
-        .rate-tag {
-            display: inline-block;
-            padding: 0.15rem 0.4rem;
-            font-size: 0.65rem;
-            font-family: var(--font-ui);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-left: 0.5rem;
-            border-radius: 2px;
-        }
-
-        .rate-tag.weekend {
-            background: var(--gold);
-            color: var(--forest-deep);
-        }
-
-        .rate-tag.holiday {
-            background: var(--sienna);
-            color: var(--cream);
-        }
-
-        .rate-tag.off-season {
-            background: var(--lake-blue);
-            color: var(--cream);
-        }
-
-        /* Calendar day rate indicators */
-        .calendar-day.weekend-day {
-            background: rgba(201, 162, 39, 0.1);
-        }
-
-        .calendar-day.holiday-day {
-            background: rgba(139, 69, 19, 0.15);
-            position: relative;
-        }
-
-        .calendar-day.holiday-day::after {
-            content: '';
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            width: 6px;
-            height: 6px;
-            background: var(--sienna);
-            border-radius: 50%;
-        }
-
-        .calendar-day.selected.holiday-day::after,
-        .calendar-day.selected.weekend-day {
-            background: var(--forest-deep);
-        }
-
-        .calendar-day.selected.holiday-day::after {
-            background: var(--gold);
-        }
-
-        .calendar-legend {
-            flex-wrap: wrap;
-        }
-
-        .legend-dot.weekend {
-            background: rgba(201, 162, 39, 0.3);
-            border: 1px solid var(--gold);
-        }
-
-        .legend-dot.holiday {
-            background: rgba(139, 69, 19, 0.3);
-            border: 1px solid var(--sienna);
-            position: relative;
-        }
-        
-        /* Book Button */
-        .book-button-container {
+            background: #FF5A5F;
+            color: white;
             text-align: center;
-            padding: 2rem 0;
-        }
-        
-        .btn-book {
-            font-family: var(--font-ui);
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 1.25rem 4rem;
-            background: var(--gold);
-            color: var(--forest-deep);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-        
-        .btn-book:hover {
-            background: var(--amber);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(184, 134, 11, 0.3);
-        }
-        
-        .btn-book:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .booking-note {
-            font-size: 0.9rem;
-            color: var(--charcoal);
-            opacity: 0.7;
-            margin-top: 1rem;
-            text-align: center;
-        }
-        
-        /* Alternative Booking */
-        .alternative-booking {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: var(--cream-dark);
-            margin: 4rem 0 0;
-        }
-        
-        .alternative-booking h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--forest-deep);
-            margin-bottom: 1rem;
-        }
-        
-        .alternative-booking p {
-            margin-bottom: 2rem;
-            opacity: 0.8;
-        }
-        
-        .airbnb-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .airbnb-link {
-            font-family: var(--font-ui);
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--forest-mid);
-            color: var(--forest-deep);
             text-decoration: none;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
             transition: var(--transition-smooth);
         }
-        
-        .airbnb-link:hover {
-            background: var(--forest-deep);
-            color: var(--cream);
-            border-color: var(--forest-deep);
+
+        .btn-airbnb:hover {
+            background: #e04e52;
         }
-        
+
         /* Contact Section */
         .contact-section {
-            max-width: 800px;
-            margin: 0 auto;
+            background: var(--cream-dark);
             padding: 4rem 2rem;
+            text-align: center;
         }
-        
+
         .contact-section h2 {
             font-family: var(--font-display);
             font-size: 2rem;
             font-weight: 400;
             color: var(--forest-deep);
-            text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
-        
-        .contact-form {
-            background: var(--cream);
-            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08);
-            padding: 3rem;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            font-family: var(--font-ui);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--forest-mid);
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid rgba(26, 58, 47, 0.2);
-            background: var(--cream);
-            font-family: var(--font-body);
+
+        .contact-section p {
             font-size: 1.1rem;
             color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--forest-deep);
-        }
-        
-        .btn-submit {
-            width: 100%;
-            font-family: var(--font-ui);
-            font-size: 0.85rem;
+
+        .contact-section a {
+            color: var(--forest-deep);
             font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 1.25rem 2rem;
-            background: var(--forest-deep);
-            color: var(--cream);
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-smooth);
         }
-        
-        .btn-submit:hover {
-            background: var(--forest-mid);
-        }
-        
+
         /* Footer */
         footer {
             background: var(--charcoal);
@@ -1040,7 +383,7 @@
             padding: 3rem 4rem;
             text-align: center;
         }
-        
+
         .footer-links-inline {
             display: flex;
             justify-content: center;
@@ -1048,7 +391,7 @@
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
-        
+
         .footer-links-inline a {
             font-family: var(--font-ui);
             font-size: 0.85rem;
@@ -1057,71 +400,32 @@
             opacity: 0.7;
             transition: opacity 0.3s ease;
         }
-        
+
         .footer-links-inline a:hover {
             opacity: 1;
         }
-        
+
         .footer-copyright {
             font-size: 0.85rem;
             opacity: 0.5;
         }
-        
+
         /* Responsive */
         @media (max-width: 1024px) {
-            .booking-options {
+            .booking-cards {
                 grid-template-columns: 1fr;
                 max-width: 500px;
+                margin: 0 auto;
             }
         }
-        
+
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
             .page-header {
                 padding: 8rem 2rem 3rem;
             }
-            
-            .booking-options {
-                margin-top: -2rem;
-                padding: 0 1rem;
-            }
-            
-            .calendar-section,
-            .contact-section {
-                padding: 2rem 1rem;
-            }
-            
-            .calendar-day {
-                min-height: 50px;
-                padding: 2px 1px;
-            }
 
-            .calendar-day .day-number {
-                font-size: 0.85rem;
-            }
-
-            .calendar-day .day-price {
-                font-size: 0.55rem;
-            }
-
-            .date-summary {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-form {
-                padding: 2rem 1.5rem;
+            .booking-section {
+                padding: 3rem 1rem;
             }
         }
     </style>
@@ -1148,226 +452,60 @@
     <!-- Page Header -->
     <header class="page-header">
         <h1>Book Your Stay</h1>
-        <p>Select your cabin, choose your dates, and reserve your lakefront escape.</p>
+        <p>Reserve your lakefront escape through Airbnb for instant confirmation and secure booking.</p>
     </header>
 
-    <!-- Booking Property Selection -->
-    <section class="booking-options">
-        <div class="booking-card selected" data-property="aframe">
-            <div class="booking-card-image">
-                <img src="images/aframe/interior-hero.avif" alt="A-Frame Chalet">
-            </div>
-            <div class="booking-card-content">
-                <h3>A-Frame Chalet</h3>
-                <p class="booking-card-specs">6 guests · 3 bedrooms · 1 bath</p>
-                <p class="booking-card-price">From $<span id="aframe-price">489</span> <span>/ night</span></p>
-                <div class="select-indicator">
-                    <span class="check"></span>
-                    <span>Select</span>
-                </div>
-            </div>
+    <!-- Booking Options -->
+    <section class="booking-section">
+        <div class="booking-intro">
+            <h2>Choose Your Cabin</h2>
+            <p>Select a property below to view availability and book directly through Airbnb.</p>
         </div>
 
-        <div class="booking-card" data-property="logcabin">
-            <div class="booking-card-image">
-                <img src="log-cabin-living-lakeview.png" alt="Log Cabin">
-            </div>
-            <div class="booking-card-content">
-                <h3>Log Cabin</h3>
-                <p class="booking-card-specs">8 guests · 3 bedrooms · 2 baths</p>
-                <p class="booking-card-price">From $<span id="logcabin-price">589</span> <span>/ night</span></p>
-                <div class="select-indicator">
-                    <span class="check"></span>
-                    <span>Select</span>
+        <div class="booking-cards">
+            <div class="booking-card">
+                <div class="booking-card-image">
+                    <img src="images/aframe/interior-hero.avif" alt="A-Frame Chalet">
+                </div>
+                <div class="booking-card-content">
+                    <h3>A-Frame Chalet</h3>
+                    <p class="booking-card-specs">6 guests · 3 bedrooms · 1 bath</p>
+                    <p class="booking-card-price">From $489 <span>/ night</span></p>
+                    <a href="https://airbnb.com/h/tranquil-a-frame-on-private-glacial-lake" target="_blank" class="btn-airbnb">Book on Airbnb</a>
                 </div>
             </div>
-        </div>
 
-        <div class="booking-card" data-property="resort">
-            <div class="booking-card-image">
-                <img src="lake-beach-overview.png" alt="Entire Resort">
+            <div class="booking-card">
+                <div class="booking-card-image">
+                    <img src="log-cabin-living-lakeview.png" alt="Log Cabin">
+                </div>
+                <div class="booking-card-content">
+                    <h3>Log Cabin</h3>
+                    <p class="booking-card-specs">8 guests · 3 bedrooms · 2 baths</p>
+                    <p class="booking-card-price">From $589 <span>/ night</span></p>
+                    <a href="https://airbnb.com/h/cozy-log-cabin-on-private-glacial-lake" target="_blank" class="btn-airbnb">Book on Airbnb</a>
+                </div>
             </div>
-            <div class="booking-card-content">
-                <h3>Entire Resort</h3>
-                <p class="booking-card-specs">14 guests · 6 bedrooms · 3 baths</p>
-                <p class="booking-card-price">From $<span id="resort-price">1,078</span> <span>/ night</span></p>
-                <div class="select-indicator">
-                    <span class="check"></span>
-                    <span>Select</span>
+
+            <div class="booking-card">
+                <div class="booking-card-image">
+                    <img src="lake-beach-overview.png" alt="Entire Resort">
+                </div>
+                <div class="booking-card-content">
+                    <h3>Entire Resort</h3>
+                    <p class="booking-card-specs">14 guests · 6 bedrooms · 3 baths</p>
+                    <p class="booking-card-price">From $1,078 <span>/ night</span></p>
+                    <a href="https://airbnb.com/h/tanquil-resort-on-a-private-glacial-lake" target="_blank" class="btn-airbnb">Book on Airbnb</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Calendar Section -->
-    <section class="calendar-section">
-        <h2>Select Your Dates</h2>
-        
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <button class="calendar-nav" id="prevMonth">←</button>
-                <span class="calendar-month" id="currentMonth">January 2025</span>
-                <button class="calendar-nav" id="nextMonth">→</button>
-            </div>
-            
-            <div class="calendar-grid" id="calendarGrid">
-                <div class="calendar-weekday">Sun</div>
-                <div class="calendar-weekday">Mon</div>
-                <div class="calendar-weekday">Tue</div>
-                <div class="calendar-weekday">Wed</div>
-                <div class="calendar-weekday">Thu</div>
-                <div class="calendar-weekday">Fri</div>
-                <div class="calendar-weekday">Sat</div>
-                <!-- Calendar days will be generated by JavaScript -->
-            </div>
-            
-            <div class="calendar-legend">
-                <div class="legend-item">
-                    <span class="legend-dot available"></span>
-                    Weekday
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot weekend"></span>
-                    Weekend
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot holiday"></span>
-                    Holiday
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot booked"></span>
-                    Booked
-                </div>
-                <div class="legend-item">
-                    <span class="legend-dot selected"></span>
-                    Selected
-                </div>
-            </div>
-        </div>
-        
-        <div class="date-summary">
-            <div class="date-input-group">
-                <label for="checkIn">Check-In</label>
-                <input type="text" id="checkIn" placeholder="Select date" readonly>
-            </div>
-            <div class="date-input-group">
-                <label for="checkOut">Check-Out</label>
-                <input type="text" id="checkOut" placeholder="Select date" readonly>
-            </div>
-            <div class="date-input-group">
-                <label for="guests">Guests</label>
-                <select id="guests" class="guest-select">
-                    <option value="1">1 Guest</option>
-                    <option value="2" selected>2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                    <option value="5">5 Guests</option>
-                    <option value="6">6 Guests</option>
-                    <option value="7">7 Guests</option>
-                    <option value="8">8 Guests</option>
-                    <option value="9">9 Guests</option>
-                    <option value="10">10 Guests</option>
-                    <option value="11">11 Guests</option>
-                    <option value="12">12 Guests</option>
-                    <option value="13">13 Guests</option>
-                    <option value="14">14 Guests</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Pet Option -->
-        <div class="pet-option">
-            <label class="pet-checkbox-label">
-                <input type="checkbox" id="bringingPet" onchange="updatePricing()">
-                <span class="pet-checkbox-text">I'm bringing a furry friend</span>
-            </label>
-            <div class="pet-count" id="petCountContainer" style="display: none;">
-                <label for="petCount">Number of pets:</label>
-                <select id="petCount" onchange="updatePricing()">
-                    <option value="1">1 pet ($100)</option>
-                    <option value="2">2 pets ($200)</option>
-                </select>
-            </div>
-            <p class="pet-note">$100 per pet, per stay. <a href="rules.html#pets">View pet policy</a></p>
-        </div>
-
-        <!-- Minimum Stay Notice -->
-        <div class="minimum-stay-notice" id="minimumStayNotice" style="display: none;">
-            <span id="minimumStayMessage">2-night minimum stay</span>
-        </div>
-
-        <!-- Pricing Summary -->
-        <div class="pricing-summary" id="pricingSummary" style="display: none;">
-            <h3>Price Details</h3>
-            <div id="nightsBreakdown">
-                <!-- Dynamic night-by-night breakdown will be inserted here -->
-            </div>
-            <div class="pricing-row" id="petFeeRow" style="display: none;">
-                <span id="petFeeLabel">Pet fee (1 pet)</span>
-                <span id="petFeeAmount">$100</span>
-            </div>
-            <div class="pricing-row">
-                <span>Cleaning fee</span>
-                <span id="cleaningFee">$200</span>
-            </div>
-            <div class="pricing-row total">
-                <span>Total</span>
-                <span id="totalPrice">$945</span>
-            </div>
-            <div class="pricing-note" id="pricingNote" style="display: none;">
-                <small></small>
-            </div>
-        </div>
-        
-        <!-- Book Button -->
-        <div class="book-button-container">
-            <button class="btn-book" id="bookButton" disabled>Select Dates to Continue</button>
-            <p class="booking-note">You won't be charged yet. We'll confirm availability first.</p>
-        </div>
-    </section>
-
-    <!-- Alternative Booking -->
-    <section class="alternative-booking">
-        <h3>Prefer to Book on Airbnb?</h3>
-        <p>You can also book through our Airbnb listings for instant confirmation.</p>
-        <div class="airbnb-links">
-            <!-- REPLACE: Add your actual Airbnb URLs -->
-            <a href="https://airbnb.com/h/tranquil-a-frame-on-private-glacial-lake" target="_blank" class="airbnb-link">A-Frame on Airbnb</a>
-            <a href="https://airbnb.com/h/cozy-log-cabin-on-private-glacial-lake" target="_blank" class="airbnb-link">Log Cabin on Airbnb</a>
-            <a href="https://airbnb.com/h/tanquil-resort-on-a-private-glacial-lake" target="_blank" class="airbnb-link">Resort on Airbnb</a>
-        </div>
-    </section>
-
-    <!-- Contact Form -->
-    <section class="contact-section" id="contact">
-        <h2>Questions? Get in Touch</h2>
-        <form class="contact-form" id="contactForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <select id="subject" name="subject">
-                    <option value="availability">Availability Question</option>
-                    <option value="special-request">Special Request</option>
-                    <option value="group-booking">Large Group Booking</option>
-                    <option value="pet-question">Pet Question</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us about your trip plans, questions, or special requests..." required></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Send Message</button>
-        </form>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Questions Before You Book?</h2>
+        <p>Have questions about the property, availability, or special requests? We're happy to help.</p>
+        <p><a href="mailto:lakehuyckresort@gmail.com">lakehuyckresort@gmail.com</a></p>
     </section>
 
     <!-- Footer -->
@@ -1383,588 +521,6 @@
     </footer>
 
     <script>
-        // ╔════════════════════════════════════════════════════════════════════╗
-        // ║                    PRICING CONFIGURATION                           ║
-        // ║         Edit these values to adjust rates on the fly               ║
-        // ╚════════════════════════════════════════════════════════════════════╝
-
-        const PRICING_CONFIG = {
-            // ─────────────────────────────────────────────────────────────────
-            // BASE RATES (Summer Season)
-            // ─────────────────────────────────────────────────────────────────
-            aframe: {
-                summerWeekday: 689,
-                summerWeekend: 729
-            },
-            logcabin: {
-                summerWeekday: 789,
-                summerWeekend: 829
-            },
-            // Resort = A-Frame + Log Cabin combined (calculated automatically)
-
-            // ─────────────────────────────────────────────────────────────────
-            // SEASONAL ADJUSTMENTS
-            // ─────────────────────────────────────────────────────────────────
-            offSeasonDiscount: 200,      // Subtracted from summer rates for spring/fall/winter
-            holidayPremium: 100,          // Added per night for holidays
-
-            // ─────────────────────────────────────────────────────────────────
-            // SEASON DEFINITIONS (Month numbers: 1=Jan, 12=Dec)
-            // ─────────────────────────────────────────────────────────────────
-            summerMonths: [6, 7, 8],      // June, July, August
-
-            // ─────────────────────────────────────────────────────────────────
-            // HOLIDAY DATES (YYYY-MM-DD format)
-            // Add or remove dates as needed
-            // ─────────────────────────────────────────────────────────────────
-            holidays: [
-                // Memorial Day Weekend 2025
-                '2025-05-24', '2025-05-25', '2025-05-26',
-                // Independence Day 2025
-                '2025-07-03', '2025-07-04', '2025-07-05', '2025-07-06',
-                // Labor Day Weekend 2025
-                '2025-08-30', '2025-08-31', '2025-09-01',
-                // Thanksgiving 2025
-                '2025-11-26', '2025-11-27', '2025-11-28', '2025-11-29', '2025-11-30',
-                // Christmas/New Year 2025-2026
-                '2025-12-20', '2025-12-21', '2025-12-22', '2025-12-23', '2025-12-24',
-                '2025-12-25', '2025-12-26', '2025-12-27', '2025-12-28', '2025-12-29',
-                '2025-12-30', '2025-12-31', '2026-01-01', '2026-01-02',
-                // Memorial Day Weekend 2026
-                '2026-05-23', '2026-05-24', '2026-05-25',
-                // Independence Day 2026
-                '2026-07-03', '2026-07-04', '2026-07-05',
-                // Labor Day Weekend 2026
-                '2026-09-05', '2026-09-06', '2026-09-07'
-            ],
-
-            // ─────────────────────────────────────────────────────────────────
-            // CLEANING FEES
-            // ─────────────────────────────────────────────────────────────────
-            cleaningFees: {
-                aframe: 200,
-                logcabin: 200,
-                resort: 400
-            },
-
-            // ─────────────────────────────────────────────────────────────────
-            // PET FEES
-            // ─────────────────────────────────────────────────────────────────
-            petFeePerPet: 100,
-            maxPets: 2,
-
-            // ─────────────────────────────────────────────────────────────────
-            // MINIMUM STAY REQUIREMENTS
-            // ─────────────────────────────────────────────────────────────────
-            minimumStay: {
-                default: 2,              // Default minimum nights
-                summer: 3,               // Summer season minimum
-                holiday: 3               // Holiday periods minimum
-            }
-        };
-
-        // ╔════════════════════════════════════════════════════════════════════╗
-        // ║                    PRICING HELPER FUNCTIONS                        ║
-        // ╚════════════════════════════════════════════════════════════════════╝
-
-        function isWeekend(date) {
-            const day = date.getDay();
-            return day === 0 || day === 5 || day === 6; // Friday, Saturday, Sunday
-        }
-
-        function isSummerSeason(date) {
-            const month = date.getMonth() + 1; // JavaScript months are 0-indexed
-            return PRICING_CONFIG.summerMonths.includes(month);
-        }
-
-        function isHoliday(date) {
-            const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-            return PRICING_CONFIG.holidays.includes(dateStr);
-        }
-
-        function getMinimumStay(checkInDate) {
-            // Check if check-in is during a holiday period
-            if (isHoliday(checkInDate)) {
-                return PRICING_CONFIG.minimumStay.holiday;
-            }
-            // Check if check-in is during summer
-            if (isSummerSeason(checkInDate)) {
-                return PRICING_CONFIG.minimumStay.summer;
-            }
-            // Default minimum stay
-            return PRICING_CONFIG.minimumStay.default;
-        }
-
-        function getMinimumStayMessage(checkInDate) {
-            const minNights = getMinimumStay(checkInDate);
-            if (isHoliday(checkInDate)) {
-                return `${minNights}-night minimum during holidays`;
-            }
-            if (isSummerSeason(checkInDate)) {
-                return `${minNights}-night minimum in summer`;
-            }
-            return `${minNights}-night minimum stay`;
-        }
-
-        function getRateForDate(property, date) {
-            // Get base rate based on property and weekend/weekday
-            let baseRate;
-            const weekend = isWeekend(date);
-            const summer = isSummerSeason(date);
-            const holiday = isHoliday(date);
-
-            if (property === 'resort') {
-                // Resort = A-Frame + Log Cabin combined
-                const aframeRate = weekend ? PRICING_CONFIG.aframe.summerWeekend : PRICING_CONFIG.aframe.summerWeekday;
-                const logcabinRate = weekend ? PRICING_CONFIG.logcabin.summerWeekend : PRICING_CONFIG.logcabin.summerWeekday;
-                baseRate = aframeRate + logcabinRate;
-            } else {
-                baseRate = weekend ?
-                    PRICING_CONFIG[property].summerWeekend :
-                    PRICING_CONFIG[property].summerWeekday;
-            }
-
-            // Apply seasonal adjustment (off-season discount)
-            if (!summer) {
-                if (property === 'resort') {
-                    baseRate -= (PRICING_CONFIG.offSeasonDiscount * 2); // Both cabins get discount
-                } else {
-                    baseRate -= PRICING_CONFIG.offSeasonDiscount;
-                }
-            }
-
-            // Apply holiday premium
-            if (holiday) {
-                if (property === 'resort') {
-                    baseRate += (PRICING_CONFIG.holidayPremium * 2); // Both cabins get premium
-                } else {
-                    baseRate += PRICING_CONFIG.holidayPremium;
-                }
-            }
-
-            return {
-                rate: baseRate,
-                isWeekend: weekend,
-                isSummer: summer,
-                isHoliday: holiday
-            };
-        }
-
-        function calculateStayPricing(property, checkIn, checkOut) {
-            const nights = [];
-            const currentDate = new Date(checkIn);
-
-            while (currentDate < checkOut) {
-                const rateInfo = getRateForDate(property, currentDate);
-                nights.push({
-                    date: new Date(currentDate),
-                    ...rateInfo
-                });
-                currentDate.setDate(currentDate.getDate() + 1);
-            }
-
-            const totalNights = nights.reduce((sum, n) => sum + n.rate, 0);
-            const weekendNights = nights.filter(n => n.isWeekend).length;
-            const weekdayNights = nights.filter(n => !n.isWeekend).length;
-            const holidayNights = nights.filter(n => n.isHoliday).length;
-            const summerNights = nights.filter(n => n.isSummer).length;
-            const offSeasonNights = nights.filter(n => !n.isSummer).length;
-
-            return {
-                nights: nights,
-                totalNightsPrice: totalNights,
-                nightCount: nights.length,
-                weekendNights,
-                weekdayNights,
-                holidayNights,
-                summerNights,
-                offSeasonNights
-            };
-        }
-
-        function getLowestRate(property) {
-            // Returns lowest possible rate (off-season weekday) for "From $X" display
-            if (property === 'resort') {
-                return (PRICING_CONFIG.aframe.summerWeekday - PRICING_CONFIG.offSeasonDiscount) +
-                       (PRICING_CONFIG.logcabin.summerWeekday - PRICING_CONFIG.offSeasonDiscount);
-            }
-            return PRICING_CONFIG[property].summerWeekday - PRICING_CONFIG.offSeasonDiscount;
-        }
-
-        // =====================
-        // PROPERTY SELECTION
-        // =====================
-        const bookingCards = document.querySelectorAll('.booking-card');
-        let selectedProperty = 'aframe';
-
-        const propertyMaxGuests = {
-            aframe: 6,
-            logcabin: 8,
-            resort: 14
-        };
-        
-        bookingCards.forEach(card => {
-            card.addEventListener('click', () => {
-                bookingCards.forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                selectedProperty = card.dataset.property;
-                updateGuestOptions();
-                renderCalendar(); // Re-render to update prices for selected property
-                updatePricing();
-            });
-        });
-        
-        function updateGuestOptions() {
-            const maxGuests = propertyMaxGuests[selectedProperty];
-            const guestSelect = document.getElementById('guests');
-            const currentValue = parseInt(guestSelect.value);
-            
-            // Update options
-            guestSelect.innerHTML = '';
-            for (let i = 1; i <= maxGuests; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i === 1 ? '1 Guest' : `${i} Guests`;
-                if (i === Math.min(currentValue, maxGuests)) {
-                    option.selected = true;
-                }
-                guestSelect.appendChild(option);
-            }
-        }
-        
-        // =====================
-        // CALENDAR
-        // =====================
-        let currentDate = new Date();
-        let selectedCheckIn = null;
-        let selectedCheckOut = null;
-        
-        // Simulated booked dates (replace with real data from your booking system)
-        const bookedDates = [
-            '2025-02-14', '2025-02-15', '2025-02-16',
-            '2025-02-21', '2025-02-22', '2025-02-23',
-            '2025-03-07', '2025-03-08', '2025-03-09', '2025-03-10'
-        ];
-        
-        function renderCalendar() {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            document.getElementById('currentMonth').textContent = 
-                new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-            
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            const grid = document.getElementById('calendarGrid');
-            
-            // Keep weekday headers
-            const weekdays = grid.querySelectorAll('.calendar-weekday');
-            grid.innerHTML = '';
-            weekdays.forEach(wd => grid.appendChild(wd));
-            
-            // Empty cells before first day
-            for (let i = 0; i < firstDay; i++) {
-                const empty = document.createElement('div');
-                empty.className = 'calendar-day disabled';
-                grid.appendChild(empty);
-            }
-            
-            // Days of month
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayEl = document.createElement('div');
-                dayEl.className = 'calendar-day';
-
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const dateObj = new Date(year, month, day);
-
-                // Create day number element
-                const dayNumber = document.createElement('span');
-                dayNumber.className = 'day-number';
-                dayNumber.textContent = day;
-                dayEl.appendChild(dayNumber);
-
-                // Create price element (only for available dates)
-                const isAvailable = dateObj >= today && !bookedDates.includes(dateStr);
-                if (isAvailable) {
-                    const rateInfo = getRateForDate(selectedProperty, dateObj);
-                    const dayPrice = document.createElement('span');
-                    dayPrice.className = 'day-price';
-                    dayPrice.textContent = `$${rateInfo.rate}`;
-                    dayEl.appendChild(dayPrice);
-                }
-
-                // Check if in past
-                if (dateObj < today) {
-                    dayEl.classList.add('disabled');
-                }
-                // Check if booked
-                else if (bookedDates.includes(dateStr)) {
-                    dayEl.classList.add('booked');
-                }
-                // Check if today
-                else if (dateObj.getTime() === today.getTime()) {
-                    dayEl.classList.add('today');
-                }
-
-                // Add weekend/holiday indicators for pricing visibility
-                if (isAvailable) {
-                    if (isHoliday(dateObj)) {
-                        dayEl.classList.add('holiday-day');
-                    } else if (isWeekend(dateObj)) {
-                        dayEl.classList.add('weekend-day');
-                    }
-                }
-
-                // Check if selected
-                if (selectedCheckIn && dateObj.getTime() === selectedCheckIn.getTime()) {
-                    dayEl.classList.add('selected');
-                }
-                if (selectedCheckOut && dateObj.getTime() === selectedCheckOut.getTime()) {
-                    dayEl.classList.add('selected');
-                }
-
-                // Check if in range
-                if (selectedCheckIn && selectedCheckOut) {
-                    if (dateObj > selectedCheckIn && dateObj < selectedCheckOut) {
-                        dayEl.classList.add('in-range');
-                    }
-                }
-
-                // Click handler
-                if (!dayEl.classList.contains('disabled') && !dayEl.classList.contains('booked')) {
-                    dayEl.addEventListener('click', () => selectDate(dateObj));
-                }
-
-                grid.appendChild(dayEl);
-            }
-        }
-        
-        function selectDate(date) {
-            if (!selectedCheckIn || (selectedCheckIn && selectedCheckOut)) {
-                // Start new selection
-                selectedCheckIn = date;
-                selectedCheckOut = null;
-            } else {
-                // Complete selection
-                if (date > selectedCheckIn) {
-                    selectedCheckOut = date;
-                } else {
-                    selectedCheckIn = date;
-                }
-            }
-            
-            updateDateInputs();
-            renderCalendar();
-            updatePricing();
-        }
-        
-        function updateDateInputs() {
-            const checkInInput = document.getElementById('checkIn');
-            const checkOutInput = document.getElementById('checkOut');
-            
-            checkInInput.value = selectedCheckIn ? 
-                selectedCheckIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-            checkOutInput.value = selectedCheckOut ? 
-                selectedCheckOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-        }
-        
-        function updatePricing() {
-            const pricingSummary = document.getElementById('pricingSummary');
-            const bookButton = document.getElementById('bookButton');
-            const bringingPet = document.getElementById('bringingPet').checked;
-            const petCountContainer = document.getElementById('petCountContainer');
-            const petFeeRow = document.getElementById('petFeeRow');
-            const nightsBreakdown = document.getElementById('nightsBreakdown');
-            const pricingNote = document.getElementById('pricingNote');
-            const minimumStayNotice = document.getElementById('minimumStayNotice');
-            const minimumStayMessage = document.getElementById('minimumStayMessage');
-
-            // Show/hide pet count dropdown
-            petCountContainer.style.display = bringingPet ? 'flex' : 'none';
-
-            if (selectedCheckIn && selectedCheckOut) {
-                // Calculate pricing using the new dynamic system
-                const pricing = calculateStayPricing(selectedProperty, selectedCheckIn, selectedCheckOut);
-
-                // Check minimum stay requirement
-                const minNights = getMinimumStay(selectedCheckIn);
-                const meetsMinimum = pricing.nightCount >= minNights;
-                const cleaningFee = PRICING_CONFIG.cleaningFees[selectedProperty] ||
-                    (PRICING_CONFIG.cleaningFees.aframe + PRICING_CONFIG.cleaningFees.logcabin);
-
-                // Calculate pet fee
-                let petFee = 0;
-                if (bringingPet) {
-                    const petCount = parseInt(document.getElementById('petCount').value);
-                    petFee = petCount * PRICING_CONFIG.petFeePerPet;
-                    document.getElementById('petFeeLabel').textContent = `Pet fee (${petCount} ${petCount === 1 ? 'pet' : 'pets'})`;
-                    document.getElementById('petFeeAmount').textContent = `$${petFee}`;
-                    petFeeRow.style.display = 'flex';
-                } else {
-                    petFeeRow.style.display = 'none';
-                }
-
-                const total = pricing.totalNightsPrice + cleaningFee + petFee;
-
-                // Build nights breakdown HTML
-                let breakdownHTML = '';
-
-                // Group nights by rate type for cleaner display
-                const rateGroups = {};
-                pricing.nights.forEach(night => {
-                    const key = night.rate;
-                    if (!rateGroups[key]) {
-                        rateGroups[key] = {
-                            rate: night.rate,
-                            count: 0,
-                            isWeekend: night.isWeekend,
-                            isHoliday: night.isHoliday,
-                            isSummer: night.isSummer
-                        };
-                    }
-                    rateGroups[key].count++;
-                });
-
-                // Create breakdown rows
-                Object.values(rateGroups).forEach(group => {
-                    let label = `$${group.rate} × ${group.count} ${group.count === 1 ? 'night' : 'nights'}`;
-                    let tags = '';
-
-                    if (group.isHoliday) {
-                        tags += '<span class="rate-tag holiday">Holiday</span>';
-                    }
-                    if (group.isWeekend && !group.isHoliday) {
-                        tags += '<span class="rate-tag weekend">Weekend</span>';
-                    }
-                    if (!group.isSummer) {
-                        tags += '<span class="rate-tag off-season">Off-Season</span>';
-                    }
-
-                    breakdownHTML += `
-                        <div class="pricing-row">
-                            <span>${label}${tags}</span>
-                            <span>$${group.rate * group.count}</span>
-                        </div>
-                    `;
-                });
-
-                nightsBreakdown.innerHTML = breakdownHTML;
-                document.getElementById('cleaningFee').textContent = `$${cleaningFee}`;
-                document.getElementById('totalPrice').textContent = `$${total.toLocaleString()}`;
-
-                // Show pricing note if there are mixed rates
-                if (Object.keys(rateGroups).length > 1) {
-                    pricingNote.style.display = 'block';
-                    pricingNote.querySelector('small').textContent =
-                        `Your stay includes ${pricing.nightCount} nights with variable rates based on season and day of week.`;
-                } else {
-                    pricingNote.style.display = 'none';
-                }
-
-                pricingSummary.style.display = 'block';
-
-                // Handle minimum stay validation
-                if (!meetsMinimum) {
-                    minimumStayNotice.style.display = 'flex';
-                    minimumStayNotice.className = 'minimum-stay-notice error';
-                    minimumStayMessage.textContent = `${getMinimumStayMessage(selectedCheckIn)} required. You selected ${pricing.nightCount} ${pricing.nightCount === 1 ? 'night' : 'nights'}.`;
-                    bookButton.disabled = true;
-                    bookButton.textContent = `${minNights}-Night Minimum Required`;
-                } else {
-                    minimumStayNotice.style.display = 'none';
-                    bookButton.disabled = false;
-                    bookButton.textContent = 'Request to Book';
-                }
-            } else if (selectedCheckIn && !selectedCheckOut) {
-                // Show minimum stay info when only check-in is selected
-                const minNights = getMinimumStay(selectedCheckIn);
-                minimumStayNotice.style.display = 'flex';
-                minimumStayNotice.className = 'minimum-stay-notice info';
-                minimumStayMessage.textContent = getMinimumStayMessage(selectedCheckIn);
-                pricingSummary.style.display = 'none';
-                bookButton.disabled = true;
-                bookButton.textContent = 'Select Check-Out Date';
-            } else {
-                pricingSummary.style.display = 'none';
-                minimumStayNotice.style.display = 'none';
-                bookButton.disabled = true;
-                bookButton.textContent = 'Select Dates to Continue';
-            }
-        }
-        
-        // Calendar navigation
-        document.getElementById('prevMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        });
-        
-        document.getElementById('nextMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        });
-        
-        // =====================
-        // BOOKING BUTTON
-        // =====================
-        document.getElementById('bookButton').addEventListener('click', () => {
-            // In production, this would integrate with Stripe
-            // For now, show a message
-            const propertyNames = {
-                aframe: 'A-Frame Chalet',
-                logcabin: 'Log Cabin',
-                resort: 'Entire Resort'
-            };
-            
-            const nights = Math.ceil((selectedCheckOut - selectedCheckIn) / (1000 * 60 * 60 * 24));
-            const guests = document.getElementById('guests').value;
-            
-            alert(`Booking Request:\n\nProperty: ${propertyNames[selectedProperty]}\nCheck-in: ${selectedCheckIn.toLocaleDateString()}\nCheck-out: ${selectedCheckOut.toLocaleDateString()}\nNights: ${nights}\nGuests: ${guests}\n\nIn production, this would redirect to Stripe Checkout.`);
-            
-            // STRIPE INTEGRATION:
-            // Replace the alert above with a redirect to your Stripe Payment Link
-            // or create a Stripe Checkout session via your backend
-            //
-            // Example with Stripe Payment Links:
-            // window.location.href = 'https://buy.stripe.com/your-payment-link-id';
-            //
-            // Example with Stripe Checkout (requires backend):
-            // fetch('/create-checkout-session', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({
-            //         property: selectedProperty,
-            //         checkIn: selectedCheckIn,
-            //         checkOut: selectedCheckOut,
-            //         guests: guests
-            //     })
-            // })
-            // .then(res => res.json())
-            // .then(data => window.location.href = data.url);
-        });
-        
-        // =====================
-        // CONTACT FORM
-        // =====================
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you within 24 hours.\n\nIn production, this would send an email via your preferred service (Formspree, Netlify Forms, etc.)');
-        });
-        
-        // Initialize property card prices from config
-        function updatePropertyCardPrices() {
-            document.getElementById('aframe-price').textContent = getLowestRate('aframe').toLocaleString();
-            document.getElementById('logcabin-price').textContent = getLowestRate('logcabin').toLocaleString();
-            document.getElementById('resort-price').textContent = getLowestRate('resort').toLocaleString();
-        }
-
-        // Initialize
-        updatePropertyCardPrices();
-        renderCalendar();
-        updateGuestOptions();
-
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navLinks = document.getElementById('navLinks');
