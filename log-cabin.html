@@ -1027,6 +1027,97 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--cream);
+            font-size: 2rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--cream);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+            }
+            .lightbox-prev { left: 0.5rem; }
+            .lightbox-next { right: 0.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -1340,7 +1431,7 @@
             </div>
             <!-- Wide dining -->
             <div class="gallery-item">
-                <img src="log-cabin-dining-1.png" alt="Dining area with table set for eight">
+                <img src="images/log-cabin/living-room-new.avif" alt="Living room view">
             </div>
             <div class="gallery-item">
                 <img src="log-cabin-bath2-1.png" alt="Guest bathroom with blue herringbone tile">
@@ -1360,6 +1451,15 @@
             <a href="a-frame.html" class="btn-secondary">View A-Frame Instead</a>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">←</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">→</button>
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1444,6 +1544,68 @@
                 document.body.classList.remove('menu-open');
                 document.body.style.overflow = '';
             });
+        });
+
+        // =====================
+        // LIGHTBOX FUNCTIONALITY
+        // =====================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const item = galleryItems[index];
+            const img = item.querySelector('img');
+            const caption = img.alt || '';
+
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = galleryItems.length - 1;
+            if (currentIndex >= galleryItems.length) currentIndex = 0;
+
+            const item = galleryItems[currentIndex];
+            const img = item.querySelector('img');
+            const caption = img.alt || '';
+
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+        }
+
+        // Event listeners
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', () => navigateLightbox(-1));
+        document.getElementById('lightboxNext').addEventListener('click', () => navigateLightbox(1));
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
         });
     </script>
 </body>
