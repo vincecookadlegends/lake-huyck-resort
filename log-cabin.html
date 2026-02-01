@@ -800,21 +800,28 @@
         .gallery-masonry {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            grid-auto-flow: dense;
             gap: 1rem;
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .gallery-item {
             overflow: hidden;
             cursor: pointer;
         }
-        
+
         .gallery-item.span-2 {
             grid-column: span 2;
         }
-        
+
         .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.span-2-tall {
+            grid-column: span 2;
             grid-row: span 2;
         }
         
@@ -1290,93 +1297,56 @@
     <section class="photo-gallery">
         <h2>Photo Gallery</h2>
         <div class="gallery-masonry">
-            <!-- REPLACE: All gallery images with your actual Log Cabin photos -->
-            <div class="gallery-item span-2">
+            <!-- Large feature -->
+            <div class="gallery-item span-2-tall">
                 <img src="log-cabin-living-room-1.png" alt="Living room with antler chandeliers">
             </div>
-            <div class="gallery-item">
-                <img src="log-cabin-kitchen-1.png" alt="Chef's kitchen with butcher block counters">
-            </div>
+            <!-- Tall portrait -->
             <div class="gallery-item tall">
                 <img src="log-cabin-woodstove.png" alt="Cozy wood stove">
             </div>
             <div class="gallery-item">
-                <img src="log-cabin-master-2.png" alt="Master bedroom with TV">
+                <img src="log-cabin-kitchen-1.png" alt="Chef's kitchen with butcher block counters">
             </div>
             <div class="gallery-item">
                 <img src="log-cabin-bath-1.png" alt="Master bathroom with herringbone tile shower">
             </div>
-            <div class="gallery-item span-2">
+            <!-- Wide exterior drone shot -->
+            <div class="gallery-item">
+                <img src="images/log-cabin/exterior/drone.avif" alt="Aerial view of Log Cabin">
+            </div>
+            <!-- Tall portrait -->
+            <div class="gallery-item tall">
+                <img src="log-cabin-master-1.png" alt="Master bedroom with porch access">
+            </div>
+            <div class="gallery-item">
+                <img src="log-cabin-guest-lakeview.png" alt="Guest bedroom with lake view">
+            </div>
+            <div class="gallery-item">
+                <img src="images/log-cabin/exterior/winter.avif" alt="Log Cabin in winter">
+            </div>
+            <div class="gallery-item">
+                <img src="log-cabin-bunk-room.png" alt="Cozy bunk room with log beds">
+            </div>
+            <!-- Wide lake view -->
+            <div class="gallery-item">
                 <img src="log-cabin-living-lakeview.png" alt="Lake view from living room">
             </div>
             <div class="gallery-item">
                 <img src="log-cabin-kitchen-dining.png" alt="Kitchen and dining area">
             </div>
             <div class="gallery-item">
-                <img src="log-cabin-coffee-station.png" alt="Coffee station with Lake Huyck mugs">
+                <img src="images/log-cabin/exterior/front.avif" alt="Log Cabin front view">
             </div>
+            <!-- Wide dining -->
             <div class="gallery-item">
-                <img src="log-cabin-mugs.png" alt="Lake Huyck Resort branded mugs">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-fridge.png" alt="Retro fridge and glassware">
-            </div>
-            <div class="gallery-item span-2">
                 <img src="log-cabin-dining-1.png" alt="Dining area with table set for eight">
             </div>
             <div class="gallery-item">
-                <img src="log-cabin-dining-2.png" alt="Kitchen and dining view">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-dining-chairs.png" alt="Red metal dining chairs">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bunk-room.png" alt="Cozy bunk room with log beds">
-            </div>
-            <div class="gallery-item span-2">
-                <img src="log-cabin-bunk-pillows.png" alt="Animal pillows on log beds">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bunk-detail.png" alt="Coleman lantern and fox pillow">
-            </div>
-            <div class="gallery-item span-2">
-                <img src="log-cabin-master-1.png" alt="Master bedroom with porch access">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-master-3.png" alt="Master bedroom with closet">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-lantern.png" alt="Vintage Coleman lantern on live edge table">
-            </div>
-            <div class="gallery-item span-2">
-                <img src="log-cabin-guest-lakeview.png" alt="Guest bedroom with lake view">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-guest-lantern.png" alt="Canoe art and lantern detail">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-guest-doorway.png" alt="Guest bedroom doorway with Navajo tapestry">
-            </div>
-            <div class="gallery-item span-2">
-                <img src="log-cabin-bath-1.png" alt="Master bathroom with dual sinks">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bath-shower.png" alt="Green herringbone tile shower">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bath-sinks.png" alt="Vessel sinks on wood vanity">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bath-toiletries.png" alt="Premium toiletries provided">
-            </div>
-            <div class="gallery-item span-2">
                 <img src="log-cabin-bath2-1.png" alt="Guest bathroom with blue herringbone tile">
             </div>
             <div class="gallery-item">
-                <img src="log-cabin-bath2-hooks.png" alt="Animal towel hooks">
-            </div>
-            <div class="gallery-item">
-                <img src="log-cabin-bath2-sink.png" alt="Bowl vessel sink detail">
+                <img src="log-cabin-mugs.png" alt="Lake Huyck Resort branded mugs">
             </div>
         </div>
     </section>

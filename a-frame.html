@@ -759,21 +759,28 @@
         .gallery-masonry {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            grid-auto-flow: dense;
             gap: 1rem;
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .gallery-item {
             overflow: hidden;
             cursor: pointer;
         }
-        
+
         .gallery-item.span-2 {
             grid-column: span 2;
         }
-        
+
         .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.span-2-tall {
+            grid-column: span 2;
             grid-row: span 2;
         }
         
@@ -995,8 +1002,7 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="page-hero-image">
-            <!-- REPLACE: Your A-frame hero image -->
-            <img src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=1920&q=80" alt="A-Frame Chalet interior with lake view">
+            <img src="images/aframe/interior-hero.avif" alt="A-Frame Chalet interior with cathedral ceilings, wood stove, and lake views">
         </div>
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -1078,8 +1084,7 @@
 
     <!-- Full Width Image -->
     <div class="image-break">
-        <!-- REPLACE: Exterior shot of A-frame -->
-        <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=1920&q=80" alt="A-Frame exterior at sunset">
+        <img src="images/aframe/beach-exterior.avif" alt="A-Frame beach view with dock and lake">
     </div>
 
     <!-- Sleeping Arrangements -->
@@ -1090,28 +1095,25 @@
         <div class="rooms-grid">
             <div class="room-card">
                 <div class="room-card-image">
-                    <!-- REPLACE: Bedroom 1 photo -->
-                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" alt="Master bedroom">
+                    <img src="images/aframe/east-bedroom/main.avif" alt="East bedroom with queen bed">
                 </div>
                 <div class="room-card-content">
-                    <h4>Bedroom 1</h4>
+                    <h4>East Bedroom</h4>
                     <p>Queen bed with comfortable bedding, Pendleton throws and pillows, lush views, and natural light.</p>
                 </div>
             </div>
             <div class="room-card">
                 <div class="room-card-image">
-                    <!-- REPLACE: Bedroom 2 photo -->
-                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80" alt="Second bedroom">
+                    <img src="images/aframe/west-bedroom/main.avif" alt="West bedroom with queen bed">
                 </div>
                 <div class="room-card-content">
-                    <h4>Bedroom 2</h4>
+                    <h4>West Bedroom</h4>
                     <p>Queen bed with quality linens, ceiling fan, and peaceful forest views through large windows.</p>
                 </div>
             </div>
             <div class="room-card">
                 <div class="room-card-image">
-                    <!-- REPLACE: Loft photo -->
-                    <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=80" alt="Loft bedroom">
+                    <img src="images/aframe/loft/main.avif" alt="Loft bedroom with twin beds">
                 </div>
                 <div class="room-card-content">
                     <h4>The Loft</h4>
@@ -1260,30 +1262,57 @@
     <section class="photo-gallery">
         <h2>Photo Gallery</h2>
         <div class="gallery-masonry">
-            <!-- REPLACE: All gallery images with your actual A-frame photos -->
-            <div class="gallery-item span-2">
-                <img src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=800&q=80" alt="Living room">
+            <!-- Large feature -->
+            <div class="gallery-item span-2-tall">
+                <img src="images/aframe/living-room/main.avif" alt="Living room with cathedral ceilings">
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=400&q=80" alt="Kitchen">
-            </div>
+            <!-- Tall portrait -->
             <div class="gallery-item tall">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" alt="Exterior view">
+                <img src="images/aframe/living-room/fireplace.avif" alt="Wood stove fireplace">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80" alt="Bedroom">
+                <img src="images/aframe/dining-room/main.avif" alt="Dining area">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80" alt="Bathroom">
+                <img src="images/aframe/east-bedroom/main.avif" alt="East bedroom">
             </div>
-            <div class="gallery-item span-2">
-                <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80" alt="Lake view">
+            <!-- Wide -->
+            <div class="gallery-item">
+                <img src="images/aframe/kitchen/main.webp" alt="Full kitchen">
+            </div>
+            <!-- Tall portrait -->
+            <div class="gallery-item tall">
+                <img src="images/aframe/loft/window.avif" alt="Loft with lake views">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&q=80" alt="Dock">
+                <img src="images/aframe/west-bedroom/main.avif" alt="West bedroom">
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&q=80" alt="Campfire">
+                <img src="images/aframe/loft/main.avif" alt="Loft bedroom">
+            </div>
+            <!-- Wide -->
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/front-canoe.avif" alt="A-Frame front with canoe">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/drone.avif" alt="A-Frame aerial view">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/fall-beach.avif" alt="Fall beach view">
+            </div>
+            <!-- Wide -->
+            <div class="gallery-item">
+                <img src="images/aframe/bathroom/main.webp" alt="Spa-like bathroom">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/sunset-balcony.avif" alt="Sunset from balcony">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/night-lake.webp" alt="Night lake view">
+            </div>
+            <!-- Wide deck view -->
+            <div class="gallery-item">
+                <img src="images/aframe/exterior/deck-lake.webp" alt="Deck with lake view">
             </div>
         </div>
     </section>
