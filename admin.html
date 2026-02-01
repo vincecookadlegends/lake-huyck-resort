@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Lake Huyck Resort</title>
+    <style>
+        :root {
+            --forest-deep: #1a3a2f;
+            --forest-mid: #2d5a4a;
+            --gold: #c9a227;
+            --cream: #faf8f5;
+            --cream-dark: #f0ebe3;
+            --charcoal: #2c2c2c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--cream-dark);
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--forest-deep);
+        }
+
+        .login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .login-box h1 {
+            color: var(--forest-deep);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .login-box p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--forest-mid);
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--forest-deep);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--forest-mid);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--forest-deep);
+        }
+
+        .btn-gold:hover {
+            background: #d4ad2c;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--forest-mid);
+            color: var(--forest-mid);
+        }
+
+        .btn-outline:hover {
+            background: var(--forest-mid);
+            color: white;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .login-screen.hidden {
+            display: none;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--forest-deep);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .admin-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-header .user-info span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .btn-logout {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Main Content */
+        .admin-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px 4px 0 0;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            background: var(--cream);
+        }
+
+        .nav-tab.active {
+            background: var(--forest-deep);
+            color: white;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            color: var(--forest-deep);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .property-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .property-card h3 {
+            color: var(--forest-deep);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .rate-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .rate-row:last-child {
+            border-bottom: none;
+        }
+
+        .rate-row label {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .rate-input {
+            width: 100px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        .rate-input:focus {
+            outline: none;
+            border-color: var(--forest-mid);
+        }
+
+        /* Holiday List */
+        .holiday-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .holiday-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .holiday-item:hover {
+            background: var(--cream);
+        }
+
+        .holiday-item .date {
+            font-weight: 500;
+        }
+
+        .holiday-item .label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .btn-remove {
+            background: #dc3545;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 3px;
+        }
+
+        .add-holiday-form {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .add-holiday-form input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-badge.saved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.unsaved {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Actions Bar */
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--cream);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .actions-bar .status {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .actions-bar .buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* Code Output */
+        .code-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-content {
+                padding: 1rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-nav {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--forest-deep);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>Lake Huyck Resort</h1>
+            <p>Admin Dashboard - Manage your pricing and availability</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" value="admin@lakehuyck.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" value="demo123" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: #999; text-align: center;">
+                Demo credentials pre-filled. In production, this would connect to a secure backend.
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <header class="admin-header">
+            <h1>Lake Huyck Resort Admin</h1>
+            <div class="user-info">
+                <span>Welcome, Admin</span>
+                <button class="btn btn-logout" onclick="logout()">Sign Out</button>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <div class="actions-bar">
+                <div class="status">
+                    <span id="saveStatus" class="status-badge saved">All changes saved</span>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-outline" onclick="resetToDefaults()">Reset to Defaults</button>
+                    <button class="btn btn-gold" onclick="saveChanges()">Save All Changes</button>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <button class="nav-tab active" onclick="switchTab('pricing')">Pricing</button>
+                <button class="nav-tab" onclick="switchTab('seasons')">Seasons & Holidays</button>
+                <button class="nav-tab" onclick="switchTab('rules')">Stay Rules</button>
+                <button class="nav-tab" onclick="switchTab('fees')">Fees</button>
+                <button class="nav-tab" onclick="switchTab('export')">Export Config</button>
+            </nav>
+
+            <!-- Pricing Tab -->
+            <div class="tab-panel active" id="panel-pricing">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Nightly Rates - Summer Season (June-August)</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="pricing-grid">
+                            <div class="property-card">
+                                <h3>A-Frame Chalet</h3>
+                                <div class="rate-row">
+                                    <label>Weekday Rate</label>
+                                    <div>$<input type="number" class="rate-input" id="aframe-summer-weekday" value="689"></div>
+                                </div>
+                                <div class="rate-row">
+                                    <label>Weekend Rate (Fri-Sun)</label>
+                                    <div>$<input type="number" class="rate-input" id="aframe-summer-weekend" value="729"></div>
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Log Cabin</h3>
+                                <div class="rate-row">
+                                    <label>Weekday Rate</label>
+                                    <div>$<input type="number" class="rate-input" id="logcabin-summer-weekday" value="789"></div>
+                                </div>
+                                <div class="rate-row">
+                                    <label>Weekend Rate (Fri-Sun)</label>
+                                    <div>$<input type="number" class="rate-input" id="logcabin-summer-weekend" value="829"></div>
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Entire Resort</h3>
+                                <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                                    Automatically calculated as A-Frame + Log Cabin combined
+                                </p>
+                                <div class="rate-row">
+                                    <label>Weekday Rate</label>
+                                    <div>$<span id="resort-weekday-display">1,478</span></div>
+                                </div>
+                                <div class="rate-row">
+                                    <label>Weekend Rate</label>
+                                    <div>$<span id="resort-weekend-display">1,558</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Seasonal Adjustments</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="pricing-grid">
+                            <div class="property-card">
+                                <h3>Off-Season Discount</h3>
+                                <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Amount subtracted from summer rates during spring, fall, and winter
+                                </p>
+                                <div class="rate-row">
+                                    <label>Discount per night</label>
+                                    <div>$<input type="number" class="rate-input" id="off-season-discount" value="200"></div>
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Holiday Premium</h3>
+                                <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Amount added to rates during holiday periods
+                                </p>
+                                <div class="rate-row">
+                                    <label>Premium per night</label>
+                                    <div>$<input type="number" class="rate-input" id="holiday-premium" value="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seasons Tab -->
+            <div class="tab-panel" id="panel-seasons">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Summer Season Months</h2>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Select which months are considered "summer" (peak season):</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="1"> January
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="2"> February
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="3"> March
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="4"> April
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="5"> May
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="6" checked> June
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="7" checked> July
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="8" checked> August
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="9"> September
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="10"> October
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="11"> November
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                                <input type="checkbox" class="summer-month" value="12"> December
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Holiday Dates</h2>
+                        <button class="btn btn-outline" onclick="addHolidayRange()">+ Add Date Range</button>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: #666;">These dates will have the holiday premium applied:</p>
+                        <div class="holiday-list" id="holidayList">
+                            <!-- Holiday items will be populated by JavaScript -->
+                        </div>
+                        <div class="add-holiday-form">
+                            <input type="date" id="newHolidayStart" placeholder="Start date">
+                            <input type="date" id="newHolidayEnd" placeholder="End date">
+                            <input type="text" id="newHolidayLabel" placeholder="Label (e.g., Memorial Day)">
+                            <button class="btn btn-primary" onclick="addHoliday()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules Tab -->
+            <div class="tab-panel" id="panel-rules">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Minimum Stay Requirements</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="pricing-grid">
+                            <div class="property-card">
+                                <h3>Default Minimum</h3>
+                                <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Standard minimum for off-season bookings
+                                </p>
+                                <div class="rate-row">
+                                    <label>Nights</label>
+                                    <input type="number" class="rate-input" id="min-stay-default" value="2" min="1" max="14">
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Summer Minimum</h3>
+                                <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Minimum during summer season (June-August)
+                                </p>
+                                <div class="rate-row">
+                                    <label>Nights</label>
+                                    <input type="number" class="rate-input" id="min-stay-summer" value="3" min="1" max="14">
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Holiday Minimum</h3>
+                                <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Minimum during holiday periods
+                                </p>
+                                <div class="rate-row">
+                                    <label>Nights</label>
+                                    <input type="number" class="rate-input" id="min-stay-holiday" value="3" min="1" max="14">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fees Tab -->
+            <div class="tab-panel" id="panel-fees">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Cleaning Fees</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="pricing-grid">
+                            <div class="property-card">
+                                <h3>A-Frame Chalet</h3>
+                                <div class="rate-row">
+                                    <label>Cleaning Fee</label>
+                                    <div>$<input type="number" class="rate-input" id="cleaning-aframe" value="200"></div>
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Log Cabin</h3>
+                                <div class="rate-row">
+                                    <label>Cleaning Fee</label>
+                                    <div>$<input type="number" class="rate-input" id="cleaning-logcabin" value="200"></div>
+                                </div>
+                            </div>
+                            <div class="property-card">
+                                <h3>Entire Resort</h3>
+                                <div class="rate-row">
+                                    <label>Cleaning Fee</label>
+                                    <div>$<input type="number" class="rate-input" id="cleaning-resort" value="400"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Pet Fees</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="pricing-grid">
+                            <div class="property-card">
+                                <h3>Pet Policy</h3>
+                                <div class="rate-row">
+                                    <label>Fee per pet</label>
+                                    <div>$<input type="number" class="rate-input" id="pet-fee" value="100"></div>
+                                </div>
+                                <div class="rate-row">
+                                    <label>Maximum pets allowed</label>
+                                    <input type="number" class="rate-input" id="max-pets" value="2" min="0" max="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div class="tab-panel" id="panel-export">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Export Configuration</h2>
+                        <button class="btn btn-gold" onclick="copyConfig()">Copy to Clipboard</button>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem; color: #666;">
+                            Copy this configuration and paste it into the <code>PRICING_CONFIG</code> section of your <code>book.html</code> file:
+                        </p>
+                        <pre class="code-output" id="configOutput"></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Making This Permanent</h2>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">To make this admin panel fully functional with real login and persistent storage, you'll need one of these options:</p>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="padding: 1rem; background: var(--cream); border-radius: 8px;">
+                                <strong>Option 1: Firebase (Easiest)</strong>
+                                <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                                    Free tier available. Add Firebase Authentication for login and Firestore database to store your config. Changes sync in real-time.
+                                </p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--cream); border-radius: 8px;">
+                                <strong>Option 2: Netlify + Netlify Identity</strong>
+                                <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                                    If hosting on Netlify, use their built-in Identity service for auth and Functions for a simple backend.
+                                </p>
+                            </div>
+                            <div style="padding: 1rem; background: var(--cream); border-radius: 8px;">
+                                <strong>Option 3: Simple JSON File</strong>
+                                <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                                    Store config in a JSON file. The booking page loads it dynamically. Edit the JSON directly when needed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Changes saved!</div>
+
+    <script>
+        // Default holidays data
+        const defaultHolidays = [
+            { start: '2025-05-24', end: '2025-05-26', label: 'Memorial Day Weekend 2025' },
+            { start: '2025-07-03', end: '2025-07-06', label: 'Independence Day 2025' },
+            { start: '2025-08-30', end: '2025-09-01', label: 'Labor Day Weekend 2025' },
+            { start: '2025-11-26', end: '2025-11-30', label: 'Thanksgiving 2025' },
+            { start: '2025-12-20', end: '2026-01-02', label: 'Christmas/New Year 2025-2026' },
+            { start: '2026-05-23', end: '2026-05-25', label: 'Memorial Day Weekend 2026' },
+            { start: '2026-07-03', end: '2026-07-05', label: 'Independence Day 2026' },
+            { start: '2026-09-05', end: '2026-09-07', label: 'Labor Day Weekend 2026' }
+        ];
+
+        let holidays = [...defaultHolidays];
+
+        // Login handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('active');
+            loadConfig();
+        });
+
+        function logout() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById('panel-' + tabName).classList.add('active');
+
+            if (tabName === 'export') {
+                generateConfigOutput();
+            }
+        }
+
+        // Load config from localStorage or defaults
+        function loadConfig() {
+            const saved = localStorage.getItem('lakehuyck_config');
+            if (saved) {
+                const config = JSON.parse(saved);
+                // Populate form fields
+                document.getElementById('aframe-summer-weekday').value = config.aframe?.summerWeekday || 689;
+                document.getElementById('aframe-summer-weekend').value = config.aframe?.summerWeekend || 729;
+                document.getElementById('logcabin-summer-weekday').value = config.logcabin?.summerWeekday || 789;
+                document.getElementById('logcabin-summer-weekend').value = config.logcabin?.summerWeekend || 829;
+                document.getElementById('off-season-discount').value = config.offSeasonDiscount || 200;
+                document.getElementById('holiday-premium').value = config.holidayPremium || 100;
+                document.getElementById('min-stay-default').value = config.minimumStay?.default || 2;
+                document.getElementById('min-stay-summer').value = config.minimumStay?.summer || 3;
+                document.getElementById('min-stay-holiday').value = config.minimumStay?.holiday || 3;
+                document.getElementById('cleaning-aframe').value = config.cleaningFees?.aframe || 200;
+                document.getElementById('cleaning-logcabin').value = config.cleaningFees?.logcabin || 200;
+                document.getElementById('cleaning-resort').value = config.cleaningFees?.resort || 400;
+                document.getElementById('pet-fee').value = config.petFeePerPet || 100;
+                document.getElementById('max-pets').value = config.maxPets || 2;
+
+                if (config.holidays) holidays = config.holidays;
+            }
+            renderHolidays();
+            updateResortDisplay();
+        }
+
+        // Update resort display (calculated from A-Frame + Log Cabin)
+        function updateResortDisplay() {
+            const aframeWeekday = parseInt(document.getElementById('aframe-summer-weekday').value) || 0;
+            const aframeWeekend = parseInt(document.getElementById('aframe-summer-weekend').value) || 0;
+            const logcabinWeekday = parseInt(document.getElementById('logcabin-summer-weekday').value) || 0;
+            const logcabinWeekend = parseInt(document.getElementById('logcabin-summer-weekend').value) || 0;
+
+            document.getElementById('resort-weekday-display').textContent = (aframeWeekday + logcabinWeekday).toLocaleString();
+            document.getElementById('resort-weekend-display').textContent = (aframeWeekend + logcabinWeekend).toLocaleString();
+        }
+
+        // Listen for rate changes
+        document.querySelectorAll('.rate-input').forEach(input => {
+            input.addEventListener('input', () => {
+                updateResortDisplay();
+                markUnsaved();
+            });
+        });
+
+        function markUnsaved() {
+            const status = document.getElementById('saveStatus');
+            status.textContent = 'Unsaved changes';
+            status.className = 'status-badge unsaved';
+        }
+
+        // Save changes
+        function saveChanges() {
+            const config = buildConfig();
+            localStorage.setItem('lakehuyck_config', JSON.stringify(config));
+
+            const status = document.getElementById('saveStatus');
+            status.textContent = 'All changes saved';
+            status.className = 'status-badge saved';
+
+            showToast('Changes saved successfully!');
+        }
+
+        // Build config object
+        function buildConfig() {
+            const summerMonths = [];
+            document.querySelectorAll('.summer-month:checked').forEach(cb => {
+                summerMonths.push(parseInt(cb.value));
+            });
+
+            return {
+                aframe: {
+                    summerWeekday: parseInt(document.getElementById('aframe-summer-weekday').value),
+                    summerWeekend: parseInt(document.getElementById('aframe-summer-weekend').value)
+                },
+                logcabin: {
+                    summerWeekday: parseInt(document.getElementById('logcabin-summer-weekday').value),
+                    summerWeekend: parseInt(document.getElementById('logcabin-summer-weekend').value)
+                },
+                offSeasonDiscount: parseInt(document.getElementById('off-season-discount').value),
+                holidayPremium: parseInt(document.getElementById('holiday-premium').value),
+                summerMonths: summerMonths,
+                holidays: holidays,
+                cleaningFees: {
+                    aframe: parseInt(document.getElementById('cleaning-aframe').value),
+                    logcabin: parseInt(document.getElementById('cleaning-logcabin').value),
+                    resort: parseInt(document.getElementById('cleaning-resort').value)
+                },
+                petFeePerPet: parseInt(document.getElementById('pet-fee').value),
+                maxPets: parseInt(document.getElementById('max-pets').value),
+                minimumStay: {
+                    default: parseInt(document.getElementById('min-stay-default').value),
+                    summer: parseInt(document.getElementById('min-stay-summer').value),
+                    holiday: parseInt(document.getElementById('min-stay-holiday').value)
+                }
+            };
+        }
+
+        // Render holidays list
+        function renderHolidays() {
+            const list = document.getElementById('holidayList');
+            list.innerHTML = holidays.map((h, i) => `
+                <div class="holiday-item">
+                    <div>
+                        <span class="date">${formatDate(h.start)} - ${formatDate(h.end)}</span>
+                        <span class="label">${h.label}</span>
+                    </div>
+                    <button class="btn btn-remove" onclick="removeHoliday(${i})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateStr) {
+            return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function addHoliday() {
+            const start = document.getElementById('newHolidayStart').value;
+            const end = document.getElementById('newHolidayEnd').value;
+            const label = document.getElementById('newHolidayLabel').value;
+
+            if (!start || !end || !label) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            holidays.push({ start, end, label });
+            renderHolidays();
+            markUnsaved();
+
+            // Clear inputs
+            document.getElementById('newHolidayStart').value = '';
+            document.getElementById('newHolidayEnd').value = '';
+            document.getElementById('newHolidayLabel').value = '';
+        }
+
+        function removeHoliday(index) {
+            holidays.splice(index, 1);
+            renderHolidays();
+            markUnsaved();
+        }
+
+        // Generate config output for export
+        function generateConfigOutput() {
+            const config = buildConfig();
+
+            // Generate holiday dates array
+            let holidayDates = [];
+            config.holidays.forEach(h => {
+                const start = new Date(h.start + 'T00:00:00');
+                const end = new Date(h.end + 'T00:00:00');
+                const current = new Date(start);
+                while (current <= end) {
+                    const dateStr = `${current.getFullYear()}-${String(current.getMonth() + 1).padStart(2, '0')}-${String(current.getDate()).padStart(2, '0')}`;
+                    holidayDates.push(`'${dateStr}'`);
+                    current.setDate(current.getDate() + 1);
+                }
+            });
+
+            const output = `const PRICING_CONFIG = {
+    // BASE RATES (Summer Season)
+    aframe: {
+        summerWeekday: ${config.aframe.summerWeekday},
+        summerWeekend: ${config.aframe.summerWeekend}
+    },
+    logcabin: {
+        summerWeekday: ${config.logcabin.summerWeekday},
+        summerWeekend: ${config.logcabin.summerWeekend}
+    },
+
+    // SEASONAL ADJUSTMENTS
+    offSeasonDiscount: ${config.offSeasonDiscount},
+    holidayPremium: ${config.holidayPremium},
+
+    // SEASON DEFINITIONS
+    summerMonths: [${config.summerMonths.join(', ')}],
+
+    // HOLIDAY DATES
+    holidays: [
+        ${holidayDates.join(',\n        ')}
+    ],
+
+    // CLEANING FEES
+    cleaningFees: {
+        aframe: ${config.cleaningFees.aframe},
+        logcabin: ${config.cleaningFees.logcabin},
+        resort: ${config.cleaningFees.resort}
+    },
+
+    // PET FEES
+    petFeePerPet: ${config.petFeePerPet},
+    maxPets: ${config.maxPets},
+
+    // MINIMUM STAY REQUIREMENTS
+    minimumStay: {
+        default: ${config.minimumStay.default},
+        summer: ${config.minimumStay.summer},
+        holiday: ${config.minimumStay.holiday}
+    }
+};`;
+
+            document.getElementById('configOutput').textContent = output;
+        }
+
+        function copyConfig() {
+            const output = document.getElementById('configOutput').textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                showToast('Configuration copied to clipboard!');
+            });
+        }
+
+        function resetToDefaults() {
+            if (confirm('Reset all settings to default values?')) {
+                localStorage.removeItem('lakehuyck_config');
+                holidays = [...defaultHolidays];
+                location.reload();
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHolidays();
+        });
+    </script>
+</body>
+</html>

@@ -487,41 +487,71 @@
         .calendar-day {
             aspect-ratio: 1;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: var(--font-ui);
-            font-size: 0.9rem;
             cursor: pointer;
             transition: var(--transition-smooth);
             border: 1px solid transparent;
+            padding: 4px 2px;
+            min-height: 60px;
         }
-        
+
+        .calendar-day .day-number {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .calendar-day .day-price {
+            font-size: 0.65rem;
+            opacity: 0.7;
+            margin-top: 2px;
+            line-height: 1;
+        }
+
+        .calendar-day.selected .day-price {
+            opacity: 0.9;
+        }
+
         .calendar-day:hover:not(.disabled):not(.booked) {
             background: var(--cream-dark);
         }
-        
+
         .calendar-day.today {
             border-color: var(--forest-mid);
         }
-        
+
         .calendar-day.selected {
             background: var(--forest-deep);
             color: var(--cream);
         }
-        
+
         .calendar-day.in-range {
             background: var(--cream-dark);
         }
-        
+
         .calendar-day.booked {
             color: #ccc;
-            text-decoration: line-through;
             cursor: not-allowed;
         }
-        
+
+        .calendar-day.booked .day-number {
+            text-decoration: line-through;
+        }
+
+        .calendar-day.booked .day-price {
+            display: none;
+        }
+
         .calendar-day.disabled {
             color: #ddd;
             cursor: not-allowed;
+        }
+
+        .calendar-day.disabled .day-price {
+            display: none;
         }
         
         .calendar-legend {
@@ -701,6 +731,132 @@
             font-size: 1.25rem;
             font-weight: 500;
             color: var(--forest-deep);
+        }
+
+        .pricing-row.sub-item {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-bottom: none;
+        }
+
+        .pricing-row.sub-item:last-of-type {
+            border-bottom: 1px solid rgba(26, 58, 47, 0.1);
+            padding-bottom: 0.75rem;
+        }
+
+        .pricing-note {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: var(--cream-dark);
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            color: var(--forest-mid);
+        }
+
+        .minimum-stay-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .minimum-stay-notice::before {
+            content: '⚠';
+            font-size: 1.1rem;
+        }
+
+        .minimum-stay-notice.error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .minimum-stay-notice.info {
+            background: var(--cream-dark);
+            border-color: var(--forest-light);
+            color: var(--forest-mid);
+        }
+
+        .minimum-stay-notice.info::before {
+            content: 'ℹ';
+        }
+
+        .rate-tag {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            font-size: 0.65rem;
+            font-family: var(--font-ui);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            border-radius: 2px;
+        }
+
+        .rate-tag.weekend {
+            background: var(--gold);
+            color: var(--forest-deep);
+        }
+
+        .rate-tag.holiday {
+            background: var(--sienna);
+            color: var(--cream);
+        }
+
+        .rate-tag.off-season {
+            background: var(--lake-blue);
+            color: var(--cream);
+        }
+
+        /* Calendar day rate indicators */
+        .calendar-day.weekend-day {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .calendar-day.holiday-day {
+            background: rgba(139, 69, 19, 0.15);
+            position: relative;
+        }
+
+        .calendar-day.holiday-day::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 6px;
+            height: 6px;
+            background: var(--sienna);
+            border-radius: 50%;
+        }
+
+        .calendar-day.selected.holiday-day::after,
+        .calendar-day.selected.weekend-day {
+            background: var(--forest-deep);
+        }
+
+        .calendar-day.selected.holiday-day::after {
+            background: var(--gold);
+        }
+
+        .calendar-legend {
+            flex-wrap: wrap;
+        }
+
+        .legend-dot.weekend {
+            background: rgba(201, 162, 39, 0.3);
+            border: 1px solid var(--gold);
+        }
+
+        .legend-dot.holiday {
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid var(--sienna);
+            position: relative;
         }
         
         /* Book Button */
@@ -942,6 +1098,19 @@
                 padding: 2rem 1rem;
             }
             
+            .calendar-day {
+                min-height: 50px;
+                padding: 2px 1px;
+            }
+
+            .calendar-day .day-number {
+                font-size: 0.85rem;
+            }
+
+            .calendar-day .day-price {
+                font-size: 0.55rem;
+            }
+
             .date-summary {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -991,14 +1160,14 @@
             <div class="booking-card-content">
                 <h3>A-Frame Chalet</h3>
                 <p class="booking-card-specs">6 guests · 3 bedrooms · 1 bath</p>
-                <p class="booking-card-price">From $250 <span>/ night</span></p>
+                <p class="booking-card-price">From $<span id="aframe-price">489</span> <span>/ night</span></p>
                 <div class="select-indicator">
                     <span class="check"></span>
                     <span>Select</span>
                 </div>
             </div>
         </div>
-        
+
         <div class="booking-card" data-property="logcabin">
             <div class="booking-card-image">
                 <img src="log-cabin-living-lakeview.png" alt="Log Cabin">
@@ -1006,14 +1175,14 @@
             <div class="booking-card-content">
                 <h3>Log Cabin</h3>
                 <p class="booking-card-specs">8 guests · 3 bedrooms · 2 baths</p>
-                <p class="booking-card-price">From $275 <span>/ night</span></p>
+                <p class="booking-card-price">From $<span id="logcabin-price">589</span> <span>/ night</span></p>
                 <div class="select-indicator">
                     <span class="check"></span>
                     <span>Select</span>
                 </div>
             </div>
         </div>
-        
+
         <div class="booking-card" data-property="resort">
             <div class="booking-card-image">
                 <img src="lake-beach-overview.png" alt="Entire Resort">
@@ -1021,7 +1190,7 @@
             <div class="booking-card-content">
                 <h3>Entire Resort</h3>
                 <p class="booking-card-specs">14 guests · 6 bedrooms · 3 baths</p>
-                <p class="booking-card-price">From $450 <span>/ night</span></p>
+                <p class="booking-card-price">From $<span id="resort-price">1,078</span> <span>/ night</span></p>
                 <div class="select-indicator">
                     <span class="check"></span>
                     <span>Select</span>
@@ -1055,7 +1224,15 @@
             <div class="calendar-legend">
                 <div class="legend-item">
                     <span class="legend-dot available"></span>
-                    Available
+                    Weekday
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot weekend"></span>
+                    Weekend
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot holiday"></span>
+                    Holiday
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot booked"></span>
@@ -1114,12 +1291,16 @@
             <p class="pet-note">$100 per pet, per stay. <a href="rules.html#pets">View pet policy</a></p>
         </div>
 
+        <!-- Minimum Stay Notice -->
+        <div class="minimum-stay-notice" id="minimumStayNotice" style="display: none;">
+            <span id="minimumStayMessage">2-night minimum stay</span>
+        </div>
+
         <!-- Pricing Summary -->
         <div class="pricing-summary" id="pricingSummary" style="display: none;">
             <h3>Price Details</h3>
-            <div class="pricing-row">
-                <span id="nightsLabel">$250 × 3 nights</span>
-                <span id="nightsTotal">$750</span>
+            <div id="nightsBreakdown">
+                <!-- Dynamic night-by-night breakdown will be inserted here -->
             </div>
             <div class="pricing-row" id="petFeeRow" style="display: none;">
                 <span id="petFeeLabel">Pet fee (1 pet)</span>
@@ -1132,6 +1313,9 @@
             <div class="pricing-row total">
                 <span>Total</span>
                 <span id="totalPrice">$945</span>
+            </div>
+            <div class="pricing-note" id="pricingNote" style="display: none;">
+                <small></small>
             </div>
         </div>
         
@@ -1199,28 +1383,224 @@
     </footer>
 
     <script>
+        // ╔════════════════════════════════════════════════════════════════════╗
+        // ║                    PRICING CONFIGURATION                           ║
+        // ║         Edit these values to adjust rates on the fly               ║
+        // ╚════════════════════════════════════════════════════════════════════╝
+
+        const PRICING_CONFIG = {
+            // ─────────────────────────────────────────────────────────────────
+            // BASE RATES (Summer Season)
+            // ─────────────────────────────────────────────────────────────────
+            aframe: {
+                summerWeekday: 689,
+                summerWeekend: 729
+            },
+            logcabin: {
+                summerWeekday: 789,
+                summerWeekend: 829
+            },
+            // Resort = A-Frame + Log Cabin combined (calculated automatically)
+
+            // ─────────────────────────────────────────────────────────────────
+            // SEASONAL ADJUSTMENTS
+            // ─────────────────────────────────────────────────────────────────
+            offSeasonDiscount: 200,      // Subtracted from summer rates for spring/fall/winter
+            holidayPremium: 100,          // Added per night for holidays
+
+            // ─────────────────────────────────────────────────────────────────
+            // SEASON DEFINITIONS (Month numbers: 1=Jan, 12=Dec)
+            // ─────────────────────────────────────────────────────────────────
+            summerMonths: [6, 7, 8],      // June, July, August
+
+            // ─────────────────────────────────────────────────────────────────
+            // HOLIDAY DATES (YYYY-MM-DD format)
+            // Add or remove dates as needed
+            // ─────────────────────────────────────────────────────────────────
+            holidays: [
+                // Memorial Day Weekend 2025
+                '2025-05-24', '2025-05-25', '2025-05-26',
+                // Independence Day 2025
+                '2025-07-03', '2025-07-04', '2025-07-05', '2025-07-06',
+                // Labor Day Weekend 2025
+                '2025-08-30', '2025-08-31', '2025-09-01',
+                // Thanksgiving 2025
+                '2025-11-26', '2025-11-27', '2025-11-28', '2025-11-29', '2025-11-30',
+                // Christmas/New Year 2025-2026
+                '2025-12-20', '2025-12-21', '2025-12-22', '2025-12-23', '2025-12-24',
+                '2025-12-25', '2025-12-26', '2025-12-27', '2025-12-28', '2025-12-29',
+                '2025-12-30', '2025-12-31', '2026-01-01', '2026-01-02',
+                // Memorial Day Weekend 2026
+                '2026-05-23', '2026-05-24', '2026-05-25',
+                // Independence Day 2026
+                '2026-07-03', '2026-07-04', '2026-07-05',
+                // Labor Day Weekend 2026
+                '2026-09-05', '2026-09-06', '2026-09-07'
+            ],
+
+            // ─────────────────────────────────────────────────────────────────
+            // CLEANING FEES
+            // ─────────────────────────────────────────────────────────────────
+            cleaningFees: {
+                aframe: 200,
+                logcabin: 200,
+                resort: 400
+            },
+
+            // ─────────────────────────────────────────────────────────────────
+            // PET FEES
+            // ─────────────────────────────────────────────────────────────────
+            petFeePerPet: 100,
+            maxPets: 2,
+
+            // ─────────────────────────────────────────────────────────────────
+            // MINIMUM STAY REQUIREMENTS
+            // ─────────────────────────────────────────────────────────────────
+            minimumStay: {
+                default: 2,              // Default minimum nights
+                summer: 3,               // Summer season minimum
+                holiday: 3               // Holiday periods minimum
+            }
+        };
+
+        // ╔════════════════════════════════════════════════════════════════════╗
+        // ║                    PRICING HELPER FUNCTIONS                        ║
+        // ╚════════════════════════════════════════════════════════════════════╝
+
+        function isWeekend(date) {
+            const day = date.getDay();
+            return day === 0 || day === 5 || day === 6; // Friday, Saturday, Sunday
+        }
+
+        function isSummerSeason(date) {
+            const month = date.getMonth() + 1; // JavaScript months are 0-indexed
+            return PRICING_CONFIG.summerMonths.includes(month);
+        }
+
+        function isHoliday(date) {
+            const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            return PRICING_CONFIG.holidays.includes(dateStr);
+        }
+
+        function getMinimumStay(checkInDate) {
+            // Check if check-in is during a holiday period
+            if (isHoliday(checkInDate)) {
+                return PRICING_CONFIG.minimumStay.holiday;
+            }
+            // Check if check-in is during summer
+            if (isSummerSeason(checkInDate)) {
+                return PRICING_CONFIG.minimumStay.summer;
+            }
+            // Default minimum stay
+            return PRICING_CONFIG.minimumStay.default;
+        }
+
+        function getMinimumStayMessage(checkInDate) {
+            const minNights = getMinimumStay(checkInDate);
+            if (isHoliday(checkInDate)) {
+                return `${minNights}-night minimum during holidays`;
+            }
+            if (isSummerSeason(checkInDate)) {
+                return `${minNights}-night minimum in summer`;
+            }
+            return `${minNights}-night minimum stay`;
+        }
+
+        function getRateForDate(property, date) {
+            // Get base rate based on property and weekend/weekday
+            let baseRate;
+            const weekend = isWeekend(date);
+            const summer = isSummerSeason(date);
+            const holiday = isHoliday(date);
+
+            if (property === 'resort') {
+                // Resort = A-Frame + Log Cabin combined
+                const aframeRate = weekend ? PRICING_CONFIG.aframe.summerWeekend : PRICING_CONFIG.aframe.summerWeekday;
+                const logcabinRate = weekend ? PRICING_CONFIG.logcabin.summerWeekend : PRICING_CONFIG.logcabin.summerWeekday;
+                baseRate = aframeRate + logcabinRate;
+            } else {
+                baseRate = weekend ?
+                    PRICING_CONFIG[property].summerWeekend :
+                    PRICING_CONFIG[property].summerWeekday;
+            }
+
+            // Apply seasonal adjustment (off-season discount)
+            if (!summer) {
+                if (property === 'resort') {
+                    baseRate -= (PRICING_CONFIG.offSeasonDiscount * 2); // Both cabins get discount
+                } else {
+                    baseRate -= PRICING_CONFIG.offSeasonDiscount;
+                }
+            }
+
+            // Apply holiday premium
+            if (holiday) {
+                if (property === 'resort') {
+                    baseRate += (PRICING_CONFIG.holidayPremium * 2); // Both cabins get premium
+                } else {
+                    baseRate += PRICING_CONFIG.holidayPremium;
+                }
+            }
+
+            return {
+                rate: baseRate,
+                isWeekend: weekend,
+                isSummer: summer,
+                isHoliday: holiday
+            };
+        }
+
+        function calculateStayPricing(property, checkIn, checkOut) {
+            const nights = [];
+            const currentDate = new Date(checkIn);
+
+            while (currentDate < checkOut) {
+                const rateInfo = getRateForDate(property, currentDate);
+                nights.push({
+                    date: new Date(currentDate),
+                    ...rateInfo
+                });
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            const totalNights = nights.reduce((sum, n) => sum + n.rate, 0);
+            const weekendNights = nights.filter(n => n.isWeekend).length;
+            const weekdayNights = nights.filter(n => !n.isWeekend).length;
+            const holidayNights = nights.filter(n => n.isHoliday).length;
+            const summerNights = nights.filter(n => n.isSummer).length;
+            const offSeasonNights = nights.filter(n => !n.isSummer).length;
+
+            return {
+                nights: nights,
+                totalNightsPrice: totalNights,
+                nightCount: nights.length,
+                weekendNights,
+                weekdayNights,
+                holidayNights,
+                summerNights,
+                offSeasonNights
+            };
+        }
+
+        function getLowestRate(property) {
+            // Returns lowest possible rate (off-season weekday) for "From $X" display
+            if (property === 'resort') {
+                return (PRICING_CONFIG.aframe.summerWeekday - PRICING_CONFIG.offSeasonDiscount) +
+                       (PRICING_CONFIG.logcabin.summerWeekday - PRICING_CONFIG.offSeasonDiscount);
+            }
+            return PRICING_CONFIG[property].summerWeekday - PRICING_CONFIG.offSeasonDiscount;
+        }
+
         // =====================
         // PROPERTY SELECTION
         // =====================
         const bookingCards = document.querySelectorAll('.booking-card');
         let selectedProperty = 'aframe';
-        
-        const propertyPrices = {
-            aframe: 250,
-            logcabin: 275,
-            resort: 450
-        };
-        
+
         const propertyMaxGuests = {
             aframe: 6,
             logcabin: 8,
             resort: 14
-        };
-
-        const propertyCleaningFees = {
-            aframe: 200,
-            logcabin: 200,
-            resort: 400
         };
         
         bookingCards.forEach(card => {
@@ -1229,6 +1609,7 @@
                 card.classList.add('selected');
                 selectedProperty = card.dataset.property;
                 updateGuestOptions();
+                renderCalendar(); // Re-render to update prices for selected property
                 updatePricing();
             });
         });
@@ -1295,11 +1676,26 @@
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day';
-                dayEl.textContent = day;
-                
+
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dateObj = new Date(year, month, day);
-                
+
+                // Create day number element
+                const dayNumber = document.createElement('span');
+                dayNumber.className = 'day-number';
+                dayNumber.textContent = day;
+                dayEl.appendChild(dayNumber);
+
+                // Create price element (only for available dates)
+                const isAvailable = dateObj >= today && !bookedDates.includes(dateStr);
+                if (isAvailable) {
+                    const rateInfo = getRateForDate(selectedProperty, dateObj);
+                    const dayPrice = document.createElement('span');
+                    dayPrice.className = 'day-price';
+                    dayPrice.textContent = `$${rateInfo.rate}`;
+                    dayEl.appendChild(dayPrice);
+                }
+
                 // Check if in past
                 if (dateObj < today) {
                     dayEl.classList.add('disabled');
@@ -1312,7 +1708,16 @@
                 else if (dateObj.getTime() === today.getTime()) {
                     dayEl.classList.add('today');
                 }
-                
+
+                // Add weekend/holiday indicators for pricing visibility
+                if (isAvailable) {
+                    if (isHoliday(dateObj)) {
+                        dayEl.classList.add('holiday-day');
+                    } else if (isWeekend(dateObj)) {
+                        dayEl.classList.add('weekend-day');
+                    }
+                }
+
                 // Check if selected
                 if (selectedCheckIn && dateObj.getTime() === selectedCheckIn.getTime()) {
                     dayEl.classList.add('selected');
@@ -1320,19 +1725,19 @@
                 if (selectedCheckOut && dateObj.getTime() === selectedCheckOut.getTime()) {
                     dayEl.classList.add('selected');
                 }
-                
+
                 // Check if in range
                 if (selectedCheckIn && selectedCheckOut) {
                     if (dateObj > selectedCheckIn && dateObj < selectedCheckOut) {
                         dayEl.classList.add('in-range');
                     }
                 }
-                
+
                 // Click handler
                 if (!dayEl.classList.contains('disabled') && !dayEl.classList.contains('booked')) {
                     dayEl.addEventListener('click', () => selectDate(dateObj));
                 }
-                
+
                 grid.appendChild(dayEl);
             }
         }
@@ -1372,21 +1777,29 @@
             const bringingPet = document.getElementById('bringingPet').checked;
             const petCountContainer = document.getElementById('petCountContainer');
             const petFeeRow = document.getElementById('petFeeRow');
+            const nightsBreakdown = document.getElementById('nightsBreakdown');
+            const pricingNote = document.getElementById('pricingNote');
+            const minimumStayNotice = document.getElementById('minimumStayNotice');
+            const minimumStayMessage = document.getElementById('minimumStayMessage');
 
             // Show/hide pet count dropdown
             petCountContainer.style.display = bringingPet ? 'flex' : 'none';
 
             if (selectedCheckIn && selectedCheckOut) {
-                const nights = Math.ceil((selectedCheckOut - selectedCheckIn) / (1000 * 60 * 60 * 24));
-                const pricePerNight = propertyPrices[selectedProperty];
-                const nightsTotal = nights * pricePerNight;
-                const cleaningFee = propertyCleaningFees[selectedProperty];
+                // Calculate pricing using the new dynamic system
+                const pricing = calculateStayPricing(selectedProperty, selectedCheckIn, selectedCheckOut);
+
+                // Check minimum stay requirement
+                const minNights = getMinimumStay(selectedCheckIn);
+                const meetsMinimum = pricing.nightCount >= minNights;
+                const cleaningFee = PRICING_CONFIG.cleaningFees[selectedProperty] ||
+                    (PRICING_CONFIG.cleaningFees.aframe + PRICING_CONFIG.cleaningFees.logcabin);
 
                 // Calculate pet fee
                 let petFee = 0;
                 if (bringingPet) {
                     const petCount = parseInt(document.getElementById('petCount').value);
-                    petFee = petCount * 100;
+                    petFee = petCount * PRICING_CONFIG.petFeePerPet;
                     document.getElementById('petFeeLabel').textContent = `Pet fee (${petCount} ${petCount === 1 ? 'pet' : 'pets'})`;
                     document.getElementById('petFeeAmount').textContent = `$${petFee}`;
                     petFeeRow.style.display = 'flex';
@@ -1394,18 +1807,89 @@
                     petFeeRow.style.display = 'none';
                 }
 
-                const total = nightsTotal + cleaningFee + petFee;
+                const total = pricing.totalNightsPrice + cleaningFee + petFee;
 
-                document.getElementById('nightsLabel').textContent = `$${pricePerNight} × ${nights} nights`;
-                document.getElementById('nightsTotal').textContent = `$${nightsTotal}`;
+                // Build nights breakdown HTML
+                let breakdownHTML = '';
+
+                // Group nights by rate type for cleaner display
+                const rateGroups = {};
+                pricing.nights.forEach(night => {
+                    const key = night.rate;
+                    if (!rateGroups[key]) {
+                        rateGroups[key] = {
+                            rate: night.rate,
+                            count: 0,
+                            isWeekend: night.isWeekend,
+                            isHoliday: night.isHoliday,
+                            isSummer: night.isSummer
+                        };
+                    }
+                    rateGroups[key].count++;
+                });
+
+                // Create breakdown rows
+                Object.values(rateGroups).forEach(group => {
+                    let label = `$${group.rate} × ${group.count} ${group.count === 1 ? 'night' : 'nights'}`;
+                    let tags = '';
+
+                    if (group.isHoliday) {
+                        tags += '<span class="rate-tag holiday">Holiday</span>';
+                    }
+                    if (group.isWeekend && !group.isHoliday) {
+                        tags += '<span class="rate-tag weekend">Weekend</span>';
+                    }
+                    if (!group.isSummer) {
+                        tags += '<span class="rate-tag off-season">Off-Season</span>';
+                    }
+
+                    breakdownHTML += `
+                        <div class="pricing-row">
+                            <span>${label}${tags}</span>
+                            <span>$${group.rate * group.count}</span>
+                        </div>
+                    `;
+                });
+
+                nightsBreakdown.innerHTML = breakdownHTML;
                 document.getElementById('cleaningFee').textContent = `$${cleaningFee}`;
-                document.getElementById('totalPrice').textContent = `$${total}`;
-                
+                document.getElementById('totalPrice').textContent = `$${total.toLocaleString()}`;
+
+                // Show pricing note if there are mixed rates
+                if (Object.keys(rateGroups).length > 1) {
+                    pricingNote.style.display = 'block';
+                    pricingNote.querySelector('small').textContent =
+                        `Your stay includes ${pricing.nightCount} nights with variable rates based on season and day of week.`;
+                } else {
+                    pricingNote.style.display = 'none';
+                }
+
                 pricingSummary.style.display = 'block';
-                bookButton.disabled = false;
-                bookButton.textContent = 'Request to Book';
+
+                // Handle minimum stay validation
+                if (!meetsMinimum) {
+                    minimumStayNotice.style.display = 'flex';
+                    minimumStayNotice.className = 'minimum-stay-notice error';
+                    minimumStayMessage.textContent = `${getMinimumStayMessage(selectedCheckIn)} required. You selected ${pricing.nightCount} ${pricing.nightCount === 1 ? 'night' : 'nights'}.`;
+                    bookButton.disabled = true;
+                    bookButton.textContent = `${minNights}-Night Minimum Required`;
+                } else {
+                    minimumStayNotice.style.display = 'none';
+                    bookButton.disabled = false;
+                    bookButton.textContent = 'Request to Book';
+                }
+            } else if (selectedCheckIn && !selectedCheckOut) {
+                // Show minimum stay info when only check-in is selected
+                const minNights = getMinimumStay(selectedCheckIn);
+                minimumStayNotice.style.display = 'flex';
+                minimumStayNotice.className = 'minimum-stay-notice info';
+                minimumStayMessage.textContent = getMinimumStayMessage(selectedCheckIn);
+                pricingSummary.style.display = 'none';
+                bookButton.disabled = true;
+                bookButton.textContent = 'Select Check-Out Date';
             } else {
                 pricingSummary.style.display = 'none';
+                minimumStayNotice.style.display = 'none';
                 bookButton.disabled = true;
                 bookButton.textContent = 'Select Dates to Continue';
             }
@@ -1469,7 +1953,15 @@
             alert('Thank you for your message! We\'ll get back to you within 24 hours.\n\nIn production, this would send an email via your preferred service (Formspree, Netlify Forms, etc.)');
         });
         
+        // Initialize property card prices from config
+        function updatePropertyCardPrices() {
+            document.getElementById('aframe-price').textContent = getLowestRate('aframe').toLocaleString();
+            document.getElementById('logcabin-price').textContent = getLowestRate('logcabin').toLocaleString();
+            document.getElementById('resort-price').textContent = getLowestRate('resort').toLocaleString();
+        }
+
         // Initialize
+        updatePropertyCardPrices();
         renderCalendar();
         updateGuestOptions();
 
