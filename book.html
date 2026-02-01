@@ -606,7 +606,66 @@
             color: var(--charcoal);
             cursor: pointer;
         }
-        
+
+        /* Pet Option */
+        .pet-option {
+            background: var(--cream);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pet-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            color: var(--forest-deep);
+        }
+
+        .pet-checkbox-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--forest-deep);
+        }
+
+        .pet-count {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(26, 58, 47, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pet-count label {
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+
+        .pet-count select {
+            padding: 0.5rem 1rem;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            border: 1px solid rgba(26, 58, 47, 0.2);
+            background: white;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+
+        .pet-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .pet-note a {
+            color: var(--forest-deep);
+        }
+
         /* Pricing Summary */
         .pricing-summary {
             background: var(--cream);
@@ -927,7 +986,7 @@
     <section class="booking-options">
         <div class="booking-card selected" data-property="aframe">
             <div class="booking-card-image">
-                <img src="https://images.unsplash.com/photo-1518732714860-b62714ce0c59?w=600&q=80" alt="A-Frame Chalet">
+                <img src="images/aframe/interior-hero.avif" alt="A-Frame Chalet">
             </div>
             <div class="booking-card-content">
                 <h3>A-Frame Chalet</h3>
@@ -1038,7 +1097,23 @@
                 </select>
             </div>
         </div>
-        
+
+        <!-- Pet Option -->
+        <div class="pet-option">
+            <label class="pet-checkbox-label">
+                <input type="checkbox" id="bringingPet" onchange="updatePricing()">
+                <span class="pet-checkbox-text">I'm bringing a furry friend</span>
+            </label>
+            <div class="pet-count" id="petCountContainer" style="display: none;">
+                <label for="petCount">Number of pets:</label>
+                <select id="petCount" onchange="updatePricing()">
+                    <option value="1">1 pet ($100)</option>
+                    <option value="2">2 pets ($200)</option>
+                </select>
+            </div>
+            <p class="pet-note">$100 per pet, per stay. <a href="rules.html#pets">View pet policy</a></p>
+        </div>
+
         <!-- Pricing Summary -->
         <div class="pricing-summary" id="pricingSummary" style="display: none;">
             <h3>Price Details</h3>
@@ -1046,13 +1121,13 @@
                 <span id="nightsLabel">$250 × 3 nights</span>
                 <span id="nightsTotal">$750</span>
             </div>
-            <div class="pricing-row">
-                <span>Cleaning fee</span>
-                <span>$150</span>
+            <div class="pricing-row" id="petFeeRow" style="display: none;">
+                <span id="petFeeLabel">Pet fee (1 pet)</span>
+                <span id="petFeeAmount">$100</span>
             </div>
             <div class="pricing-row">
-                <span>Service fee</span>
-                <span id="serviceFee">$45</span>
+                <span>Cleaning fee</span>
+                <span id="cleaningFee">$200</span>
             </div>
             <div class="pricing-row total">
                 <span>Total</span>
@@ -1140,6 +1215,12 @@
             aframe: 6,
             logcabin: 8,
             resort: 14
+        };
+
+        const propertyCleaningFees = {
+            aframe: 200,
+            logcabin: 200,
+            resort: 400
         };
         
         bookingCards.forEach(card => {
@@ -1288,18 +1369,36 @@
         function updatePricing() {
             const pricingSummary = document.getElementById('pricingSummary');
             const bookButton = document.getElementById('bookButton');
-            
+            const bringingPet = document.getElementById('bringingPet').checked;
+            const petCountContainer = document.getElementById('petCountContainer');
+            const petFeeRow = document.getElementById('petFeeRow');
+
+            // Show/hide pet count dropdown
+            petCountContainer.style.display = bringingPet ? 'flex' : 'none';
+
             if (selectedCheckIn && selectedCheckOut) {
                 const nights = Math.ceil((selectedCheckOut - selectedCheckIn) / (1000 * 60 * 60 * 24));
                 const pricePerNight = propertyPrices[selectedProperty];
                 const nightsTotal = nights * pricePerNight;
-                const cleaningFee = 150;
-                const serviceFee = Math.round(nightsTotal * 0.06);
-                const total = nightsTotal + cleaningFee + serviceFee;
-                
+                const cleaningFee = propertyCleaningFees[selectedProperty];
+
+                // Calculate pet fee
+                let petFee = 0;
+                if (bringingPet) {
+                    const petCount = parseInt(document.getElementById('petCount').value);
+                    petFee = petCount * 100;
+                    document.getElementById('petFeeLabel').textContent = `Pet fee (${petCount} ${petCount === 1 ? 'pet' : 'pets'})`;
+                    document.getElementById('petFeeAmount').textContent = `$${petFee}`;
+                    petFeeRow.style.display = 'flex';
+                } else {
+                    petFeeRow.style.display = 'none';
+                }
+
+                const total = nightsTotal + cleaningFee + petFee;
+
                 document.getElementById('nightsLabel').textContent = `$${pricePerNight} × ${nights} nights`;
                 document.getElementById('nightsTotal').textContent = `$${nightsTotal}`;
-                document.getElementById('serviceFee').textContent = `$${serviceFee}`;
+                document.getElementById('cleaningFee').textContent = `$${cleaningFee}`;
                 document.getElementById('totalPrice').textContent = `$${total}`;
                 
                 pricingSummary.style.display = 'block';
