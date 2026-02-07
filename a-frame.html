@@ -235,21 +235,24 @@
                 top: 0;
                 left: 0;
                 width: 100vw;
-                height: 100vh;
+                height: auto;
                 background-color: #1a3a2f;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
                 gap: 0;
-                transform: translateX(-100%);
+                transform: translateY(-100%);
                 transition: transform 0.3s ease;
                 z-index: 1002;
                 padding-top: 5rem;
+                padding-bottom: 1.5rem;
                 overflow-y: auto;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             }
 
             .nav-links.active {
-                transform: translateX(0);
+                transform: translateY(0);
             }
 
             .nav-links li {
@@ -933,10 +936,6 @@
                 padding: 1rem 1.5rem;
             }
             
-            .nav-links {
-                display: none;
-            }
-            
             .page-hero {
                 padding: 2rem;
             }
@@ -1489,11 +1488,9 @@
         const navLinks = document.getElementById('navLinks');
 
         mobileMenuToggle.addEventListener('click', () => {
-            const isOpen = navLinks.classList.contains('active');
             mobileMenuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
             document.body.classList.toggle('menu-open');
-            document.body.style.overflow = !isOpen ? 'hidden' : '';
         });
 
         // Close mobile menu when clicking a link
@@ -1502,7 +1499,6 @@
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
                 document.body.classList.remove('menu-open');
-                document.body.style.overflow = '';
             });
         });
 
