@@ -322,6 +322,12 @@
             max-width: 800px;
         }
         
+        .hero-logo {
+            width: 115px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
         .page-hero-eyebrow {
             font-family: var(--font-ui);
             font-size: 0.75rem;
@@ -972,10 +978,6 @@
                 grid-row: span 1;
             }
             
-            .booking-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
         }
 
         /* Lightbox */
@@ -1034,6 +1036,11 @@
             color: var(--cream);
             font-size: 1.5rem;
             transition: var(--transition-smooth);
+            display: none;
+        }
+
+        .lightbox.active .lightbox-nav {
+            display: block;
         }
 
         .lightbox-nav:hover {
@@ -1096,6 +1103,7 @@
         </div>
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
+            <img src="images/aframe-logo-white.png" alt="A-Frame Chalet" class="hero-logo">
             <p class="page-hero-eyebrow">The A-Frame Chalet</p>
             <h1>Tranquil A-Frame on Private Glacial Lake</h1>
             <div class="page-hero-rating">
@@ -1216,7 +1224,7 @@
     <!-- Amenities -->
     <section class="cabin-amenities">
         <h2>A-Frame Amenities</h2>
-        <p class="amenities-intro">Everything you need for a comfortable stay</p>
+        <p class="amenities-intro">Everything you need for an adventurous stay</p>
         
         <!-- Highlighted Amenities with Woodcut Illustrations -->
         <div class="amenities-highlights">

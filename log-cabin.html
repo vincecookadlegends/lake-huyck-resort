@@ -323,6 +323,12 @@
             max-width: 800px;
         }
         
+        .hero-logo {
+            width: 115px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
         .page-hero-eyebrow {
             font-family: var(--font-ui);
             font-size: 0.75rem;
@@ -1083,6 +1089,11 @@
             color: var(--cream);
             font-size: 1.5rem;
             transition: var(--transition-smooth);
+            display: none;
+        }
+
+        .lightbox.active .lightbox-nav {
+            display: block;
         }
 
         .lightbox-nav:hover {
@@ -1146,6 +1157,7 @@
         </div>
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
+            <img src="images/logcabin-logo-white.png" alt="Log Cabin" class="hero-logo">
             <p class="page-hero-eyebrow">The Log Cabin</p>
             <h1>Cozy Log Cabin on Private Glacial Lake</h1>
             <div class="page-hero-rating">
@@ -1212,7 +1224,7 @@
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
-                    <span>Antler chandeliers and original décor</span>
+                    <span>Plush leather couches and original décor</span>
                 </li>
                 <li>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
@@ -1288,7 +1300,7 @@
     <!-- Amenities -->
     <section class="cabin-amenities">
         <h2>Log Cabin Amenities</h2>
-        <p class="amenities-intro">Everything you need for a comfortable stay</p>
+        <p class="amenities-intro">Everything you need for an adventurous stay</p>
         
         <!-- Highlighted Amenities with Woodcut Images -->
         <div class="amenities-highlights">
@@ -1389,7 +1401,7 @@
         <div class="gallery-masonry">
             <!-- Large feature -->
             <div class="gallery-item span-2-tall">
-                <img src="log-cabin-living-room-1.png" alt="Living room with antler chandeliers">
+                <img src="log-cabin-living-room-1.png" alt="Living room with plush leather couches">
             </div>
             <!-- Tall portrait -->
             <div class="gallery-item tall">
