@@ -675,7 +675,7 @@
 
         .intro-attribution {
             font-family: var(--font-ui);
-            font-size: 0.34rem;
+            font-size: 0.85rem;
             font-weight: 400;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -1627,6 +1627,7 @@
             <li><a href="index.html#amenities">Amenities</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="rules.html">Guest Handbook</a></li>
+            <li><a href="local-guide.html">Local Guide</a></li>
         </ul>
         <a href="book.html" class="nav-book">Book Now</a>
     </nav>
@@ -1639,6 +1640,7 @@
             <li><a href="index.html#amenities">Amenities</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="rules.html">Guest Handbook</a></li>
+            <li><a href="local-guide.html">Local Guide</a></li>
         </ul>
     </div>
 
@@ -1925,6 +1927,7 @@
     <!-- Amenities Section -->
     <section class="amenities" id="amenities">
         <div class="amenities-header">
+            <img src="images/pinecone.png" alt="Lake Huyck Resort" style="width: 138px; height: auto; margin-bottom: 0.07rem; mix-blend-mode: multiply;">
             <h2>Resort Amenities</h2>
             <p class="intro-eyebrow">Everything you need for the perfect getaway</p>
         </div>
@@ -2027,19 +2030,19 @@
             },
             "entertainment": {
                 "title": "Entertainment",
-                "items": ["Ethernet connection", "HDTV", "Bluetooth sound system", "Books and reading material"]
+                "items": ["Ethernet connection", "HDTV", "Bluetooth sound system", "Books and reading material", "Board games", "Outdoor games"]
             },
             "family": {
                 "title": "Family",
-                "items": ["Board games", "Outdoor playground"]
+                "items": ["Board games", "Adult fort with swing", "Private lookout over lake with bar seating", "Cornhole & badminton", "Tree swings"]
             },
             "heating-cooling": {
                 "title": "Heating & Cooling",
-                "items": ["AC - split type ductless system", "Indoor fireplace: wood-burning", "Portable fans", "Portable heater", "Radiant heating", "Heating - split type ductless system"]
+                "items": ["AC - split type ductless system", "Indoor fireplace: wood-burning", "Portable fans", "Portable heater", "Radiant heating", "Heating - split type ductless system", "Central heat and AC"]
             },
             "home-safety": {
                 "title": "Home Safety",
-                "items": ["Exterior security cameras on property", "Smoke alarm", "Carbon monoxide alarm", "Fire extinguisher", "First aid kit"]
+                "items": ["Exterior security cameras on property", "Smoke alarm", "Fire extinguisher", "First aid kit"]
             },
             "internet-office": {
                 "title": "Internet & Office",
@@ -2047,7 +2050,7 @@
             },
             "kitchen-dining": {
                 "title": "Kitchen & Dining",
-                "items": ["Kitchen", "Refrigerator", "Microwave", "Dishwasher", "Cooking basics (pots, pans, oil, salt, pepper)", "Dishes and silverware", "Freezer", "Electric stove", "Oven", "Hot water kettle", "Coffee maker", "Wine glasses", "Toaster", "Baking sheet", "Barbecue utensils", "Dining table", "Coffee"]
+                "items": ["Kitchen", "Refrigerator", "Microwave", "Dishwasher", "Cooking basics (pots, pans, oil, salt, pepper)", "Dishes and silverware", "Freezer", "Electric stove", "Oven", "Hot water kettle", "Coffee maker", "Wine glasses", "Toaster", "Baking sheet", "Barbecue utensils", "Dining table", "Coffee", "BBQ grill"]
             },
             "location-features": {
                 "title": "Location Features",
@@ -2055,7 +2058,7 @@
             },
             "outdoor": {
                 "title": "Outdoor",
-                "items": ["Private patio or balcony", "Shared backyard", "Fire pit", "Outdoor furniture", "Hammock", "Outdoor dining area", "BBQ grill", "Beach essentials", "Kayak", "Boat slip", "Sun loungers"]
+                "items": ["Private patio or balcony", "Shared property", "Fire pit", "Outdoor furniture", "Hammock", "Outdoor dining area", "BBQ grill", "Beach essentials", "Kayak", "Boat slip", "Sun loungers", "Private L-dock for swimming", "Bistro lights", "Dock lights"]
             },
             "parking-facilities": {
                 "title": "Parking & Facilities",
@@ -2085,8 +2088,8 @@
             <div class="gallery-item">
                 <img src="log-cabin-woodstove.png" alt="Cozy wood stove">
             </div>
-            <div class="gallery-item tall">
-                <img src="lake-dock-wildflowers.png" alt="Dock and beach">
+            <div class="gallery-item tall" style="aspect-ratio: 2/3;">
+                <img src="lake-dock-wildflowers.png" alt="Dock and beach" style="object-position: center top;">
             </div>
             <div class="gallery-item">
                 <img src="lake-kayak-dog.png" alt="Kayaking with dog">
@@ -2111,6 +2114,36 @@
             </div>
             <div class="gallery-item">
                 <img src="lake-grounds-sunrise.png" alt="Grounds at sunrise">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/living-room/coffee-table.avif" alt="A-Frame cozy fireplace seating">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/bathroom/main.webp" alt="A-Frame spa-like bathroom">
+            </div>
+            <div class="gallery-item wide">
+                <img src="images/aframe/east-bedroom/main.avif" alt="A-Frame east bedroom">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/west-bedroom/main.avif" alt="A-Frame west bedroom">
+            </div>
+            <div class="gallery-item">
+                <img src="images/aframe/loft/main.avif" alt="A-Frame loft bedroom">
+            </div>
+            <div class="gallery-item wide">
+                <img src="log-cabin-master-1.png" alt="Log Cabin master bedroom">
+            </div>
+            <div class="gallery-item">
+                <img src="log-cabin-guest-1.png" alt="Log Cabin guest bedroom">
+            </div>
+            <div class="gallery-item">
+                <img src="log-cabin-bunk-room.png" alt="Log Cabin bunk room">
+            </div>
+            <div class="gallery-item wide">
+                <img src="images/aframe/exterior/drone.avif" alt="A-Frame Chalet aerial view">
+            </div>
+            <div class="gallery-item wide">
+                <img src="images/log-cabin/exterior/drone.avif" alt="Log Cabin aerial view">
             </div>
         </div>
         <div class="gallery-cta">
@@ -2138,6 +2171,7 @@
                 <ul>
                     <li><a href="#amenities">Amenities</a></li>
                     <li><a href="rules.html">Guest Handbook</a></li>
+                    <li><a href="local-guide.html">Local Guide</a></li>
                     <li><a href="rules.html#pets">Pet Policy</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                 </ul>

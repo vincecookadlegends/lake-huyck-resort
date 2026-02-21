@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Guide | Lake Huyck Resort</title>
+    <meta name="description" content="Our favorite restaurants, breweries, wineries, coffee shops, and adventures near Lake Huyck Resort in Marcellus, Michigan.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --forest-deep: #1a3a2f;
+            --forest-mid: #2d5a4a;
+            --forest-light: #4a7c6b;
+            --amber: #b8860b;
+            --sienna: #8b4513;
+            --lake-blue: #5a7d8c;
+            --cream: #faf8f5;
+            --cream-dark: #f0ebe3;
+            --charcoal: #2c2c2c;
+            --gold: #c9a227;
+            --red-warning: #c0392b;
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-ui: 'Outfit', sans-serif;
+
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--charcoal);
+            background-color: var(--cream);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-book {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.75rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-book:hover {
+            background: var(--amber);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 28px;
+            height: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--forest-deep);
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                z-index: 1003;
+            }
+
+            .mobile-menu-toggle.active span {
+                background: var(--cream);
+            }
+
+            .logo {
+                z-index: 1003;
+                position: relative;
+            }
+
+            body.menu-open .logo {
+                color: var(--cream);
+            }
+
+            .nav-links {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: auto;
+                background-color: #1a3a2f;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 0;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1002;
+                padding-top: 5rem;
+                padding-bottom: 1.5rem;
+                overflow-y: auto;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                list-style: none;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(250, 248, 245, 0.15);
+            }
+
+            .nav-links li:first-child {
+                border-top: 1px solid rgba(250, 248, 245, 0.15);
+            }
+
+            .nav-links a {
+                color: var(--cream) !important;
+                font-size: 0.85rem;
+                letter-spacing: 0.12em;
+                display: block;
+                padding: 1rem 2rem;
+            }
+
+            .nav-book {
+                position: relative;
+                z-index: 1003;
+            }
+
+            body.menu-open .nav-book {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 7rem 4rem 3rem;
+            text-align: center;
+            background: var(--forest-deep);
+            color: var(--cream);
+        }
+
+        .page-header-logo {
+            width: 115px;
+            height: auto;
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 2rem 4rem;
+            background: var(--cream);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tab-btn {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            color: var(--forest-deep);
+            border: 1px solid var(--forest-mid);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--forest-deep);
+            color: var(--cream);
+            border-color: var(--forest-deep);
+        }
+
+        /* Tab Content */
+        .tab-content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            min-height: 60vh;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content > h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--forest-deep);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--forest-mid);
+        }
+
+        .tab-intro {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--cream-dark);
+            border-left: 4px solid var(--gold);
+        }
+
+        /* Listing Grid */
+        .listing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .listing-card {
+            background: #fff;
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            padding: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .listing-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(26, 58, 47, 0.12);
+        }
+
+        .listing-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            margin-bottom: 0.25rem;
+        }
+
+        .listing-meta {
+            font-family: var(--font-ui);
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .listing-meta svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        .listing-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+
+        .listing-section-divider {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(26, 58, 47, 0.15);
+            margin-top: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .listing-section-divider:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--cream-dark);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .highlight-box.info {
+            border-left-color: var(--lake-blue);
+            background: #f0f7fa;
+        }
+
+        .highlight-box h4 {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forest-mid);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        /* CTA */
+        .contact-cta {
+            background: var(--forest-deep);
+            color: var(--cream);
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .contact-cta h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .contact-cta p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--forest-deep);
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-primary:hover {
+            background: var(--amber);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        .footer-links-inline {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links-inline a {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links-inline a:hover { opacity: 1; }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .page-header { padding: 8rem 2rem 3rem; }
+            .tab-nav { padding: 1.5rem 1rem; gap: 0.5rem; }
+            .tab-btn { padding: 0.5rem 0.75rem; font-size: 0.7rem; min-height: 50px; }
+            .tab-content-container { padding: 2rem 1rem; }
+            .listing-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .contact-cta { padding: 3rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html" class="logo">Lake Huyck Resort</a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="a-frame.html">A-Frame Chalet</a></li>
+            <li><a href="log-cabin.html">Cozy Log Cabin</a></li>
+            <li><a href="index.html#amenities">Amenities</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="rules.html">Guest Handbook</a></li>
+            <li><a href="local-guide.html">Local Guide</a></li>
+        </ul>
+        <a href="book.html" class="nav-book">Book Now</a>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <img src="images/arrows-logo-white.png" alt="Lake Huyck Resort" class="page-header-logo">
+        <h1>Local Guide</h1>
+        <p>Our favorite restaurants, breweries, wineries, and adventures near the resort.<br>Everything is within a short scenic drive from your cabin.</p>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="dining">Dining</button>
+        <button class="tab-btn" data-tab="coffee-sweets">Coffee & Sweets</button>
+        <button class="tab-btn" data-tab="craft-drinks">Craft Drinks</button>
+        <button class="tab-btn" data-tab="outdoors">Outdoors & Parks</button>
+        <button class="tab-btn" data-tab="activities">Activities</button>
+        <button class="tab-btn" data-tab="essentials">Essentials</button>
+    </div>
+
+    <!-- Tab Content -->
+    <main class="tab-content-container">
+
+        <!-- DINING TAB -->
+        <div class="tab-content active" id="dining">
+            <h2>Dining</h2>
+
+            <div class="tab-intro">
+                <p>From lakeside supper clubs to farm-to-table fine dining, southwest Michigan has an incredible food scene. Here are the spots we keep coming back to.</p>
+            </div>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>The Rock At Big Fish Lake</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away</span>
+                    </div>
+                    <p>Great supper club with very good steaks, bluegill tacos, cocktails and sunset views. Taco and pizza bar patio overlook the lake. It gets crowded but worth the wait.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Amy's Fabulous Diner II</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away &middot; Marcellus</span>
+                    </div>
+                    <p>Great local cafe. Fantastic breakfasts and lunches. The Benedicts are super &mdash; Cubano or Brisket. Giant cups of coffee.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Longship Brewing Company</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>9 mi away &middot; Lawton</span>
+                    </div>
+                    <p>Live folk and blues music on some nights and weekends. Fantastic brews and delicious menu. Very cool and rustic, warm joint. Best burger we've had in five years. Fish tacos and scratch made desserts are fantastic.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Bird Dog</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Mattawan</span>
+                    </div>
+                    <p>Make reservations ahead &mdash; this is a good one. Wild game, some great food and probably an unforgettable meal.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Journeyman Distillery</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Three Oaks</span>
+                    </div>
+                    <p>Great distillery with a full restaurant, 18 hole mini golf, corn hole, and much more. Fantastic cocktails and menu. Great place to pick up some locally made whiskey and swag on your way in.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Craftsman Chop Co</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Kalamazoo</span>
+                    </div>
+                    <p>One of the finest chop houses in the area. Fantastic steaks, selection of wines and a cozy setting.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>BOLD</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Kalamazoo</span>
+                    </div>
+                    <p>For a nice night out and a little bit fancier, Bold has a wonderful menu.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Oak and Ash BBQ &amp; Catering</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>15 min drive &middot; Lawton</span>
+                    </div>
+                    <p>Giant family restaurant, very charming, huge beer list and something for everyone.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>La Cantina</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Paw Paw</span>
+                    </div>
+                    <p>80+ year old restaurant with classic Italian food and a great patio by the river.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Amore Pizza</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Paw Paw</span>
+                    </div>
+                    <p>Great pizza. Probably the best in 50 miles.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Strand Brewery &amp; Kitchen</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>15 min drive &middot; Sister Lakes</span>
+                    </div>
+                    <p>Great brewery on the lake with live music Friday and Saturday.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Hank's Tavern on the River</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>15 min drive</span>
+                    </div>
+                    <p>Great spot for beer, cocktails, lunch and dinner.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Dockside | Dining &amp; Drinks</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Sister Lakes</span>
+                    </div>
+                    <p>Pizza next to a lake, music and sunsets. Perfection.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>The Joint at Rainbow Farms</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away &middot; Marcellus</span>
+                    </div>
+                    <p>A quirky restaurant with a good sub menu and ice cream bar.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>The Vineyard Caf&eacute;</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>9 mi away &middot; Lawton</span>
+                    </div>
+                    <p>Cute, simple, little diner. A true local hang out. Great food and breakfasts.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Oaks Eatery</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Three Oaks</span>
+                    </div>
+                    <p>Small cafe &mdash; maybe a stop on your way in from Chicago in the morning. Fantastic menus and food.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Copper Ridge Inn &amp; Market</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Call ahead for schedule. Fresh farm breakfasts.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Sly's Seafood &amp; Co.</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Fresh seafood spot worth checking out.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Diamond Dough &amp; Co.</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Cassopolis</span>
+                    </div>
+                    <p>Best donuts in south Michigan. Just look at the pictures.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Scott's Pig Roast</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Local favorite for smoked meats and BBQ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COFFEE & SWEETS TAB -->
+        <div class="tab-content" id="coffee-sweets">
+            <h2>Coffee &amp; Sweets</h2>
+
+            <div class="tab-intro">
+                <p>Whether you need a morning espresso or an afternoon ice cream fix, these local spots have you covered.</p>
+            </div>
+
+            <h3 class="listing-section-divider">Coffee &amp; Bakeries</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Patch &amp; Remington</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away &middot; Marcellus</span>
+                    </div>
+                    <p>Perfect little coffee shop/art studio with espresso bar, reading room and nice local, friendly people. Even a great place to have a meeting.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>The Modern Well</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>9 mi away &middot; Lawton</span>
+                    </div>
+                    <p>If you like great coffee, espressos, lattes, caramel macchiatos, and all kinds of warm and cozy drinks this is the place. Great place to jump on Wi-Fi, read a book or study a while.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>The Baker's Rhapsody</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>15 min away &middot; Dowagiac</span>
+                    </div>
+                    <p>A fantastic local bakery with coffee in the charming town of Dowagiac.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Savage Bean Coffee Company</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Cassopolis</span>
+                    </div>
+                    <p>Located in a beautiful lake town, this charming coffee brewery is worth the drive.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Ice Cream</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Wildcat Whippy Dip</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away &middot; Marcellus</span>
+                    </div>
+                    <p>Need an ice cream fix? Only 6 minutes away. Fantastic ice cream bar. Seasonal hours: M,T closed &middot; W,Th 4&ndash;9 &middot; F 4&ndash;10 &middot; Sat 3&ndash;10 &middot; Sun 2&ndash;8</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>The Twirl</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Cassopolis</span>
+                    </div>
+                    <p>A diner that sits right on the beach on a beautiful lake. Great burgers and ice cream near a fun beach and pier.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRAFT DRINKS TAB -->
+        <div class="tab-content" id="craft-drinks">
+            <h2>Craft Drinks</h2>
+
+            <div class="tab-intro">
+                <p>Southwest Michigan is wine and craft beer country. From award-winning vineyards to cozy taprooms, there's no shortage of great drinks within a short drive.</p>
+            </div>
+
+            <h3 class="listing-section-divider">Breweries</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Longship Brewing Company</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>9 mi away &middot; Lawton</span>
+                    </div>
+                    <p>Beautiful vintage building with wonderful craft brews, fantastic food and live music. Joe, the owner is a sweetheart.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Texas Corners Brewing Company</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great little brewery made in a renovated church. Fantastic handhelds and bison burger.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Strand Brewery &amp; Kitchen</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>15 min drive &middot; Sister Lakes</span>
+                    </div>
+                    <p>Great brewery on the lake with live music Friday and Saturday.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Paw Paw Brewing Co</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Paw Paw</span>
+                    </div>
+                    <p>Cool brewery and location for local craft beers.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Final Gravity Brewing Company</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great craft brews, pizza and sandwiches.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Greenbush Brewing Co</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Popular Michigan craft brewery with a great tap list.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>120 Taphouse &amp; Bistro</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Extensive tap selection with bistro-style dining.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Wineries</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Cody Kresta Vineyard and Winery</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Lovely estate. Incredible staff. Really nice vintage wines. Lots of medals and awards. A great stop.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Warner Vineyards</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Paw Paw</span>
+                    </div>
+                    <p>Outstanding concert venue and garden outside. Great place to hang and entertain.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>St Julian Winery &amp; Distillery</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Experience a local wine tour at a highly recommended place.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Karma Vista Vineyards</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great wine tour with a beautiful drive through Michigan.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Moonrise</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great little winery in a beautiful location.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Contessa Wine Cellars</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Another fun winery to visit.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>12 Corners Vineyards</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>South Haven</span>
+                    </div>
+                    <p>A little further up Michigan but a nice winery with a tasting room.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTDOORS & PARKS TAB -->
+        <div class="tab-content" id="outdoors">
+            <h2>Outdoors &amp; Parks</h2>
+
+            <div class="tab-intro">
+                <p>From internationally designated dark sky parks to creekside forest trails, the natural beauty around Lake Huyck is something special.</p>
+            </div>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Dr. Lawless International Dark Sky Park</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>One of just a few designated Dark Parks in the US for star watching. Also a great place for picnics, hiking and playgrounds.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Meyer Broadway County Park</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great for almost any activity. Beautiful hiking, disc golf, sledding.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Fred Russ Forest Park</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Fantastic hike for family or dog with beautiful creekside paths.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box info" style="margin-top: 2rem;">
+                <h4>Star Gazing Tip</h4>
+                <p>Dr. Lawless Dark Sky Park is one of the best places in the Midwest to see the Milky Way. Best viewing on clear, moonless nights. Bring a blanket and give your eyes 20 minutes to adjust.</p>
+            </div>
+        </div>
+
+        <!-- ACTIVITIES TAB -->
+        <div class="tab-content" id="activities">
+            <h2>Activities</h2>
+
+            <div class="tab-intro">
+                <p>There's no shortage of things to do around the resort. Whether you're into golf, horseback riding, skiing, or just exploring, we've got you covered.</p>
+            </div>
+
+            <h3 class="listing-section-divider">Golf</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Pine View Golf Club</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Great golf course nearby.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Olde Mill Golf Club</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Another great option for a round of golf.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">On the Water</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Klinger Lake Marina</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Nearby marina for boat rentals.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Lake Life Watersports LLC</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Watersport rentals and equipment.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Winter Sports</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Swiss Valley Ski &amp; Snowboard Area</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>12 min away</span>
+                    </div>
+                    <p>A ski resort only 12 minutes away. Great for a winter day trip.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Horseback Riding</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Diamond-D Ranch</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Love horseback riding? Here it is.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>True Vine Equestrian Center</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Horseback riding and equestrian experiences.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Farms &amp; Orchards</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Spirit Springs Farm</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Apple picking and farm experiences.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Shades of Lavender Farm</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Beautiful lavender farm and gift shop.</p>
+                </div>
+            </div>
+
+            <h3 class="listing-section-divider">Sightseeing</h3>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Air Zoo Aerospace &amp; Science Center</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Teen daughter approved. This place is fun with a real flight simulator.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESSENTIALS TAB -->
+        <div class="tab-content" id="essentials">
+            <h2>Essentials</h2>
+
+            <div class="tab-intro">
+                <p>Need to stock up on groceries or grab a few things you forgot? Here are the closest options.</p>
+            </div>
+
+            <div class="listing-grid">
+                <div class="listing-card">
+                    <h3>Dollar General</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>6 min away</span>
+                    </div>
+                    <p>Quick trip for supplies and some frozen groceries. Closest option to the resort.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Harding's Market</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>Full grocery store for stocking up.</p>
+                </div>
+
+                <div class="listing-card">
+                    <h3>Meijer</h3>
+                    <div class="listing-meta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nearby</span>
+                    </div>
+                    <p>One of the large scale grocers if you need to stock up on everything.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <h4>Pro Tip</h4>
+                <p>Instacart also delivers to the resort if you'd rather have groceries waiting for you when you arrive.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <h2>Need a Recommendation?</h2>
+        <p>We're happy to share our personal favorites or help plan your day out.</p>
+        <a href="book.html#contact" class="btn-primary">Ask Your Hosts</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links-inline">
+            <a href="index.html">Home</a>
+            <a href="a-frame.html">A-Frame Chalet</a>
+            <a href="log-cabin.html">Cozy Log Cabin</a>
+            <a href="rules.html">Guest Handbook</a>
+            <a href="local-guide.html">Local Guide</a>
+            <a href="book.html">Book Now</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 Lake Huyck Resort &middot; Hosted by Adriana & Vince &middot; Marcellus, Michigan</p>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                const tabId = btn.dataset.tab;
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Handle URL hash for direct linking
+        function checkHash() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const targetBtn = document.querySelector(`[data-tab="${hash}"]`);
+                if (targetBtn) {
+                    targetBtn.click();
+                }
+            }
+        }
+
+        checkHash();
+        window.addEventListener('hashchange', checkHash);
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>
