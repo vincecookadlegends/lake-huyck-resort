@@ -396,7 +396,186 @@
             background: var(--cream-dark);
             border-left: 4px solid var(--gold);
         }
-        
+
+        .lake-map-section {
+            max-width: 960px;
+            margin: 2.5rem auto 2rem;
+            text-align: center;
+        }
+
+        .lake-map-section h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .lake-map-section p {
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: 0 auto 1.75rem;
+            color: var(--charcoal);
+        }
+
+        .lake-map-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .lake-map-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Checkout Checklist */
+        .checkout-intro {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+        }
+
+        .checkout-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .checkout-list li {
+            background: #fff;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .checkout-list li:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .checkout-list .checkout-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            line-height: 1.5;
+        }
+
+        .checkout-list .checkout-text {
+            flex: 1;
+        }
+
+        .checkout-list .checkout-text strong {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--forest-deep);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .checkout-list .checkout-text p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+
+        /* Wildlife */
+        .wildlife-header-emojis {
+            font-size: 2rem;
+            letter-spacing: 0.3em;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .wildlife-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .wildlife-entry {
+            background: #fff;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .wildlife-entry:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .wildlife-entry .wildlife-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }
+
+        .wildlife-entry p {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        /* Seasonal Tabs */
+        .season-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .season-intro .season-tagline {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--forest-mid);
+            margin-bottom: 1rem;
+        }
+
+        .season-intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+        .season-intro .season-kicker {
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--forest-deep);
+            margin-top: 1.25rem;
+        }
+
+        .season-photo {
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .season-photo img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
         /* Accordion */
         .accordion {
             margin-bottom: 1rem;
@@ -758,6 +937,11 @@
         <button class="tab-btn" data-tab="safety">Safety</button>
         <button class="tab-btn" data-tab="check-in">Check-In/Out</button>
         <button class="tab-btn" data-tab="swag">Swag</button>
+        <button class="tab-btn" data-tab="lake-map">Lake Map</button>
+        <button class="tab-btn" data-tab="wildlife">Wildlife</button>
+        <button class="tab-btn" data-tab="fall">Fall</button>
+        <button class="tab-btn" data-tab="winter">Winter</button>
+        <button class="tab-btn" data-tab="fishing">Fishing</button>
     </div>
 
     <!-- Tab Content -->
@@ -1391,7 +1575,7 @@
         <!-- GUEST ACCESS TAB -->
         <div class="tab-content" id="guest-access">
             <h2>Guest Access</h2>
-            
+
             <div class="tab-intro">
                 <p>You'll have access to the entire grounds on a private lake with a private beach, shared with the other cabin, woods, sport fishing, prairie preserves, communal spaces, EV charger, AC, wood stoves, outdoor games, sport fishing, outdoor shower, private parking, private fire pits, propane grills, picnic tables, a secluded lakefront with a large rolling yard and mature shady trees into Lake Huyck.</p>
             </div>
@@ -1608,6 +1792,103 @@
                 <h4>⏰ Important</h4>
                 <p>no early check-ins or late checkouts. we run a tight ship.</p>
             </div>
+
+            <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 400; color: var(--forest-deep); margin-top: 3rem; margin-bottom: 0.5rem;">Checkout Instructions</h3>
+            <p class="checkout-intro">Checking out is a lake breeze. Our staff will be in to clean and disinfect shortly after 11 AM. Before you head out, could you lend us a hand with a few things?</p>
+
+            <ul class="checkout-list">
+                <li>
+                    <span class="checkout-icon">💰</span>
+                    <div class="checkout-text">
+                        <strong>Wrap Up Any Loose Ends</strong>
+                        <p>If you haven't yet, please settle up any boat rentals, pet fees, etc. Your cooperation is golden! If you could help close the books on those before you leave, we'd appreciate it.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🙌🏼</span>
+                    <div class="checkout-text">
+                        <strong>Fridge & Freezer Clean-Up</strong>
+                        <p>Please remove all items from the fridge & freezer, microwave and outdoor grill — please kindly clean and take care of messes and spills inside them.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🍔</span>
+                    <div class="checkout-text">
+                        <strong>Leftovers</strong>
+                        <p>Remove any food and leftovers from tables and counters and not leave them behind.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🍽️</span>
+                    <div class="checkout-text">
+                        <strong>Dishes</strong>
+                        <p>Please wash any used dishes, cups, cookware, etc., and leave them to dry. Your future guests will thank you and everyone loves clean kitchenware.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🪑</span>
+                    <div class="checkout-text">
+                        <strong>Furniture Feng Shui</strong>
+                        <p>If any furniture was moved or other items indoor or outdoor, please return it to the original spot.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🛏️</span>
+                    <div class="checkout-text">
+                        <strong>Bedding</strong>
+                        <p>Please pull down comforters to the end of the beds and leave the sheets and pillow cases on the beds. The staff will strip them.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🧺</span>
+                    <div class="checkout-text">
+                        <strong>Towels</strong>
+                        <p>If you can pile all towels together in the laundry basket, this would help.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🐶</span>
+                    <div class="checkout-text">
+                        <strong>Pet Clean-Up</strong>
+                        <p>If your furry friend sheds or tracked in debris, please clean them up as agreed in the furry friend policy.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🗑️</span>
+                    <div class="checkout-text">
+                        <strong>Trash Talk</strong>
+                        <p>Remove all trash, including from outside and by the beach, and place it in the blue bins outside by the road.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">⚡️</span>
+                    <div class="checkout-text">
+                        <strong>Power Down</strong>
+                        <p>Turn off the AC or heat and all the lights.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🔍</span>
+                    <div class="checkout-text">
+                        <strong>Treasure Hunt</strong>
+                        <p>Check for anything you might leave behind under beds, on the bath counters, phone cords, etc.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🛶</span>
+                    <div class="checkout-text">
+                        <strong>Boat Return</strong>
+                        <p>If you rented boats, please return them and the life vests to the boat rack. (Our staff can't lift these.)</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="checkout-icon">🔐</span>
+                    <div class="checkout-text">
+                        <strong>Lock Up</strong>
+                        <p>For the Log Cabin: lock the keypad by pressing # for 3 seconds. For the A-Frame: place the key back in the lockbox. It will self-lock.</p>
+                    </div>
+                </li>
+            </ul>
         </div>
         
         <!-- SWAG TAB -->
@@ -1649,6 +1930,102 @@
                     <h4>S'mores</h4>
                     <span class="swag-price">$25</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- LAKE MAP TAB -->
+        <div class="tab-content" id="lake-map">
+            <h2>Lake Map</h2>
+
+            <div class="lake-map-section">
+                <h3>Meet Lake Huyck</h3>
+                <p>Getting your bearings on our 30-acre lake is easy. From the cabins, right is where the sun rises, left is where it sets, and straight ahead is the rest of Michigan. Lake Huyck is spring-fed and has been registered at 52 feet deep at its deepest point.</p>
+                <div class="lake-map-wrapper">
+                    <img src="images/lake%20map.jpg" alt="Illustrated overhead map of Lake Huyck showing depths, springs, and compass directions">
+                </div>
+            </div>
+        </div>
+
+        <!-- WILDLIFE TAB -->
+        <div class="tab-content" id="wildlife">
+            <h2>Wildlife</h2>
+
+            <div class="wildlife-header-emojis">🦫🐿️🦌🐟🐠🦢🦨🦝🦡🦉🦅</div>
+
+            <div class="wildlife-entries">
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦢</span>
+                    <p>Whether it's our resident pair of swans, family of beavers, great blue herons, bald eagles, sandhill cranes, deer, groundhogs, coyotes, frogs, chipmunks, raccoons, rabbits, barred owls, and a myriad of Michigan birds, if you sit around long enough you will certainly see and hear nature's wonders.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦅</span>
+                    <p>Migratory birds, including geese and hummingbirds as well as a plethora of ducks have been spotted near the shores of our property.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🐟</span>
+                    <p>We have bald eagles hunting in the lake for fish.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦫</span>
+                    <p>You might be out on a canoe and hear a beaver slap its tail on the water to say hello.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦉</span>
+                    <p>Bats, coyotes and barred owls usually perform a concert in the evenings.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🐿️</span>
+                    <p>Crickets, frogs, cicadas and katydids usually pick up the serenade right after sunset.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦌</span>
+                    <p>Most guests open the windows and are lulled to sleep.</p>
+                </div>
+                <div class="wildlife-entry">
+                    <span class="wildlife-icon">🦝</span>
+                    <p>Grab a wildlife book or Michigan guide, a pair of binoculars and report back to the family what you find.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FALL TAB -->
+        <div class="tab-content" id="fall">
+            <h2>Fall on Lake Huyck</h2>
+
+            <div class="season-intro">
+                <p class="season-tagline">The pictures are worth a thousand words. It's like staying in a Pure Michigan commercial.</p>
+                <p>Apple picking, wine tasting, local pies, crackling fires, canoeing, kayaking, nature hikes and stargazing on crisp fall days here are unforgettable.</p>
+            </div>
+
+            <div class="season-photo">
+                <img src="images/fall.jpg" alt="Fall on Lake Huyck — stunning autumn foliage, lake reflections, and golden landscapes">
+            </div>
+        </div>
+
+        <!-- WINTER TAB -->
+        <div class="tab-content" id="winter">
+            <h2>Winter at Lake Huyck</h2>
+
+            <div class="season-intro">
+                <p class="season-tagline">Stars, serenity, cozy fires, a blanket of snow and fleece with the nearby Swiss Valley ski resort only 9 minutes away! Why Colorado?</p>
+            </div>
+
+            <div class="season-photo">
+                <img src="images/winter.jpg" alt="Winter at Lake Huyck — snow-covered cabins, frozen lake, and nearby Swiss Valley skiing">
+            </div>
+        </div>
+
+        <!-- FISHING TAB -->
+        <div class="tab-content" id="fishing">
+            <h2>Fishing Lake Huyck</h2>
+
+            <div class="season-intro">
+                <p class="season-tagline">Grab a fishing pole and throw something in Lake Huyck and you're bound to catch something.</p>
+                <p>For hundreds of years, or even longer, this lake has been rarely fished and is nature's unspoiled aquarium. We've had guests pull fish out the size of a small boy and plenty of the kids love to catch the bluegill off the docks. Whether fly fishing the lily pads and shallows or dropping worms off the dock, there's plenty for everyone. Below is a helpful guide to what's down below.</p>
+            </div>
+
+            <div class="season-photo">
+                <img src="images/fish%20poster.jpg" alt="Fish of Huyck Lake, Michigan — illustrated guide showing Bluegill, Crappie, Rock Bass, Pickerel, Long Nose Gar, Large Mouth Bass, Carp, Bowfin, Yellow Perch, and Bullhead">
             </div>
         </div>
 
