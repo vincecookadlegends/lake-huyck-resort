@@ -640,6 +640,73 @@
             opacity: 0.5;
         }
         
+        /* Swag Grid */
+        .swag-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .swag-item {
+            text-align: center;
+        }
+
+        .swag-item img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center 25%;
+            transform: scale(1.5);
+            transform-origin: center 38%;
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .swag-item:nth-child(3) img,
+        .swag-item:nth-child(6) img {
+            transform: scale(1.75);
+        }
+
+        .swag-item .swag-img-wrap {
+            overflow: hidden;
+            border: 1px solid rgba(26, 58, 47, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .swag-item .swag-img-wrap:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(26, 58, 47, 0.15);
+        }
+
+        .swag-item img {
+            border: none;
+        }
+
+        .swag-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .swag-item .swag-price {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--forest-mid);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 600px) {
+            .swag-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
@@ -689,6 +756,7 @@
         <button class="tab-btn" data-tab="country-living">Country Living</button>
         <button class="tab-btn" data-tab="safety">Safety</button>
         <button class="tab-btn" data-tab="check-in">Check-In/Out</button>
+        <button class="tab-btn" data-tab="swag">Swag</button>
     </div>
 
     <!-- Tab Content -->
@@ -1541,6 +1609,48 @@
             </div>
         </div>
         
+        <!-- SWAG TAB -->
+        <div class="tab-content" id="swag">
+            <h2>Resort Swag</h2>
+
+            <div class="tab-intro">
+                <p>Take a piece of Lake Huyck home with you. Our hand-designed mugs feature original resort logos and artwork. <strong>$25 each.</strong> Ask your host to grab one during your stay.</p>
+            </div>
+
+            <div class="swag-grid">
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/a-frame-mug.jpg" alt="A-Frame Chalet mug"></div>
+                    <h4>A-Frame Chalet</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/log-mug.jpg" alt="Log Cabin mug"></div>
+                    <h4>Log Cabin</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/arrowhead-mug.jpg" alt="Arrowhead logo mug"></div>
+                    <h4>Arrowhead</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/arrows-mug.jpg" alt="Arrows logo mug"></div>
+                    <h4>Arrows</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/paddles-mug.jpg" alt="Paddles logo mug"></div>
+                    <h4>Paddles</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+                <div class="swag-item">
+                    <div class="swag-img-wrap"><img src="images/swag/s'more-mug.jpg" alt="S'mores mug"></div>
+                    <h4>S'mores</h4>
+                    <span class="swag-price">$25</span>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Contact CTA -->
