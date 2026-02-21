@@ -373,9 +373,9 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
+            grid-auto-rows: 220px;
             grid-auto-flow: dense;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .gallery-item {
@@ -384,24 +384,20 @@
             cursor: pointer;
         }
 
-        .gallery-item.span-2 {
-            grid-column: span 2;
-        }
-
-        .gallery-item.span-2-tall {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
         .gallery-item.tall {
             grid-row: span 2;
         }
-        
+
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .gallery-item:hover img {
@@ -596,43 +592,49 @@
             .gallery-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .gallery-item.featured {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            .gallery-item.tall {
+                grid-row: span 1;
+            }
         }
-        
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
             }
-            
+
             .page-header {
                 padding: 8rem 2rem 3rem;
             }
-            
+
             .gallery-container {
                 padding: 1rem;
             }
-            
+
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
+                gap: 0.35rem;
             }
-            
-            .gallery-item.span-2,
-            .gallery-item.span-2-tall {
-                grid-column: span 2;
-            }
-            
-            .gallery-item.tall {
-                grid-row: span 1;
-                aspect-ratio: 4/3;
-            }
-            
+
             .lightbox-nav {
                 width: 40px;
                 height: 40px;
             }
-            
+
             .lightbox-prev { left: 0.5rem; }
             .lightbox-next { right: 0.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-item.featured {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
@@ -677,199 +679,458 @@
         <section class="gallery-section" data-category="aframe">
             <div class="gallery-section-header">
                 <h2>A-Frame Chalet</h2>
-                <span>24 Photos</span>
+                <span>56 Photos</span>
             </div>
             <div class="gallery-grid">
-                <!-- Large feature: span-2-tall -->
-                <div class="gallery-item span-2-tall" data-caption="A-Frame living room with cathedral windows">
-                    <img src="images/aframe/interior-hero.avif" alt="A-Frame living room">
+
+                <!-- FEATURED: Cathedral ceiling hero shot -->
+                <div class="gallery-item featured" data-caption="A-Frame living room with cathedral windows">
+                    <img src="images/aframe/interior-hero.avif" alt="A-Frame living room" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Tall portrait -->
+
+                <!-- WIDE: Living room overview -->
+                <div class="gallery-item" data-caption="Living room main">
+                    <img src="images/aframe/living-room/main.avif" alt="A-Frame living room" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Fireplace vertical -->
                 <div class="gallery-item tall" data-caption="Cozy fireplace">
-                    <img src="images/aframe/living-room/fireplace.avif" alt="A-Frame fireplace">
+                    <img src="images/aframe/living-room/fireplace.avif" alt="A-Frame fireplace" style="object-position: right bottom">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Full kitchen">
-                    <img src="images/aframe/kitchen/main.webp" alt="A-Frame kitchen">
+
+                <!-- Regular: Living room interior -->
+                <div class="gallery-item" data-caption="Living room interior">
+                    <img src="images/aframe/living-room/interior.avif" alt="A-Frame living room interior" style="object-position: center top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Dining area">
-                    <img src="images/aframe/dining-room/main.avif" alt="A-Frame dining">
+
+                <!-- WIDE: Full interior with loft -->
+                <div class="gallery-item" data-caption="Full A-Frame interior">
+                    <img src="images/aframe/living-room/wide.avif" alt="Full A-Frame interior with loft" style="object-position: right top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Wide span-2 -->
-                <div class="gallery-item" data-caption="A-Frame exterior with canoe">
-                    <img src="images/aframe/exterior/front-canoe.avif" alt="A-Frame exterior">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Tall portrait -->
-                <div class="gallery-item tall" data-caption="Loft window views">
-                    <img src="images/aframe/loft/window.avif" alt="A-Frame loft window">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="East bedroom">
-                    <img src="images/aframe/east-bedroom/main.avif" alt="A-Frame east bedroom">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="West bedroom">
-                    <img src="images/aframe/west-bedroom/main.avif" alt="A-Frame west bedroom">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Loft bedroom">
-                    <img src="images/aframe/loft/main.avif" alt="A-Frame loft">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Wide span-2 -->
-                <div class="gallery-item" data-caption="Spa-like bathroom">
-                    <img src="images/aframe/bathroom/main.webp" alt="A-Frame bathroom">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Drone view">
-                    <img src="images/aframe/exterior/drone.avif" alt="A-Frame aerial view">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Fall beach view">
-                    <img src="images/aframe/exterior/fall-beach.avif" alt="Fall beach">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Wide span-2 -->
-                <div class="gallery-item" data-caption="Deck with lake view">
-                    <img src="images/aframe/exterior/deck-table.avif" alt="A-Frame deck">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Sunset from balcony">
-                    <img src="images/aframe/exterior/sunset-balcony.avif" alt="Sunset balcony">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Night lake view">
-                    <img src="images/aframe/exterior/night-lake.webp" alt="Night lake">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Tree stump nightstand">
-                    <img src="images/aframe/east-bedroom/table.avif" alt="Tree stump nightstand with lamp">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
+
+                <!-- Regular: Coffee table seating -->
                 <div class="gallery-item" data-caption="Cozy fireplace seating">
-                    <img src="images/aframe/living-room/coffee-table.avif" alt="Cozy fireplace seating area">
+                    <img src="images/aframe/living-room/coffee-table.avif" alt="Cozy fireplace seating area" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item tall" data-caption="Full A-Frame interior">
-                    <img src="images/aframe/living-room/wide.avif" alt="Full A-Frame interior with loft">
+
+                <!-- Regular: Antler chandelier -->
+                <div class="gallery-item" data-caption="Antler chandelier">
+                    <img src="images/aframe/living-room/chandelier.avif" alt="A-Frame antler chandelier" style="object-position: center top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Dark wood exterior">
-                    <img src="images/aframe/exterior/sidewall.avif" alt="A-Frame dark wood exterior">
+
+                <!-- WIDE: Kitchen main -->
+                <div class="gallery-item" data-caption="Full kitchen">
+                    <img src="images/aframe/kitchen/main.webp" alt="A-Frame kitchen" style="object-position: left top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item tall" data-caption="Fall stairway to the lake">
-                    <img src="images/aframe/exterior/stairs.avif" alt="Fall stairway to the lake">
+
+                <!-- WIDE: Kitchen wide -->
+                <div class="gallery-item" data-caption="Kitchen wide view">
+                    <img src="images/aframe/kitchen/wide.avif" alt="A-Frame kitchen wide view" style="object-position: center top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Rustic outdoor light">
-                    <img src="images/aframe/exterior/outdoor-light.avif" alt="Rustic outdoor wall light">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
+
+                <!-- Regular: Coffee station -->
                 <div class="gallery-item" data-caption="Retro coffee station">
-                    <img src="images/aframe/kitchen/coffee.avif" alt="Retro coffee station with Lake Huyck mugs">
+                    <img src="images/aframe/kitchen/coffee.avif" alt="Retro coffee station with Lake Huyck mugs" style="object-position: left top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Kitchen fridge -->
                 <div class="gallery-item" data-caption="Kitchen shelving">
-                    <img src="images/aframe/kitchen/fridge.avif" alt="Kitchen shelving and fridge">
+                    <img src="images/aframe/kitchen/fridge.avif" alt="Kitchen shelving and fridge" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Lake Huyck mugs -->
+                <div class="gallery-item" data-caption="Lake Huyck mugs">
+                    <img src="images/aframe/kitchen/mugs.avif" alt="A-Frame kitchen Lake Huyck mugs" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Sink angle -->
+                <div class="gallery-item" data-caption="Kitchen sink angle">
+                    <img src="images/aframe/kitchen/sink-angle.avif" alt="A-Frame kitchen sink angle" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Kitchen sink -->
+                <div class="gallery-item" data-caption="Kitchen sink">
+                    <img src="images/aframe/kitchen/sink.avif" alt="A-Frame kitchen sink" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Kitchen spices -->
+                <div class="gallery-item" data-caption="Kitchen spices">
+                    <img src="images/aframe/kitchen/spices.avif" alt="A-Frame kitchen spices" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Kitchen table -->
+                <div class="gallery-item" data-caption="Kitchen table">
+                    <img src="images/aframe/kitchen/table.jpg" alt="A-Frame kitchen table" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Dining room -->
+                <div class="gallery-item" data-caption="Dining area">
+                    <img src="images/aframe/dining-room/main.avif" alt="A-Frame dining" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Dining closeup -->
+                <div class="gallery-item" data-caption="Dining room closeup">
+                    <img src="images/aframe/dining-room/closeup.avif" alt="A-Frame dining room closeup" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: East bedroom main -->
+                <div class="gallery-item" data-caption="East bedroom">
+                    <img src="images/aframe/east-bedroom/main.avif" alt="A-Frame east bedroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: East bedroom bed -->
+                <div class="gallery-item" data-caption="East bedroom bed">
+                    <img src="images/aframe/east-bedroom/bed.avif" alt="A-Frame east bedroom bed" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: East bedroom view -->
+                <div class="gallery-item" data-caption="East bedroom lake view">
+                    <img src="images/aframe/east-bedroom/view.avif" alt="A-Frame east bedroom view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: East bedroom angle -->
+                <div class="gallery-item" data-caption="East bedroom angle">
+                    <img src="images/aframe/east-bedroom/angle.avif" alt="A-Frame east bedroom angle" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Tree stump nightstand -->
+                <div class="gallery-item" data-caption="Tree stump nightstand">
+                    <img src="images/aframe/east-bedroom/table.avif" alt="Tree stump nightstand with lamp" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: West bedroom main -->
+                <div class="gallery-item" data-caption="West bedroom">
+                    <img src="images/aframe/west-bedroom/main.avif" alt="A-Frame west bedroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: West bedroom bed -->
+                <div class="gallery-item" data-caption="West bedroom bed">
+                    <img src="images/aframe/west-bedroom/bed.avif" alt="A-Frame west bedroom bed" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: West bedroom angle -->
+                <div class="gallery-item" data-caption="West bedroom angle">
+                    <img src="images/aframe/west-bedroom/angle.avif" alt="A-Frame west bedroom angle" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: West bedroom nightstand -->
+                <div class="gallery-item" data-caption="West bedroom nightstand">
+                    <img src="images/aframe/west-bedroom/table.avif" alt="A-Frame west bedroom nightstand" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: West bedroom side -->
+                <div class="gallery-item" data-caption="West bedroom side view">
+                    <img src="images/aframe/west-bedroom/side.avif" alt="A-Frame west bedroom side" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Loft main -->
+                <div class="gallery-item" data-caption="Loft bedroom">
+                    <img src="images/aframe/loft/main.avif" alt="A-Frame loft" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Loft window -->
+                <div class="gallery-item tall" data-caption="Loft window views">
+                    <img src="images/aframe/loft/window.avif" alt="A-Frame loft window" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Loft large window -->
+                <div class="gallery-item tall" data-caption="Loft large window">
+                    <img src="images/aframe/loft/large-window.avif" alt="A-Frame loft large window" style="object-position: left">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Loft tent -->
+                <div class="gallery-item" data-caption="Loft tent nook">
+                    <img src="images/aframe/loft/tent.avif" alt="A-Frame loft tent nook" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Loft deer pillow -->
+                <div class="gallery-item" data-caption="Loft deer pillow">
+                    <img src="images/aframe/loft/deer.avif" alt="A-Frame loft deer pillow" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Loft raccoon pillow -->
+                <div class="gallery-item" data-caption="Loft raccoon pillow">
+                    <img src="images/aframe/loft/raccoon.avif" alt="A-Frame loft raccoon pillow" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom main -->
+                <div class="gallery-item" data-caption="Spa-like bathroom">
+                    <img src="images/aframe/bathroom/main.webp" alt="A-Frame bathroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Bathroom wide -->
+                <div class="gallery-item" data-caption="Bathroom wide view">
+                    <img src="images/aframe/bathroom/wide.avif" alt="A-Frame bathroom wide view" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom shower -->
+                <div class="gallery-item" data-caption="Bathroom shower">
+                    <img src="images/aframe/bathroom/shower.avif" alt="A-Frame bathroom shower" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom vanity -->
+                <div class="gallery-item" data-caption="Bathroom vanity">
+                    <img src="images/aframe/bathroom/vanity.avif" alt="A-Frame bathroom vanity" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom tiles -->
+                <div class="gallery-item" data-caption="Bathroom tiles">
+                    <img src="images/aframe/bathroom/tiles.webp" alt="A-Frame bathroom tiles" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom sink -->
+                <div class="gallery-item" data-caption="Bathroom sink">
+                    <img src="images/aframe/bathroom/sink.avif" alt="A-Frame bathroom sink" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Shampoo amenities -->
+                <div class="gallery-item" data-caption="Shampoo amenities">
+                    <img src="images/aframe/bathroom/shampoo.avif" alt="A-Frame bathroom shampoo amenities" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Cotton amenities -->
+                <div class="gallery-item" data-caption="Cotton amenities">
+                    <img src="images/aframe/bathroom/cotton.avif" alt="A-Frame bathroom cotton amenities" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- FEATURED: Drone aerial overview -->
+                <div class="gallery-item featured" data-caption="Drone view">
+                    <img src="images/aframe/exterior/drone.avif" alt="A-Frame aerial view" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- FEATURED: Sunset panorama -->
+                <div class="gallery-item featured" data-caption="Sunset from balcony">
+                    <img src="images/aframe/exterior/sunset-balcony.avif" alt="Sunset balcony" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Front with canoe -->
+                <div class="gallery-item" data-caption="A-Frame exterior with canoe">
+                    <img src="images/aframe/exterior/front-canoe.avif" alt="A-Frame exterior" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Deck lake view -->
+                <div class="gallery-item" data-caption="Deck with lake view">
+                    <img src="images/aframe/exterior/deck-lake.webp" alt="A-Frame deck lake view" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Fall beach -->
+                <div class="gallery-item" data-caption="Fall beach view">
+                    <img src="images/aframe/exterior/fall-beach.avif" alt="Fall beach" style="object-position: right top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Night lake -->
+                <div class="gallery-item" data-caption="Night lake view">
+                    <img src="images/aframe/exterior/night-lake.webp" alt="Night lake" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Stairs to the lake -->
+                <div class="gallery-item tall" data-caption="Fall stairway to the lake">
+                    <img src="images/aframe/exterior/stairs.avif" alt="Fall stairway to the lake" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Deck table -->
+                <div class="gallery-item" data-caption="Deck with lake view">
+                    <img src="images/aframe/exterior/deck-table.avif" alt="A-Frame deck" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Sidewall -->
+                <div class="gallery-item" data-caption="Dark wood exterior">
+                    <img src="images/aframe/exterior/sidewall.avif" alt="A-Frame dark wood exterior" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Outdoor light -->
+                <div class="gallery-item" data-caption="Rustic outdoor light">
+                    <img src="images/aframe/exterior/outdoor-light.avif" alt="Rustic outdoor wall light" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Beach exterior -->
+                <div class="gallery-item" data-caption="Beach exterior">
+                    <img src="images/aframe/beach-exterior.avif" alt="A-Frame beach exterior view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Fire pit -->
+                <div class="gallery-item" data-caption="Fire pit">
+                    <img src="images/aframe/exterior/firepit.avif" alt="A-Frame fire pit" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: String lights -->
+                <div class="gallery-item" data-caption="String lights">
+                    <img src="images/aframe/exterior/lights.avif" alt="A-Frame string lights" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Summer fire pit -->
+                <div class="gallery-item" data-caption="Summer fire pit">
+                    <img src="images/aframe/exterior/summer-firepit.avif" alt="A-Frame summer fire pit" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -877,134 +1138,322 @@
         <section class="gallery-section" data-category="logcabin">
             <div class="gallery-section-header">
                 <h2>Log Cabin</h2>
-                <span>15 Photos</span>
+                <span>40 Photos</span>
             </div>
             <div class="gallery-grid">
-                <!-- Large feature: span-2-tall -->
-                <div class="gallery-item span-2-tall" data-caption="Log Cabin living room with wood stove">
-                    <img src="log-cabin-living-room-1.png" alt="Log Cabin living room">
+
+                <!-- FEATURED: Living room lake view hero -->
+                <div class="gallery-item featured" data-caption="Living room lake view">
+                    <img src="log-cabin-living-lakeview.png" alt="Log Cabin living room view" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Tall portrait -->
-                <div class="gallery-item tall" data-caption="Bunk room">
-                    <img src="bunk%20room.avif" alt="Log Cabin bunk room">
+
+                <!-- FEATURED: Living room with wood stove -->
+                <div class="gallery-item featured" data-caption="Log Cabin living room with wood stove">
+                    <img src="log-cabin-living-room-1.png" alt="Log Cabin living room" style="object-position: center top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Wood stove">
-                    <img src="log-cabin-woodstove.png" alt="Log Cabin wood stove">
+
+                <!-- WIDE: Living room and kitchen open plan -->
+                <div class="gallery-item" data-caption="Living room and kitchen">
+                    <img src="log-cabin-living-kitchen.png" alt="Log Cabin living room and kitchen" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Chef's kitchen">
-                    <img src="log-cabin-kitchen-1.png" alt="Log Cabin kitchen">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Wide span-2: Exterior drone shot -->
-                <div class="gallery-item" data-caption="Aerial view of Log Cabin">
-                    <img src="images/log-cabin/exterior/drone.avif" alt="Log Cabin drone view">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Tall portrait -->
-                <div class="gallery-item tall" data-caption="Master suite">
-                    <img src="log-cabin-master-1.png" alt="Log Cabin master">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Guest bedroom">
-                    <img src="log-cabin-guest-1.png" alt="Log Cabin guest room">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Bathroom">
-                    <img src="log-cabin-bath-1.png" alt="Log Cabin bathroom">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Winter exterior">
-                    <img src="images/log-cabin/exterior/winter.avif" alt="Log Cabin in winter">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Wide span-2 -->
-                <div class="gallery-item" data-caption="Living room lake view">
-                    <img src="log-cabin-living-lakeview.png" alt="Log Cabin living room view">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Lake view from guest room">
-                    <img src="log-cabin-guest-lakeview.png" alt="Log Cabin lake view">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
+
+                <!-- Regular: Living room new -->
                 <div class="gallery-item" data-caption="Living room">
-                    <img src="images/log-cabin/living-room-new.avif" alt="Log Cabin living room">
+                    <img src="images/log-cabin/living-room-new.avif" alt="Log Cabin living room" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- WIDE: Wood stove -->
+                <div class="gallery-item" data-caption="Wood stove">
+                    <img src="log-cabin-woodstove.png" alt="Log Cabin wood stove" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Kitchen main -->
+                <div class="gallery-item" data-caption="Chef's kitchen">
+                    <img src="log-cabin-kitchen-1.png" alt="Log Cabin kitchen" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Kitchen dining -->
                 <div class="gallery-item" data-caption="Kitchen dining area">
-                    <img src="log-cabin-kitchen-dining.png" alt="Log Cabin dining">
+                    <img src="log-cabin-kitchen-dining.png" alt="Log Cabin dining" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Cabin exterior">
-                    <img src="images/log-cabin/exterior/front.avif" alt="Log Cabin front view">
+
+                <!-- Regular: Coffee station -->
+                <div class="gallery-item" data-caption="Coffee station">
+                    <img src="log-cabin-coffee-station.png" alt="Log Cabin coffee station" style="object-position: left top">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Cabin mugs -->
                 <div class="gallery-item" data-caption="Cabin mugs">
-                    <img src="log-cabin-mugs.png" alt="Log Cabin mugs">
+                    <img src="log-cabin-mugs.png" alt="Log Cabin mugs" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Retro fridge -->
+                <div class="gallery-item" data-caption="Retro refrigerator">
+                    <img src="log-cabin-fridge.png" alt="Log Cabin retro fridge" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Dining room -->
+                <div class="gallery-item" data-caption="Dining room">
+                    <img src="log-cabin-dining-1.png" alt="Log Cabin dining room" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Dining area -->
+                <div class="gallery-item" data-caption="Dining area">
+                    <img src="log-cabin-dining-2.png" alt="Log Cabin dining area" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Dining chairs -->
+                <div class="gallery-item" data-caption="Dining chairs">
+                    <img src="log-cabin-dining-chairs.png" alt="Log Cabin dining chairs" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- FEATURED: Master suite -->
+                <div class="gallery-item featured" data-caption="Master suite">
+                    <img src="log-cabin-master-1.png" alt="Log Cabin master" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Master bedroom angle -->
+                <div class="gallery-item tall" data-caption="Master bedroom angle">
+                    <img src="log-cabin-master-2.png" alt="Log Cabin master bedroom" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Master bedroom view -->
+                <div class="gallery-item" data-caption="Master bedroom view">
+                    <img src="log-cabin-master-3.png" alt="Log Cabin master bedroom view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Guest bedroom 1 -->
+                <div class="gallery-item" data-caption="Guest bedroom">
+                    <img src="log-cabin-guest-1.png" alt="Log Cabin guest room" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Guest bedroom 2 -->
+                <div class="gallery-item" data-caption="Guest bedroom">
+                    <img src="log-cabin-guest-2.png" alt="Log Cabin guest bedroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Guest lake view -->
+                <div class="gallery-item" data-caption="Lake view from guest room">
+                    <img src="log-cabin-guest-lakeview.png" alt="Log Cabin lake view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Guest room lantern -->
+                <div class="gallery-item" data-caption="Guest room lantern">
+                    <img src="log-cabin-guest-lantern.png" alt="Log Cabin guest room lantern" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Guest doorway -->
+                <div class="gallery-item" data-caption="Guest room doorway">
+                    <img src="log-cabin-guest-doorway.png" alt="Log Cabin guest room doorway" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Bunk room -->
+                <div class="gallery-item tall" data-caption="Bunk room">
+                    <img src="bunk%20room.avif" alt="Log Cabin bunk room" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bunk room overview -->
+                <div class="gallery-item" data-caption="Bunk room overview">
+                    <img src="log-cabin-bunk-room.png" alt="Log Cabin bunk room" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bunk detail -->
+                <div class="gallery-item" data-caption="Bunk room detail">
+                    <img src="log-cabin-bunk-detail.png" alt="Log Cabin bunk room detail" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bunk pillows -->
+                <div class="gallery-item" data-caption="Bunk room pillows">
+                    <img src="log-cabin-bunk-pillows.png" alt="Log Cabin bunk room pillows" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom main -->
+                <div class="gallery-item" data-caption="Bathroom">
+                    <img src="log-cabin-bath-1.png" alt="Log Cabin bathroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom shower -->
+                <div class="gallery-item" data-caption="Bathroom shower">
+                    <img src="log-cabin-bath-shower.png" alt="Log Cabin bathroom shower" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom sinks -->
+                <div class="gallery-item" data-caption="Bathroom sinks">
+                    <img src="log-cabin-bath-sinks.png" alt="Log Cabin bathroom sinks" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom amenities -->
+                <div class="gallery-item" data-caption="Bathroom amenities">
+                    <img src="log-cabin-bath-amenities.png" alt="Log Cabin bathroom amenities" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Bathroom toiletries -->
+                <div class="gallery-item" data-caption="Bathroom toiletries">
+                    <img src="log-cabin-bath-toiletries.png" alt="Log Cabin bathroom toiletries" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Second bathroom -->
+                <div class="gallery-item" data-caption="Second bathroom">
+                    <img src="log-cabin-bath2-1.png" alt="Log Cabin second bathroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Second bathroom view -->
+                <div class="gallery-item" data-caption="Second bathroom view">
+                    <img src="log-cabin-bath-2.png" alt="Log Cabin second bathroom" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Second bathroom vanity -->
+                <div class="gallery-item" data-caption="Second bathroom vanity">
+                    <img src="log-cabin-bath2-vanity.png" alt="Log Cabin second bathroom vanity" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Second bathroom sink -->
+                <div class="gallery-item" data-caption="Second bathroom sink">
+                    <img src="log-cabin-bath2-sink.png" alt="Log Cabin second bathroom sink" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Second bathroom hooks -->
+                <div class="gallery-item" data-caption="Second bathroom hooks">
+                    <img src="log-cabin-bath2-hooks.png" alt="Log Cabin second bathroom hooks" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Coleman lantern -->
+                <div class="gallery-item" data-caption="Coleman lantern">
+                    <img src="log-cabin-lantern.png" alt="Log Cabin vintage lantern" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- WIDE: Drone aerial -->
+                <div class="gallery-item" data-caption="Aerial view of Log Cabin">
+                    <img src="images/log-cabin/exterior/drone.avif" alt="Log Cabin drone view" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Front exterior -->
+                <div class="gallery-item" data-caption="Cabin exterior">
+                    <img src="images/log-cabin/exterior/front.avif" alt="Log Cabin front view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Winter exterior -->
+                <div class="gallery-item tall" data-caption="Winter exterior">
+                    <img src="images/log-cabin/exterior/winter.avif" alt="Log Cabin in winter" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -1012,135 +1461,178 @@
         <section class="gallery-section" data-category="outdoor">
             <div class="gallery-section-header">
                 <h2>Lake & Outdoors</h2>
-                <span>15 Photos</span>
+                <span>21 Photos</span>
             </div>
             <div class="gallery-grid">
-                <!-- Large feature: span-2-tall -->
-                <div class="gallery-item span-2-tall" data-caption="Huyck Lake at sunrise">
-                    <img src="lake-sunrise-dock.png" alt="Lake sunrise">
+
+                <!-- FEATURED: Sunrise dock hero -->
+                <div class="gallery-item featured" data-caption="Huyck Lake at sunrise">
+                    <img src="lake-sunrise-dock.png" alt="Lake sunrise" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Tall portrait -->
-                <div class="gallery-item tall" data-caption="Fall reflection">
-                    <img src="lake-fall-reflection.png" alt="Fall reflection">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Private dock">
-                    <img src="lake-dock-beach.png" alt="Dock">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
+
+                <!-- WIDE: Dock with kayaks -->
                 <div class="gallery-item" data-caption="Kayaks ready for adventure">
-                    <img src="lake-dock-kayaks.png" alt="Kayaks">
+                    <img src="lake-dock-kayaks.png" alt="Kayaks" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Wide span-2 -->
-                <div class="gallery-item" data-caption="Campfire under the stars">
-                    <img src="lake-campfire-stars.png" alt="Starry night campfire" style="object-position: center 75%;">
+
+                <!-- WIDE: Dock and beach -->
+                <div class="gallery-item" data-caption="Private dock">
+                    <img src="lake-dock-beach.png" alt="Dock" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Tall portrait -->
+
+                <!-- FEATURED: Fall reflection mirror -->
+                <div class="gallery-item featured" data-caption="Fall reflection">
+                    <img src="lake-fall-reflection.png" alt="Fall reflection" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Swing at sunrise -->
                 <div class="gallery-item tall" data-caption="Swing at sunrise">
-                    <img src="lake-swing-sunrise.png" alt="Swing at sunrise">
+                    <img src="lake-swing-sunrise.png" alt="Swing at sunrise" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <div class="gallery-item" data-caption="Paddle boarding with dog">
-                    <img src="lake-kayak-dog.png" alt="Kayaking with dog">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Sandy beach">
-                    <img src="lake-beach-overview.png" alt="Beach">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-caption="Fall colors">
-                    <img src="lake-fall-view.png" alt="Fall colors">
-                    <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
-                    </div>
-                </div>
-                <!-- Wide span-2 -->
+
+                <!-- WIDE: Kids jumping -->
                 <div class="gallery-item" data-caption="Floating dock and swim area">
-                    <img src="lake-kids-jumping.png" alt="Kids jumping off dock">
+                    <img src="lake-kids-jumping.png" alt="Kids jumping off dock" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- WIDE: Beach overview -->
+                <div class="gallery-item" data-caption="Sandy beach">
+                    <img src="lake-beach-overview.png" alt="Beach" style="object-position: center bottom">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Paddle boarding with dog -->
+                <div class="gallery-item" data-caption="Paddle boarding with dog">
+                    <img src="lake-kayak-dog.png" alt="Kayaking with dog" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Misty morning kayak -->
                 <div class="gallery-item" data-caption="Misty morning kayak">
-                    <img src="lake-kayak-mist.png" alt="Misty morning kayak">
+                    <img src="lake-kayak-mist.png" alt="Misty morning kayak" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- WIDE: Fall wide view -->
+                <div class="gallery-item" data-caption="Fall wide view">
+                    <img src="lake-fall-wide.png" alt="Wide fall lake view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Fall colors -->
+                <div class="gallery-item" data-caption="Fall colors">
+                    <img src="lake-fall-view.png" alt="Fall colors" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- TALL: Wildflowers on dock -->
+                <div class="gallery-item tall" data-caption="Wildflowers on the dock">
+                    <img src="lake-dock-wildflowers.png" alt="Dock with wildflowers" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Lilies on the lake -->
                 <div class="gallery-item" data-caption="Lilies on the lake">
-                    <img src="outdoor-lilies.avif" alt="Water lilies">
+                    <img src="outdoor-lilies.avif" alt="Water lilies" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
-                <!-- Wide span-2 -->
+
+                <!-- Regular: Boats waving -->
                 <div class="gallery-item" data-caption="Fall day on the lake">
-                    <img src="boats-waving.avif" alt="Boats on fall day">
+                    <img src="boats-waving.avif" alt="Boats on fall day" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Campfire under stars -->
+                <div class="gallery-item" data-caption="Campfire under the stars">
+                    <img src="lake-campfire-stars.png" alt="Starry night campfire" style="object-position: center top">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Group campfire -->
+                <div class="gallery-item" data-caption="Group campfire">
+                    <img src="lake-campfire-group.png" alt="Group around campfire" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Fall fire pit -->
+                <div class="gallery-item" data-caption="Fall fire pit">
+                    <img src="lake-fall-firepit.png" alt="Fire pit in fall" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Beach at A-Frame -->
                 <div class="gallery-item" data-caption="Beach at A-Frame">
-                    <img src="images/aframe/exterior/beach.avif" alt="Beach view">
+                    <img src="images/aframe/exterior/beach.avif" alt="Beach view" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
+                <!-- Regular: Grounds at sunrise -->
+                <div class="gallery-item" data-caption="Grounds at sunrise">
+                    <img src="lake-grounds-sunrise.png" alt="Resort grounds at sunrise" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Lake Huyck overview -->
+                <div class="gallery-item" data-caption="Lake Huyck overview">
+                    <img src="lake-hero-main.png" alt="Lake Huyck main view" style="object-position: center">
+                    <div class="gallery-item-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+                    </div>
+                </div>
+
+                <!-- Regular: Night on the lake -->
                 <div class="gallery-item" data-caption="Night on the lake">
-                    <img src="images/aframe/exterior/night-lake.webp" alt="Night lake">
+                    <img src="images/aframe/exterior/night-lake.webp" alt="Night lake" style="object-position: center">
                     <div class="gallery-item-overlay">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
                     </div>
                 </div>
+
             </div>
         </section>
 
