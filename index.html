@@ -393,9 +393,29 @@
             filter: saturate(1.2);
         }
 
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-video.active {
+            opacity: 1;
+        }
+
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 60% bottom;
+            filter: saturate(1.2);
+        }
+
         @media (min-width: 768px) {
             .hero-image img,
-            .hero-image video {
+            .hero-image video,
+            .hero-video video {
                 object-position: center center;
             }
         }
@@ -1625,10 +1645,52 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-image">
-            <video autoplay muted loop playsinline poster="lake-hero-main.png">
-                <source src="images/sunrise-lake-sdr.mp4" type="video/mp4">
-                <img src="lake-hero-main.png" alt="Lake Huyck Resort">
-            </video>
+            <div class="hero-video active" data-hero-video>
+                <video autoplay muted playsinline poster="lake-hero-main.png">
+                    <source src="images/sunrise-lake-sdr.mp4" type="video/mp4">
+                    <img src="lake-hero-main.png" alt="Lake Huyck Resort">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/jump-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/a-frame-tour-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/leaves-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/a-frame-dusk-pass-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/morning-dock-cloud-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/pontoon-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/log-interior-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="hero-video" data-hero-video>
+                <video muted playsinline>
+                    <source src="images/videos/fire-sdr.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
         <div class="hero-overlay"></div>
         <img src="images/lake-huyck-logo-white-paddles.png" alt="Lake Huyck Resort - Established 1980 - Michigan" class="hero-top-logo">
@@ -2281,6 +2343,36 @@
             // Prevent ghost image dragging
             carousel.addEventListener('dragstart', (e) => e.preventDefault());
         });
+
+        // Hero video crossfade sequence
+        (function() {
+            const heroSlides = document.querySelectorAll('[data-hero-video]');
+            if (heroSlides.length < 2) return;
+
+            const videos = Array.from(heroSlides).map(s => s.querySelector('video'));
+            let current = 0;
+
+            function crossfadeTo(next) {
+                const nextVideo = videos[next];
+                nextVideo.currentTime = 0;
+                nextVideo.play();
+
+                heroSlides[current].classList.remove('active');
+                heroSlides[next].classList.add('active');
+                current = next;
+            }
+
+            // When the current video ends, crossfade to the next
+            videos.forEach((video, i) => {
+                video.addEventListener('ended', () => {
+                    const next = (i + 1) % heroSlides.length;
+                    crossfadeTo(next);
+                });
+            });
+
+            // Loop: when the last video ends, go back to first
+            // (handled by the modulo above)
+        })();
     </script>
 </body>
 </html>
