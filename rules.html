@@ -589,17 +589,26 @@
 
         .boat-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            /* photos at natural 4:3, video at natural 9:16 — columns sized so all rows match height */
+            grid-template-columns: 1.3333fr 1.3333fr 0.5625fr;
             gap: 1.25rem;
             margin: 2rem 0;
         }
 
         .boat-gallery .boat-photo,
         .boat-gallery .boat-video {
-            aspect-ratio: 3 / 4;
+            min-width: 0;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .boat-gallery .boat-photo {
+            aspect-ratio: 4 / 3;
+        }
+
+        .boat-gallery .boat-video {
+            aspect-ratio: 9 / 16;
         }
 
         .boat-gallery .boat-photo img,
@@ -615,13 +624,9 @@
                 grid-template-columns: 1fr;
             }
 
-            .boat-gallery .boat-photo,
             .boat-gallery .boat-video {
-                aspect-ratio: 4 / 3;
-            }
-
-            .boat-gallery .boat-video {
-                aspect-ratio: 3 / 4;
+                max-width: 320px;
+                margin: 0 auto;
             }
         }
 
