@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lake Huyck Resort — Print Ad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <style>
+        @page {
+            size: 8.5in 11in;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            overflow: hidden;
+            font-family: 'Cormorant Garamond', serif;
+            color: #2c2c2c;
+            position: relative;
+            background: #faf8f5;
+        }
+
+        /* ========================
+           SECTION 1 — HERO
+        ======================== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 3.6in;
+            overflow: hidden;
+        }
+
+        .hero img.hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.15) 50%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 0.3in;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-logo {
+            width: 1in;
+            height: auto;
+            margin-bottom: 0.12in;
+        }
+
+        .hero-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #faf8f5;
+            opacity: 0.9;
+            margin-bottom: 0.08in;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32pt;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            color: #faf8f5;
+        }
+
+        .hero-title em {
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9pt;
+            line-height: 1.4;
+            color: #faf8f5;
+            opacity: 0.9;
+            max-width: 5.5in;
+            margin-top: 0.1in;
+        }
+
+        .qr-container {
+            position: absolute;
+            bottom: 0.2in;
+            right: 0.3in;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .qr-container canvas {
+            display: block;
+            width: 0.7in !important;
+            height: 0.7in !important;
+            border-radius: 4px;
+            background: white;
+            padding: 4px;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .qr-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5pt;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #faf8f5;
+            margin-top: 0.04in;
+        }
+
+        /* ========================
+           SECTION 2 — WELCOME
+        ======================== */
+        .welcome {
+            background: #f3ede4;
+            text-align: center;
+            padding: 0.2in 0.6in 0.15in;
+            height: 2.7in;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-logo {
+            width: 0.5in;
+            height: auto;
+            margin-bottom: 0.15in;
+        }
+
+        .welcome-eyebrow {
+            font-family: 'Outfit', sans-serif;
+            font-size: 7.5pt;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #1a3a2f;
+            margin-bottom: 0.12in;
+            font-weight: 500;
+        }
+
+        .welcome-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 9pt;
+            line-height: 1.4;
+            color: #2c2c2c;
+            max-width: 6.8in;
+            margin-bottom: 0.15in;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 11.5pt;
+            font-style: italic;
+            line-height: 1.35;
+            color: #1a3a2f;
+            max-width: 6.5in;
+        }
+
+        .quote-attribution {
+            font-family: 'Outfit', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8fa9b3;
+            margin-top: 0.08in;
+        }
+
+        /* ========================
+           SECTION 3 — CABINS
+        ======================== */
+        .cabins {
+            display: flex;
+            height: 4.0in;
+        }
+
+        .cabin-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cabin-panel:first-child {
+            border-right: 1px solid #e8e3db;
+        }
+
+        .cabin-panel-image {
+            width: 100%;
+            height: 2.1in;
+            overflow: hidden;
+        }
+
+        .cabin-panel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cabin-panel-content {
+            padding: 0.15in 0.3in 0.15in;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cabin-panel:first-child .cabin-panel-content {
+            background: #faf8f5;
+        }
+
+        .cabin-panel:last-child .cabin-panel-content {
+            background: #faf8f5;
+        }
+
+        .cabin-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 0.1in;
+            height: 0.3in;
+        }
+
+        .cabin-logo-small {
+            width: 0.28in;
+            height: auto;
+        }
+
+        .cabin-eyebrow {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5.5pt;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8fa9b3;
+        }
+
+        .cabin-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 13pt;
+            font-weight: 500;
+            color: #1a3a2f;
+            line-height: 1.2;
+            height: 0.4in;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .cabin-specs {
+            display: flex;
+            gap: 0.2in;
+            height: 0.35in;
+            align-items: center;
+        }
+
+        .cabin-spec {
+            text-align: center;
+        }
+
+        .cabin-spec strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 600;
+            color: #1a3a2f;
+            display: block;
+            line-height: 1;
+        }
+
+        .cabin-spec span {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5pt;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #8fa9b3;
+        }
+
+        .cabin-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8.5pt;
+            line-height: 1.45;
+            color: #2c2c2c;
+        }
+
+        /* Footer bar */
+        .footer-bar {
+            background: #1a3a2f;
+            height: 0.35in;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-url {
+            font-family: 'Outfit', sans-serif;
+            font-size: 9pt;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: #c9a227;
+        }
+
+        /* Print */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1 — HERO -->
+    <div class="hero">
+        <img src="lake-hero-main.png" alt="Kayak on misty Lake Huyck at sunrise" class="hero-bg">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="images/lake-huyck-logo-white-paddles.png" alt="Lake Huyck Resort" class="hero-logo">
+            <p class="hero-subtitle">Private Glacial Lake &middot; Southeastern Michigan</p>
+            <h1 class="hero-title">Your <em>tranquil</em> escape is waiting.</h1>
+            <p class="hero-description">A private 30-acre glacial lake with just a handful of homes on the shoreline, no public boat access, and a resort all to yourself. That's not something you find twice.</p>
+        </div>
+        <div class="qr-container">
+            <canvas id="qr"></canvas>
+            <p class="qr-label">Visit Our Site</p>
+        </div>
+    </div>
+
+    <!-- SECTION 2 — WELCOME -->
+    <div class="welcome">
+        <img src="images/arrowhead-logo.png" alt="Lake Huyck Resort" class="welcome-logo">
+        <p class="welcome-eyebrow">Welcome to Lake Huyck Resort</p>
+        <p class="welcome-text">There are cabins on lakes and there are these, a tranquil A-frame and Log Cabin nestled in towering trees, perched perfectly on a grassy overlook for breathtaking views of a private, glacial, spring-fed lake. Enjoy beautiful summer days, fall leaves in full blaze, a gazillion stars, s'mores &amp; campfires, pontoon &amp; kayaking, fishing, beaver &amp; bald eagle watching, swimming, hiking, reading on docks and decks, catching sunrises, sunshine and sunsets and let clouds &amp; time pass by with family &amp;&nbsp;friends.</p>
+        <p class="quote-text">"This is not a cookie-cutter, generic Airbnb experience. Their homes have been meticulously designed and curated with original modern &amp; rustic d&eacute;cor and all the amenities."</p>
+        <p class="quote-attribution">&mdash; Midwestern Living</p>
+    </div>
+
+    <!-- SECTION 3 — CABINS -->
+    <div class="cabins">
+
+        <!-- A-Frame Panel -->
+        <div class="cabin-panel">
+            <div class="cabin-panel-image">
+                <img src="images/aframe/interior-hero.avif" alt="A-Frame Chalet interior">
+            </div>
+            <div class="cabin-panel-content">
+                <div class="cabin-panel-header">
+                    <img src="images/aframe-logo.png" alt="" class="cabin-logo-small">
+                    <span class="cabin-eyebrow">The A-Frame Chalet</span>
+                </div>
+                <h3 class="cabin-name">Tranquil A-Frame on Private Glacial Lake</h3>
+                <div class="cabin-specs">
+                    <div class="cabin-spec"><strong>6</strong><span>Guests</span></div>
+                    <div class="cabin-spec"><strong>3</strong><span>Bedrooms</span></div>
+                    <div class="cabin-spec"><strong>4</strong><span>Beds</span></div>
+                    <div class="cabin-spec"><strong>1</strong><span>Bath</span></div>
+                </div>
+                <p class="cabin-description">Dramatic floor-to-ceiling windows frame stunning lake views and fall foliage. The open living space is flooded with natural light, creating an inviting atmosphere perfect for morning coffee or evening conversations.</p>
+            </div>
+        </div>
+
+        <!-- Log Cabin Panel -->
+        <div class="cabin-panel">
+            <div class="cabin-panel-image">
+                <img src="log-cabin-living-lakeview.png" alt="Log Cabin living room with lake view">
+            </div>
+            <div class="cabin-panel-content">
+                <div class="cabin-panel-header">
+                    <img src="images/logcabin-logo.png" alt="" class="cabin-logo-small">
+                    <span class="cabin-eyebrow">The Log Cabin</span>
+                </div>
+                <h3 class="cabin-name">Cozy Log Cabin on Private Glacial Lake</h3>
+                <div class="cabin-specs">
+                    <div class="cabin-spec"><strong>8</strong><span>Guests</span></div>
+                    <div class="cabin-spec"><strong>3</strong><span>Bedrooms</span></div>
+                    <div class="cabin-spec"><strong>6</strong><span>Beds</span></div>
+                    <div class="cabin-spec"><strong>2</strong><span>Baths</span></div>
+                </div>
+                <p class="cabin-description">Freshly remodeled with vintage, rustic charm. The wood-burning stove, comfortable leather couches, and expansive screened porch create the perfect setting for s'mores, campfire stories, and making memories that last a lifetime.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER BAR -->
+    <div class="footer-bar">
+        <span class="footer-url">LAKEHUYCKRESORT.COM</span>
+    </div>
+
+    <script>
+        // Generate QR code pointing to the landing page
+        var qr = qrcode(0, 'M');
+        qr.addData('https://lakehuyckresort.com');
+        qr.make();
+
+        var canvas = document.getElementById('qr');
+        var cellSize = 4;
+        var margin = 8;
+        var moduleCount = qr.getModuleCount();
+        var size = moduleCount * cellSize + margin * 2;
+        canvas.width = size;
+        canvas.height = size;
+
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = '#1a3a2f';
+
+        for (var row = 0; row < moduleCount; row++) {
+            for (var col = 0; col < moduleCount; col++) {
+                if (qr.isDark(row, col)) {
+                    ctx.fillRect(col * cellSize + margin, row * cellSize + margin, cellSize, cellSize);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
