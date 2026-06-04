@@ -576,6 +576,57 @@
             height: auto;
         }
 
+        /* Boat gallery */
+        .boat-section-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--forest-deep);
+            margin: 2.5rem 0 0.5rem;
+        }
+
+        .boat-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .boat-gallery .boat-photo {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .boat-gallery .boat-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .boat-video {
+            margin: 2rem auto;
+            max-width: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+        }
+
+        .boat-video video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 640px) {
+            .boat-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Accordion */
         .accordion {
             margin-bottom: 1rem;
@@ -933,6 +984,7 @@
         <button class="tab-btn" data-tab="pets">Pet Policy</button>
         <button class="tab-btn" data-tab="guest-access">Guest Access</button>
         <button class="tab-btn" data-tab="boats">Boats & Rentals</button>
+        <button class="tab-btn" data-tab="mission">Mission Statement</button>
         <button class="tab-btn" data-tab="country-living">Country Living</button>
         <button class="tab-btn" data-tab="safety">Safety</button>
         <button class="tab-btn" data-tab="check-in">Check-In/Out</button>
@@ -1644,7 +1696,28 @@
             <div class="tab-intro">
                 <p>We have a large fleet of boats. A pontoon, kayaks, paddle boards, a canoe and row boats for rent if you want to take your adventuring up a notch. Boats (when available) can be rented.</p>
             </div>
-            
+
+            <h3 class="boat-section-title">Meet the Pontoon</h3>
+            <div class="boat-gallery">
+                <div class="boat-photo">
+                    <img src="images/pontoon-grumman-dock.jpg" alt="Grumman 20 ft pontoon boat at the Lake Huyck dock on a sunny morning">
+                </div>
+                <div class="boat-photo">
+                    <img src="images/pontoon-dock-wide.jpg" alt="The pontoon docked on Lake Huyck with the shoreline and lily pads behind it">
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p>Our flagship is a <strong>Grumman 20-footer</strong> with a <strong>Mercury 15 horsepower</strong> on the back — plenty for making some waves and getting across the lake without stirring up the geese and getting them squawking. Easy on the wildlife, great on the tour.</p>
+            </div>
+
+            <div class="boat-video">
+                <video controls playsinline preload="metadata" poster="images/pontoon-tour-poster.jpg">
+                    <source src="images/pontoon-tour.mp4" type="video/mp4">
+                    Your browser doesn't support video playback.
+                </video>
+            </div>
+
             <table class="info-table">
                 <tr><th>Pontoon Boat</th><td><strong>$250 per day</strong> (1 tank of gas provided). Limit 6 persons due to weight capacity.</td></tr>
                 <tr><th>Row Boats</th><td><strong>$25 per boat per day</strong></td></tr>
@@ -1664,15 +1737,28 @@
             </div>
         </div>
         
+        <!-- MISSION STATEMENT TAB -->
+        <div class="tab-content" id="mission">
+            <h2>Our Mission Statement</h2>
+
+            <div class="tab-intro">
+                <p>As a family, we've always dreamed of a lake home and in the summer of 2022 we discovered this little slice of heaven — but in pretty rough shape. We're big believers there's beauty beneath the surface of everything so we took on this project with a ton of sweat equity, sore muscles, vision and of course lots of love into every detail we could imagine — and we still have so many exciting projects in store. We love sharing Lake Huyck Resort with others who love the experience of cabining too.</p>
+                <p style="margin-top: 1rem;">We want you to feel as far away from that city you left behind.</p>
+                <p style="margin-top: 1rem;">We hope you play hard, sleep under a blanket of stars and have big dreams. We hope your days here are filled with memories that shine like the sun on Lake Huyck and make moments you'll proudly share for years.</p>
+                <p style="margin-top: 1rem;">We hope Lake Huyck Resort becomes your backdrop for great family adventures on the water — fishing, counting stars, snow skiing, roasting s'mores, boating, laughs and tan lines.</p>
+                <p style="margin-top: 1rem;">As seasoned hosts who've camped in just about every national park, we take pride in curating stays that are as unique as the nature that surrounds here. Our cabins are our homes — not just a place to rest but a canvas where nostalgia and rustic charm meets the beauty of a Michigan lake.</p>
+                <p style="margin-top: 1rem;">We embrace rustic living and the adventure it brings, knowing that nature's beauty and quirks are best appreciated by those who see it as a friend, not foe. It's our pleasure to welcome you to a space that's yours so please make yourself at home, be yourself and start drifting into some great memories. We'll leave the lantern on.</p>
+            </div>
+        </div>
+
         <!-- COUNTRY LIVING TAB -->
         <div class="tab-content" id="country-living">
             <h2>Our Country Living Creed</h2>
-            
+
             <div class="tab-intro">
-                <p><em>If we had a mission statement, this would be it.</em></p>
-                <p style="margin-top: 1rem;">Want you to feel as far away from that city as you can. We want you to play hard and get deep sleep and have big dreams. We want you to have awesome memories that you can brag about for years. We want you to feel amazing, be awesome, love the people you're with harder, get some tan lines, and take all your photos wearing huge smiles. It's our pleasure to welcome you to a space that's yours so please make yourself at home, be yourself and start drifting into some great memories. We'll leave the light on for ya.</p>
+                <p><em>We get asked a lot "How rustic is your resort? Is it glamping or is it like a New Buffalo beach house?" We wrote this as a manifesto of expectations.</em></p>
             </div>
-            
+
             <div class="creed-section">
                 <h4>Rustic Living</h4>
                 <p>We are experienced new owners whose intent is sharing our homes to make wonderful stays. We embrace rustic living and the adventure it brings. Nature surrounds the resort and those that are into nature and all its beauty and charm will absolutely love the experience. Those that see nature as a nuisance might not appreciate it.</p>
