@@ -589,8 +589,8 @@
 
         .boat-gallery {
             display: grid;
-            /* photos at natural 4:3, video at natural 9:16 — columns sized so all rows match height */
-            grid-template-columns: 1.3333fr 1.3333fr 0.5625fr;
+            /* tiles at natural ratios (3:4 photo, 4:3 photo, 9:16 video) — columns sized so all rows match height */
+            grid-template-columns: 0.7566fr 1.3333fr 0.5625fr;
             gap: 1.25rem;
             margin: 2rem 0;
         }
@@ -605,6 +605,10 @@
 
         .boat-gallery .boat-photo {
             aspect-ratio: 4 / 3;
+        }
+
+        .boat-gallery .boat-photo-portrait {
+            aspect-ratio: 1290 / 1705;
         }
 
         .boat-gallery .boat-video {
@@ -1702,8 +1706,8 @@
 
             <h3 class="boat-section-title">Meet the Pontoon</h3>
             <div class="boat-gallery">
-                <div class="boat-photo">
-                    <img src="images/pontoon-grumman-dock.jpg" alt="Grumman 20 ft pontoon boat at the Lake Huyck dock on a sunny morning">
+                <div class="boat-photo boat-photo-portrait">
+                    <img src="images/pontoon-lake-cruise.jpg" alt="Couple and their golden retriever relaxing on the Grumman pontoon out on Lake Huyck">
                 </div>
                 <div class="boat-photo">
                     <img src="images/boat-rack-fleet.jpg" alt="Kayaks, paddle boards, and life vests on the boat rack beside the boathouse">
