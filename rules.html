@@ -589,8 +589,8 @@
 
         .boat-gallery {
             display: grid;
-            /* tiles at natural ratios (3:4 photo, 4:3 photo, 9:16 video) — columns sized so all rows match height */
-            grid-template-columns: 0.7566fr 1.3333fr 0.5625fr;
+            /* tiles at natural ratios (3:4 photo, 9:16 video, 9:16 video) — columns sized so all rows match height */
+            grid-template-columns: 0.7566fr 0.5625fr 0.5625fr;
             gap: 1.25rem;
             margin: 2rem 0;
         }
@@ -1709,8 +1709,11 @@
                 <div class="boat-photo boat-photo-portrait">
                     <img src="images/pontoon-lake-cruise.jpg" alt="Couple and their golden retriever relaxing on the Grumman pontoon out on Lake Huyck">
                 </div>
-                <div class="boat-photo">
-                    <img src="images/boat-rack-fleet.jpg" alt="Kayaks, paddle boards, and life vests on the boat rack beside the boathouse">
+                <div class="boat-video">
+                    <video controls muted playsinline preload="metadata" poster="images/fleet-rack-tour-poster.jpg">
+                        <source src="images/fleet-rack-tour.mp4" type="video/mp4">
+                        Your browser doesn't support video playback.
+                    </video>
                 </div>
                 <div class="boat-video">
                     <video controls muted playsinline preload="metadata" poster="images/pontoon-tour-poster.jpg">
