@@ -1120,7 +1120,66 @@
             color: var(--charcoal);
             opacity: 0.8;
         }
-        
+
+        /* Flip cards — amenity tiles with a photo on the back */
+        .amenity-card.has-photo {
+            background: transparent;
+            padding: 0;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .amenity-flip-inner {
+            position: relative;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+        }
+
+        .amenity-card.has-photo:hover .amenity-flip-inner,
+        .amenity-card.has-photo.flipped .amenity-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .amenity-flip-front,
+        .amenity-flip-back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .amenity-flip-front {
+            height: 100%;
+            background: var(--cream);
+            padding: 2.5rem 2rem;
+        }
+
+        .amenity-flip-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            overflow: hidden;
+        }
+
+        .amenity-flip-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .amenity-flip-back .amenity-back-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.75rem 1rem 0.9rem;
+            background: linear-gradient(to top, rgba(15, 32, 25, 0.75), transparent);
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+
         /* Full Amenities List */
         .amenities-full-section {
             max-width: 1200px;
@@ -1932,23 +1991,47 @@
             <p class="intro-eyebrow">Everything you need for the perfect getaway</p>
         </div>
         <div class="amenities-grid">
-            <div class="amenity-card">
-                <!-- Beach woodcut illustration -->
-                <img src="beach-woodcut.jpg" alt="Private Beach" class="amenity-icon-img">
-                <h4>Private Beach</h4>
-                <p>Sandy shoreline with swim docks and floating island</p>
+            <div class="amenity-card has-photo">
+                <div class="amenity-flip-inner">
+                    <div class="amenity-flip-front">
+                        <!-- Beach woodcut illustration -->
+                        <img src="beach-woodcut.jpg" alt="Private Beach" class="amenity-icon-img">
+                        <h4>Private Beach</h4>
+                        <p>Sandy shoreline with swim docks and floating island</p>
+                    </div>
+                    <div class="amenity-flip-back">
+                        <img src="lake-beach-overview.png" alt="The private beach with Adirondack chairs, swim dock, and floating island" loading="lazy">
+                        <span class="amenity-back-label">Private Beach</span>
+                    </div>
+                </div>
             </div>
-            <div class="amenity-card">
-                <!-- Paddle woodcut illustration -->
-                <img src="paddle-woodcut.jpg" alt="Water Sports" class="amenity-icon-img">
-                <h4>Water Sports</h4>
-                <p>Kayaks, canoes, paddle boards & pontoon rentals</p>
+            <div class="amenity-card has-photo">
+                <div class="amenity-flip-inner">
+                    <div class="amenity-flip-front">
+                        <!-- Paddle woodcut illustration -->
+                        <img src="paddle-woodcut.jpg" alt="Water Sports" class="amenity-icon-img">
+                        <h4>Water Sports</h4>
+                        <p>Kayaks, canoes, paddle boards & pontoon rentals</p>
+                    </div>
+                    <div class="amenity-flip-back">
+                        <img src="lake-dock-kayaks.png" alt="Kayaks and paddle boards ready at the dock on a misty morning" loading="lazy">
+                        <span class="amenity-back-label">Water Sports</span>
+                    </div>
+                </div>
             </div>
-            <div class="amenity-card">
-                <!-- Campfire woodcut illustration -->
-                <img src="campfire-woodcut.jpg" alt="Fire Pits" class="amenity-icon-img">
-                <h4>Fire Pits</h4>
-                <p>Communal campfire & private fire pit for s'mores</p>
+            <div class="amenity-card has-photo">
+                <div class="amenity-flip-inner">
+                    <div class="amenity-flip-front">
+                        <!-- Campfire woodcut illustration -->
+                        <img src="campfire-woodcut.jpg" alt="Fire Pits" class="amenity-icon-img">
+                        <h4>Fire Pits</h4>
+                        <p>Communal campfire & private fire pit for s'mores</p>
+                    </div>
+                    <div class="amenity-flip-back">
+                        <img src="lake-campfire-group.png" alt="Guests gathered around a crackling campfire at dusk" loading="lazy">
+                        <span class="amenity-back-label">Fire Pits</span>
+                    </div>
+                </div>
             </div>
             <div class="amenity-card">
                 <!-- Fish woodcut illustration -->
@@ -1956,11 +2039,19 @@
                 <h4>Sport Fishing</h4>
                 <p>Well-stocked lake with bass, bluegill & more</p>
             </div>
-            <div class="amenity-card">
-                <!-- Kitchen woodcut illustration -->
-                <img src="kitchen-woodcut.jpg" alt="Full Kitchens" class="amenity-icon-img">
-                <h4>Full Kitchens</h4>
-                <p>Fully equipped chef's kitchens in both cabins</p>
+            <div class="amenity-card has-photo">
+                <div class="amenity-flip-inner">
+                    <div class="amenity-flip-front">
+                        <!-- Kitchen woodcut illustration -->
+                        <img src="kitchen-woodcut.jpg" alt="Full Kitchens" class="amenity-icon-img">
+                        <h4>Full Kitchens</h4>
+                        <p>Fully equipped chef's kitchens in both cabins</p>
+                    </div>
+                    <div class="amenity-flip-back">
+                        <img src="log-cabin-kitchen-1.png" alt="The Log Cabin's fully equipped kitchen with antler chandelier" loading="lazy">
+                        <span class="amenity-back-label">Full Kitchens</span>
+                    </div>
+                </div>
             </div>
             <div class="amenity-card">
                 <!-- WiFi woodcut illustration -->
@@ -1974,11 +2065,19 @@
                 <h4>EV Charger</h4>
                 <p>Electric vehicle charging station on-site</p>
             </div>
-            <div class="amenity-card">
-                <!-- Dog woodcut illustration -->
-                <img src="dog-woodcut.jpg" alt="Pet Friendly" class="amenity-icon-img">
-                <h4>Pet Friendly</h4>
-                <p>Furry friends welcome—see our pet policy</p>
+            <div class="amenity-card has-photo">
+                <div class="amenity-flip-inner">
+                    <div class="amenity-flip-front">
+                        <!-- Dog woodcut illustration -->
+                        <img src="dog-woodcut.jpg" alt="Pet Friendly" class="amenity-icon-img">
+                        <h4>Pet Friendly</h4>
+                        <p>Furry friends welcome—see our pet policy</p>
+                    </div>
+                    <div class="amenity-flip-back">
+                        <img src="lake-kayak-dog.png" alt="A pup riding the bow of a kayak into the sunrise mist" loading="lazy">
+                        <span class="amenity-back-label">Pet Friendly</span>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -2412,6 +2511,18 @@
             // Loop: when the last video ends, go back to first
             // (handled by the modulo above)
         })();
+
+        // Amenity flip cards — tap to flip on touch devices, Enter/Space via keyboard
+        document.querySelectorAll('.amenity-card.has-photo').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('click', () => card.classList.toggle('flipped'));
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.classList.toggle('flipped');
+                }
+            });
+        });
     </script>
 </body>
 </html>
