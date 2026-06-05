@@ -1180,6 +1180,97 @@
             text-align: center;
         }
 
+        /* Guest Reviews */
+        .reviews {
+            background: var(--forest-deep);
+            padding: 6rem 2rem;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .reviews-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--cream);
+            margin-bottom: 0.75rem;
+        }
+
+        .reviews-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(250, 248, 245, 0.65);
+        }
+
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.75rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: #fff;
+            width: 350px;
+            padding: 2.25rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .review-avatar {
+            display: block;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 1.05rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.1rem;
+        }
+
+        .review-quote {
+            font-size: 0.96rem;
+            line-height: 1.65;
+            color: var(--charcoal);
+            margin-bottom: 1.4rem;
+        }
+
+        .review-meta strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--forest-deep);
+        }
+
+        .review-meta span {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            opacity: 0.65;
+        }
+
+        @media (max-width: 640px) {
+            .reviews {
+                padding: 4rem 1.25rem;
+            }
+
+            .review-card {
+                width: 100%;
+            }
+        }
+
         /* Full Amenities List */
         .amenities-full-section {
             max-width: 1200px;
@@ -1980,6 +2071,61 @@
                 </div>
             </div>
             <a href="mailto:lakehuyckresort@gmail.com?subject=Resort%20Inquiry" class="btn-primary">Inquire About the Resort</a>
+        </div>
+    </section>
+
+    <!-- Guest Reviews -->
+    <section class="reviews" id="reviews">
+        <div class="reviews-header">
+            <h2>What Our Guests Say</h2>
+            <p class="reviews-eyebrow">Five-star stays, in their own words</p>
+        </div>
+        <div class="reviews-grid">
+            <article class="review-card">
+                <img src="images/reviews/marta.jpg" alt="Marta" class="review-avatar" loading="lazy">
+                <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="review-quote">"Tucked away along a shimmering glacier lake, this cabin offers the kind of stillness that feels almost rare… A place to breathe deeply, unplug, and remember what simple living feels like."</p>
+                <div class="review-meta">
+                    <strong>Marta</strong>
+                    <span>Cozy Log Cabin · October 2025</span>
+                </div>
+            </article>
+            <article class="review-card">
+                <img src="images/reviews/vanessa.jpg" alt="Vanessa" class="review-avatar" loading="lazy">
+                <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="review-quote">"I own a large cleaning business and clean about 60 vacation rentals — these owners are by far some of the most organized and efficient I've seen. Everything is perfectly done and exactly like the photos. You can feel the love and care they have put into the property."</p>
+                <div class="review-meta">
+                    <strong>Vanessa</strong>
+                    <span>Cozy Log Cabin · August 2025</span>
+                </div>
+            </article>
+            <article class="review-card">
+                <img src="images/reviews/julie.jpg" alt="Julie" class="review-avatar" loading="lazy">
+                <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="review-quote">"Our family fell in love with this location… It was the exact type of family getaway that we were in need of. Truly was a gorgeous destination and we'll definitely be back again!"</p>
+                <div class="review-meta">
+                    <strong>Julie</strong>
+                    <span>Tranquil A-Frame Chalet · October 2025</span>
+                </div>
+            </article>
+            <article class="review-card">
+                <img src="images/reviews/john.jpg" alt="John" class="review-avatar" loading="lazy">
+                <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="review-quote">"The attention to detail is amazing and we loved all of the special touches they added to make the place comfortable and charming. The lake is very private and peaceful. We'd love to return sometime!"</p>
+                <div class="review-meta">
+                    <strong>John</strong>
+                    <span>Tranquil A-Frame Chalet · May 2025</span>
+                </div>
+            </article>
+            <article class="review-card">
+                <img src="images/reviews/family.jpg" alt="A returning summer family" class="review-avatar" loading="lazy">
+                <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="review-quote">"This location, with its side-by-side houses, easily and comfortably held our group of 10… long afternoons enjoying the quiet lake. Highly recommend if you're looking for the quintessential Michigan getaway."</p>
+                <div class="review-meta">
+                    <strong>A Returning Summer Family</strong>
+                    <span>Whole Resort · August 2025</span>
+                </div>
+            </article>
         </div>
     </section>
 
