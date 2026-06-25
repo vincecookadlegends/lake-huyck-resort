@@ -651,7 +651,80 @@
             object-fit: contain;
             mix-blend-mode: multiply;
         }
-        
+
+        /* Flip highlight tiles — woodcut on the front, photo on the back */
+        .highlight-amenity.has-photo {
+            position: relative;
+            padding: 0;
+            border: none;
+            background: transparent;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .highlight-amenity.has-photo:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .highlight-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 178px;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+        }
+
+        .highlight-amenity.has-photo:hover .highlight-flip-inner,
+        .highlight-amenity.has-photo:focus-visible .highlight-flip-inner,
+        .highlight-amenity.has-photo.flipped .highlight-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .highlight-flip-front,
+        .highlight-flip-back {
+            position: absolute;
+            inset: 0;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 1px solid rgba(139, 69, 19, 0.15);
+        }
+
+        .highlight-flip-front {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream-dark);
+            padding: 1.25rem 1rem;
+        }
+
+        .highlight-flip-back {
+            transform: rotateY(180deg);
+            overflow: hidden;
+        }
+
+        .highlight-flip-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .highlight-back-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.6rem 0.75rem 0.7rem;
+            background: linear-gradient(to top, rgba(15, 32, 25, 0.78), transparent);
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            text-align: center;
+        }
+
         .amenities-full-list {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1475,45 +1548,117 @@
         
         <!-- Highlighted Amenities with Woodcut Images -->
         <div class="amenities-highlights">
-            <div class="highlight-amenity">
-                <img src="lakeview-woodcut.jpg" alt="Lake View" class="highlight-icon-img">
-                <span class="highlight-text">Lake View</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="lakeview-woodcut.jpg" alt="Lake View" class="highlight-icon-img">
+                        <span class="highlight-text">Lake View</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="lake-hero-main.png" alt="The view across Lake Huyck from the cabin grounds" loading="lazy">
+                        <span class="highlight-back-label">Lake View</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="beach-woodcut.jpg" alt="Private Beach" class="highlight-icon-img">
-                <span class="highlight-text">Private Beach</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="beach-woodcut.jpg" alt="Private Beach" class="highlight-icon-img">
+                        <span class="highlight-text">Private Beach</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="lake-beach-overview.png" alt="The private sandy beach with Adirondack chairs and swim dock" loading="lazy">
+                        <span class="highlight-back-label">Private Beach</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="kitchen-woodcut.jpg" alt="Full Kitchen" class="highlight-icon-img">
-                <span class="highlight-text">Full Kitchen</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="kitchen-woodcut.jpg" alt="Full Kitchen" class="highlight-icon-img">
+                        <span class="highlight-text">Full Kitchen</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="log-cabin-kitchen-1.png" alt="The Log Cabin's fully equipped kitchen with antler chandelier" loading="lazy">
+                        <span class="highlight-back-label">Full Kitchen</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="wifi-woodcut.jpg" alt="High-Speed WiFi" class="highlight-icon-img">
-                <span class="highlight-text">High-Speed WiFi</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="wifi-woodcut.jpg" alt="High-Speed WiFi" class="highlight-icon-img">
+                        <span class="highlight-text">High-Speed WiFi</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="images/wifi-starlink.jpg" alt="Starlink satellite internet keeping the cabin connected" loading="lazy">
+                        <span class="highlight-back-label">High-Speed WiFi</span>
+                    </div>
+                </div>
             </div>
             <div class="highlight-amenity">
                 <img src="outdoor-shower-woodcut.jpg" alt="Outdoor Shower" class="highlight-icon-img">
                 <span class="highlight-text">Outdoor Shower</span>
             </div>
-            <div class="highlight-amenity">
-                <img src="boat-rental-woodcut.jpg" alt="Boat Rentals" class="highlight-icon-img">
-                <span class="highlight-text">Boat Rentals</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="boat-rental-woodcut.jpg" alt="Boat Rentals" class="highlight-icon-img">
+                        <span class="highlight-text">Boat Rentals</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="images/lake-pontoon-redchair.jpg" alt="The pontoon boat ready for a cruise on Lake Huyck" loading="lazy">
+                        <span class="highlight-back-label">Boat Rentals</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="dog-woodcut.jpg" alt="Pets Welcome" class="highlight-icon-img">
-                <span class="highlight-text">Pets Welcome</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="dog-woodcut.jpg" alt="Pets Welcome" class="highlight-icon-img">
+                        <span class="highlight-text">Pets Welcome</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="lake-kayak-dog.png" alt="A pup riding the bow of a kayak into the sunrise mist" loading="lazy">
+                        <span class="highlight-back-label">Pets Welcome</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="sunset-deck-woodcut.jpg" alt="Sunset Beach Deck" class="highlight-icon-img">
-                <span class="highlight-text">Sunset Beach Deck</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="sunset-deck-woodcut.jpg" alt="Sunset Beach Deck" class="highlight-icon-img">
+                        <span class="highlight-text">Sunset Beach Deck</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="images/lake-pavilion-twilight.jpg" alt="The lakeside deck glowing at twilight" loading="lazy">
+                        <span class="highlight-back-label">Sunset Beach Deck</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="ev-charger-woodcut.jpg" alt="EV Charger" class="highlight-icon-img">
-                <span class="highlight-text">EV Charger</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="ev-charger-woodcut.jpg" alt="EV Charger" class="highlight-icon-img">
+                        <span class="highlight-text">EV Charger</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="images/ev-charging.jpg" alt="An electric car charging at the on-site station with the lake beyond" loading="lazy">
+                        <span class="highlight-back-label">EV Charger</span>
+                    </div>
+                </div>
             </div>
-            <div class="highlight-amenity">
-                <img src="campfire-woodcut.jpg" alt="Fire Pit" class="highlight-icon-img">
-                <span class="highlight-text">Fire Pit</span>
+            <div class="highlight-amenity has-photo" tabindex="0">
+                <div class="highlight-flip-inner">
+                    <div class="highlight-flip-front">
+                        <img src="campfire-woodcut.jpg" alt="Fire Pit" class="highlight-icon-img">
+                        <span class="highlight-text">Fire Pit</span>
+                    </div>
+                    <div class="highlight-flip-back">
+                        <img src="lake-fall-firepit.png" alt="The lakeside fire pit crackling on a crisp autumn evening" loading="lazy">
+                        <span class="highlight-back-label">Fire Pit</span>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -1756,6 +1901,17 @@
                 mobileMenuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
                 document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Amenity flip tiles — tap to flip on touch devices, Enter/Space via keyboard
+        document.querySelectorAll('.highlight-amenity.has-photo').forEach(tile => {
+            tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+            tile.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    tile.classList.toggle('flipped');
+                }
             });
         });
 
